@@ -1,6 +1,6 @@
 import React from 'react'
 import ErrorPage from './ErrorPage'
-import './layout.scss'
+import './layout.css'
 
 class ErrorBoundary extends React.PureComponent {
   constructor(props) {

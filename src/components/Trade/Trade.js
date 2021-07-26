@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './trade.scss'
+import './trade.css'
 
 const Trade = () => {
   return (

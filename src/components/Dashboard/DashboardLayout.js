@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './dashboard.scss'
+import './dashboard.css'
 
 const DashboardLayout = () => {
   const Navbar = () => {

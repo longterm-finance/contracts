@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Web3 from 'web3'
-import './vault.scss'
+import './vault.css'
 
 class Vault extends React.Component {
   async componentWillMount() {
@@ -9,7 +9,7 @@ class Vault extends React.Component {
   }
 
   async loadBlockchainData(dispatch) {
-    //
+    console.log('Load blockchain data...')
   }
 
   constructor(props) {
