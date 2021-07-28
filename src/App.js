@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './redux/store'
@@ -14,20 +14,31 @@ const DashboardLayout = lazy(() =>
 const Vault = lazy(() => import('./components/Vault/Vault'))
 const Trade = lazy(() => import('./components/Trade/Trade'))
 const Pool = lazy(() => import('./components/Pool/Pool'))
+const Farm = lazy(() => import('./components/Farm/Farm'))
 const Learn = lazy(() => import('./components/Learn/Learn'))
-const NotFound = lazy(() => import('./components/Layout/NotFound'))
+const NotFoundImported = lazy(() => import('./components/Layout/NotFound'))
 
 const App = () => {
+  const [darkMode, setDarkMode] = useState(false)
+
+  const NotFound = () => (
+    <NotFoundImported isDarkMode={darkMode ? true : false} />
+  )
+
   return (
     <Provider store={store}>
       <Router>
         <ErrorBoundary>
           <Suspense fallback={<Spinner />}>
-            <DashboardLayout />
+            <DashboardLayout
+              switchMode={() => setDarkMode(!darkMode)}
+              isDarkMode={darkMode ? true : false}
+            />
             <Switch>
               <Route exact path="/" component={Vault} />
               <Route exact path="/trade" component={Trade} />
               <Route exact path="/pool" component={Pool} />
+              <Route exact path="/farm" component={Farm} />
               <Route exact path="/learn" component={Learn} />
               <Route component={NotFound} />
             </Switch>

@@ -34,6 +34,7 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.3.0",
     "truffle": "^5.4.2",
     "truffle-hdwallet-provider-privkey": "^0.3.0",
     "uuid": "^3.4.0",

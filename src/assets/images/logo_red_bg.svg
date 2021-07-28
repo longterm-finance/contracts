@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:cc="http://creativecommons.org/ns#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  id="svg64675"
+  viewBox="0 0 1024 768"
+  height="200px"
+  width="267px"
+  version="1.1"
+  style="background-color: #e84142;"
+>
+      <defs id="defs64679" />
+      <linearGradient
+    spreadMethod="pad"
+    y2="30%"
+    x2="-10%"
+    y1="120%"
+    x1="30%"
+    id="3d_gradient2-logo-cd00772b-10a8-425a-b1e0-d985b60913b0"
+  >
+        <stop
+      id="stop64656"
+      stop-opacity="1"
+      stop-color="#ffffff"
+      offset="0%"
+    />
+        <stop
+      id="stop64658"
+      stop-opacity="1"
+      stop-color="#000000"
+      offset="100%"
+    />
+      </linearGradient>
+      <linearGradient
+    gradientTransform="rotate(-30)"
+    spreadMethod="pad"
+    y2="30%"
+    x2="-10%"
+    y1="120%"
+    x1="30%"
+    id="3d_gradient3-logo-cd00772b-10a8-425a-b1e0-d985b60913b0"
+  >
+        <stop
+      id="stop64661"
+      stop-opacity="1"
+      stop-color="#ffffff"
+      offset="0%"
+    />
+        <stop
+      id="stop64663"
+      stop-opacity="1"
+      stop-color="#cccccc"
+      offset="50%"
+    />
+        <stop
+      id="stop64665"
+      stop-opacity="1"
+      stop-color="#000000"
+      offset="100%"
+    />
+      </linearGradient>
+      <g id="logo-group">
+        <image
+      xlink:href=""
+      id="container"
+      x="272"
+      y="144"
+      width="480"
+      height="480"
+      transform="translate(0 0)"
+      style="display: none;"
+    />
+        <g id="logo-center" transform="translate(0 0)">
+          <image
+        xlink:href=""
+        id="icon_container"
+        x="0"
+        y="0"
+        style="display: none;"
+      />
+          <path
+        id="path173479"
+        style="
+              font-style: normal;
+              font-weight: 800;
+              font-size: 72px;
+              line-height: 1;
+              font-family: 'Montserrat ExtraBold Alt1';
+              font-variant-ligatures: none;
+              text-align: center;
+              text-anchor: middle;
+            "
+        d="m 454.60644,-50.4 h -14.04 L 418.31844,0 h 14.544 l 3.96,-9.792 4.176,-10.512 6.48,-16.128 6.48,16.128 4.176,10.512 3.96,9.792 h 14.832 z"
+        stroke-width="0"
+        stroke-linejoin="miter"
+        stroke-miterlimit="2"
+        fill="#ffffff"
+        stroke="#ffffff"
+        transform="translate(0 334) translate(325.3085 -0.3999999999999986) scale(2) translate(-418.31844 50.4)"
+      />
+
+          <path
+        id="path173481"
+        style="
+              font-style: normal;
+              font-weight: 800;
+              font-size: 72px;
+              line-height: 1;
+              font-family: 'Montserrat ExtraBold Alt1';
+              font-variant-ligatures: none;
+              text-align: center;
+              text-anchor: middle;
+            "
+        d="m 487.73319,-50.4 h -15.408 l 14.328,33.696 7.704,-17.64 z m 27.648,0 -13.968,32.832 -7.56,17.568 h 14.04 l 21.6,-50.4 z"
+        stroke-width="0"
+        stroke-linejoin="miter"
+        stroke-miterlimit="2"
+        fill="#ffffff"
+        stroke="#ffffff"
+        transform="translate(0 334) translate(433.322 -0.3999999999999986) scale(2) translate(-472.32519 50.4)"
+      />
+
+          <path
+        id="path173483"
+        style="
+              font-style: normal;
+              font-weight: 800;
+              font-size: 72px;
+              line-height: 1;
+              font-family: 'Montserrat ExtraBold Alt1';
+              font-variant-ligatures: none;
+              text-align: center;
+              text-anchor: middle;
+            "
+        d="M 532.15719,-50.4 V 0 h 14.256 v -50.4 z"
+        stroke-width="0"
+        stroke-linejoin="miter"
+        stroke-miterlimit="2"
+        fill="#ffffff"
+        stroke="#ffffff"
+        transform="translate(0 334) translate(552.986 -0.3999999999999986) scale(2) translate(-532.15719 50.4)"
+      />
+
+          <path
+        id="path173485"
+        style="
+              font-style: normal;
+              font-weight: 800;
+              font-size: 72px;
+              line-height: 1;
+              font-family: 'Montserrat ExtraBold Alt1';
+              font-variant-ligatures: none;
+              text-align: center;
+              text-anchor: middle;
+            "
+        d="m 572.03394,-45.072 -3.6,-5.328 h -16.056 l 11.16,15.84 z m 21.096,28.584 -8.352,10.8 3.816,5.688 h 16.416 z m 10.728,-33.912 h -15.408 L 551.58594,0 h 16.272 z"
+        stroke-width="0"
+        stroke-linejoin="miter"
+        stroke-miterlimit="2"
+        fill="#ffffff"
+        stroke="#ffffff"
+        transform="translate(0 334) translate(591.8435000000002 -0.3999999999999986) scale(2) translate(-551.58594 50.4)"
+      />
+        </g>
+      </g>
+    </svg>
