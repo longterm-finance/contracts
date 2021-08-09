@@ -11,15 +11,25 @@ import 'react-toastify/dist/ReactToastify.css'
 const DashboardLayout = lazy(() =>
   import('./components/Dashboard/DashboardLayout'),
 )
-const Vault = lazy(() => import('./components/Vault/Vault'))
-const Trade = lazy(() => import('./components/Trade/Trade'))
-const Pool = lazy(() => import('./components/Pool/Pool'))
-const Farm = lazy(() => import('./components/Farm/Farm'))
-const Learn = lazy(() => import('./components/Learn/Learn'))
+const VaultImported = lazy(() => import('./components/Vault/Vault'))
+const TradeImported = lazy(() => import('./components/Trade/Trade'))
+const PoolImported = lazy(() => import('./components/Pool/Pool'))
+const FarmImported = lazy(() => import('./components/Farm/Farm'))
+const LearnImported = lazy(() => import('./components/Learn/Learn'))
 const NotFoundImported = lazy(() => import('./components/Layout/NotFound'))
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false)
+
+  const Vault = () => <VaultImported isDarkMode={darkMode ? true : false} />
+
+  const Trade = () => <TradeImported isDarkMode={darkMode ? true : false} />
+
+  const Pool = () => <PoolImported isDarkMode={darkMode ? true : false} />
+
+  const Farm = () => <FarmImported isDarkMode={darkMode ? true : false} />
+
+  const Learn = () => <LearnImported isDarkMode={darkMode ? true : false} />
 
   const NotFound = () => (
     <NotFoundImported isDarkMode={darkMode ? true : false} />

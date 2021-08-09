@@ -252,3 +252,9 @@ input:checked + .slider:before {
   margin-top: 10px !important;
   margin-bottom: 10px !important;
 }
+
+.vault-mobile {
+  position: relative !important;
+  right: 2px;
+  bottom: 1.5px;
+}

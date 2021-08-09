@@ -16,6 +16,8 @@ class Vault extends React.Component {
   }
 
   render() {
+    const { isDarkMode } = this.props
+
     return (
       <div className="vault-container">
         <div className="mint-container">Mint</div>

@@ -9,6 +9,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import Button from '@material-ui/core/Button'
 import transparentPNGLogo from '../../assets/images/logo_transparent_bg.png'
+import vaultIcon from '../../assets/images/vault.svg'
+import whiteVaultIcon from '../../assets/images/vault_white.svg'
+import greyVaultIcon from '../../assets/images/vault_grey.svg'
 
 const DashboardLayout = ({ switchMode, isDarkMode }) => {
   const mobileHeader = useMediaQuery({ query: '(max-width: 992px)' })
@@ -122,7 +125,15 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
               to="/"
               className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
             >
-              <i className="fas fa-home" />{' '}
+              <img
+                src={isDarkMode ? whiteVaultIcon : vaultIcon}
+                alt="Vault"
+                className="vault-mobile"
+                style={{
+                  height: 18,
+                  width: 23,
+                }}
+              />
               <span className="mobile-menu-tab-name">Vault</span>
             </Link>
             <Link
@@ -286,14 +297,33 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
           {this.props.path[0] === '/' ? (
             <Link
               active={active}
-              className={`pt-3 ${
+              className={`pt-4 ${
                 active ? 'sidebar-item-active' : 'sidebar-item'
               } ${this.props.css}`}
               to={this.props.path}
               onClick={this.handleClick}
               style={{ color: active ? '#fff' : '#b8b4b4' }}
             >
-              <span className="sidebar-tab-name">{this.props.name}</span>
+              {this.props.path === '/' && (
+                <img
+                  src={active ? whiteVaultIcon : greyVaultIcon}
+                  alt="Vault"
+                  className="vault"
+                  style={{
+                    width: 22.5,
+                    height: 22.5,
+                  }}
+                />
+              )}
+              <span
+                className="sidebar-tab-name"
+                style={{
+                  position: this.props.path === '/' && 'relative',
+                  top: this.props.path === '/' && '1.5px',
+                }}
+              >
+                {this.props.name}
+              </span>
             </Link>
           ) : (
             <a
@@ -301,7 +331,7 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
               rel="noreferrer"
               href={this.props.path}
               active={active}
-              className={`pt-3 ${
+              className={`pt-4 ${
                 active ? 'sidebar-item-active' : 'sidebar-item'
               } ${this.props.css}`}
               onClick={this.handleClick}
@@ -324,44 +354,44 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
           {
             path: '/',
             name: 'Vault',
-            css: 'fa fa-fw fa-home',
-            key: 1,
+            css: 'fas vault',
+            key: Math.random(),
           },
           {
             path: '/trade',
             name: 'Trade',
             css: 'fas fa-sync-alt',
-            key: 2,
+            key: Math.random() + 1,
           },
           {
             path: '/pool',
             name: 'Pool',
             css: 'fas fa-swimming-pool',
-            key: 3,
+            key: Math.random() + 2,
           },
           {
             path: '/farm',
             name: 'Farm',
             css: 'fas fa-tractor',
-            key: 4,
+            key: Math.random() + 3,
           },
           {
             path: 'https://gov.avix.finance',
             name: 'Governance',
             css: 'fas fa-bullhorn',
-            key: 5,
+            key: Math.random() + 4,
           },
           {
             path: 'https://stats.avix.finance',
             name: 'Stats',
             css: 'fas fa-chart-line',
-            key: 6,
+            key: Math.random() + 5,
           },
           {
             path: '/learn',
             name: 'Learn',
             css: 'fas fa-book-open',
-            key: 7,
+            key: Math.random() + 6,
           },
         ],
       }
