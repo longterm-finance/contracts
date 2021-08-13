@@ -49,20 +49,22 @@ textarea {
   box-shadow: salmon 0px 10px 40px;
   text-decoration: none;
   border-radius: 5px !important;
+  border-radius: 0.5rem !important;
 }
 .shadow-btn:hover {
   background-color: #e11936 !important;
   transition: 150ms ease-in;
 }
 .regular-btn {
-  background-color: #e84142;
+  background-color: #e84142 !important;
   font-weight: bold;
   color: #fff !important;
   text-decoration: none;
   border-radius: 5px !important;
+  border-radius: 0.5rem !important;
 }
 .regular-btn:hover {
-  background-color: #e11936;
+  background-color: #e11936 !important;
   transition: 150ms ease-in;
 }
 .outline-btn {
@@ -72,6 +74,7 @@ textarea {
   text-decoration: none;
   border: 1px solid #e84142;
   border-radius: 5px !important;
+  border-radius: 0.5rem !important;
 }
 .outline-btn:hover {
   background-color: #e84142;
@@ -94,8 +97,11 @@ textarea {
   transition: 200ms ease-in;
 }
 .light-btn {
-  background-color: #fff !important;
+  background-color: #fff;
   color: #e84142 !important;
+  border: 1.5px solid #e84142;
+  padding: 8px !important;
+  border-radius: 0.5rem !important;
 }
 .light-btn:hover {
   opacity: 0.9;
@@ -129,4 +135,25 @@ textarea {
   color: #e9e5e5 !important;
 }
 
+.modal {
+  height: auto !important;
+  top: auto !important;
+  left: auto !important;
+  bottom: auto !important;
+  right: auto !important;
+}
+
+.dimmed.dimmable > .ui.modals.dimmer.visible {
+  display: flex !important;
+}
+
+.border-rad-05 {
+  border-radius: 0.5rem !important;
+}
+
+.dark-text {
+  color: black !important;
+}
+
 /* Lighter Shade for Dashboard Dark Mode: #212429 */
+/* Lighter Shade for Dashboard Dark Mode: #191b1f */

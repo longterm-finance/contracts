@@ -12,8 +12,57 @@ import transparentPNGLogo from '../../assets/images/logo_transparent_bg.png'
 import vaultIcon from '../../assets/images/vault.svg'
 import whiteVaultIcon from '../../assets/images/vault_white.svg'
 import greyVaultIcon from '../../assets/images/vault_grey.svg'
+import { useWeb3React } from '@web3-react/core'
+import { Modal } from 'semantic-ui-react'
+import { InjectedConnector } from '@web3-react/injected-connector'
+
+const injected = new InjectedConnector({
+  supportedChainIds: [137], // 137 = Matic mainnet; later add 1 (Ethereum mainnet)
+})
 
 const DashboardLayout = ({ switchMode, isDarkMode }) => {
+  const { active, account, activate, deactivate, chainId } = useWeb3React()
+
+  async function connectWallet() {
+    try {
+      await activate(injected)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function disconnectWallet() {
+    try {
+      await deactivate()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const [toggleAccountModal, setToggleAccountModal] = useState(false)
+  const [mouseOverCopy, setMouseOverCopy] = useState()
+  const [copyAddressClicked, setCopyAddressClicked] = useState(false)
+
+  const openAccountModal = () => setToggleAccountModal(true)
+  const closeAccountModal = () => setToggleAccountModal(false)
+
+  const onMouseOver = () => setMouseOverCopy(true)
+  const onMouseOut = () => setMouseOverCopy(false)
+
+  const copyAddress = () => {
+    const el = document.createElement('input')
+    el.value = account
+    document.body.appendChild(el)
+    el.select()
+    document.execCommand('copy')
+    document.body.removeChild(el)
+  }
+
+  const onCopyAddressClicked = () => {
+    setCopyAddressClicked(true)
+    setTimeout(() => setCopyAddressClicked(false), 2000)
+  }
+
   const mobileHeader = useMediaQuery({ query: '(max-width: 992px)' })
 
   const Navbar = () => {
@@ -247,13 +296,148 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
             <div className="nav-links">
               <ModeSwitcher />
               <button
-                className="btn shadow-btn mr-4"
+                className="btn regular-btn mr-4"
                 type="button"
-                style={{ fontWeight: 'bold' }}
+                style={{
+                  fontWeight: 'bold',
+                  height: '50px',
+                  fontSize: '1.125em',
+                }}
+                onClick={() => {
+                  if (!active) {
+                    connectWallet()
+                  }
+
+                  if ((chainId && chainId !== 137) || !active) {
+                    alert('Please switch to Matic!')
+                  }
+
+                  openAccountModal()
+                }}
               >
-                Connect Wallet
+                {active
+                  ? account !== undefined && (
+                      <React.Fragment>
+                        <span className="coin-balance-header mr-3">
+                          14.579 MATIC
+                        </span>{' '}
+                        {account[0] +
+                          account[1] +
+                          account[2] +
+                          account[3] +
+                          '...' +
+                          account[account.length - 4] +
+                          account[account.length - 3] +
+                          account[account.length - 2] +
+                          account[account.length - 1]}
+                      </React.Fragment>
+                    )
+                  : 'Connect Wallet'}
               </button>
             </div>
+
+            <Modal
+              size="mini"
+              open={toggleAccountModal}
+              onClose={closeAccountModal}
+            >
+              <Modal.Header
+                className="text-center bold"
+                style={{ fontSize: '1.75em' }}
+              >
+                Account
+              </Modal.Header>
+              <Modal.Content
+                className="text-center bold"
+                style={{ fontSize: '1.15em' }}
+              >
+                {active && (
+                  <React.Fragment>
+                    <i
+                      class="far fa-check-circle"
+                      style={{
+                        color: 'green',
+                      }}
+                    />{' '}
+                    Connected with MetaMask
+                  </React.Fragment>
+                )}
+              </Modal.Content>
+              <div className="copy-address-btn-container">
+                <button
+                  className="btn btn-link light-btn border-rad-05 dark-text"
+                  type="button"
+                  style={{
+                    fontWeight: 'bold',
+                    border: '1.5px solid #e84142',
+                  }}
+                  onClick={() => {
+                    copyAddress()
+                    onCopyAddressClicked()
+                  }}
+                  onMouseOver={onMouseOver}
+                  onMouseOut={onMouseOut}
+                >
+                  {account !== undefined &&
+                    account[0] +
+                      account[1] +
+                      account[2] +
+                      account[3] +
+                      '...' +
+                      account[account.length - 4] +
+                      account[account.length - 3] +
+                      account[account.length - 2] +
+                      account[account.length - 1]}{' '}
+                  {mouseOverCopy && <i className="ml-2 far fa-copy" />}
+                </button>
+                {copyAddressClicked && (
+                  <span className="bold ml-3">
+                    <i
+                      class="far fa-check-circle"
+                      style={{
+                        color: 'green',
+                      }}
+                    />{' '}
+                    Address Copied!
+                  </span>
+                )}
+              </div>
+              <div className="account-options">
+                <button
+                  className="btn light-btn mt-3 mb-4 mr-3 border-rad-05 dark-text"
+                  type="button"
+                  style={{
+                    fontWeight: 'bold',
+                    border: '1.5px solid #e84142',
+                  }}
+                >
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={`https://polygonscan.com/address/${account}`}
+                    className="bold"
+                    style={{ color: '#000' }}
+                  >
+                    View on Polygonscan
+                  </a>
+                </button>
+
+                <button
+                  className="btn light-btn mt-3 mb-4 border-rad-05 dark-text"
+                  type="button"
+                  style={{
+                    fontWeight: 'bold',
+                    border: '1.5px solid #e84142',
+                  }}
+                  onClick={() => {
+                    disconnectWallet()
+                    closeAccountModal()
+                  }}
+                >
+                  Disconnect
+                </button>
+              </div>
+            </Modal>
           </React.Fragment>
         ) : (
           <React.Fragment>
@@ -327,13 +511,15 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
             </Link>
           ) : (
             <a
-              target="_blank"
+              // ADD LATER: target="_blank"
               rel="noreferrer"
               href={this.props.path}
               active={active}
               className={`pt-4 ${
                 active ? 'sidebar-item-active' : 'sidebar-item'
-              } ${this.props.css}`}
+              } ${this.props.css}
+                disabled-link
+              `} // REMOVE THE "disabled-link" CLASSNAME LATER
               onClick={this.handleClick}
               style={{ color: active ? '#fff' : '#b8b4b4' }}
             >
@@ -376,14 +562,14 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
             key: Math.random() + 3,
           },
           {
-            path: 'https://gov.avix.finance',
-            name: 'Governance',
+            path: 'javascript:void(0)', // LATER: https://gov.avix.finance
+            name: 'Vote (SOON)', // LATER: Governance
             css: 'fas fa-bullhorn',
             key: Math.random() + 4,
           },
           {
-            path: 'https://stats.avix.finance',
-            name: 'Stats',
+            path: 'javascript:void(0 + 0)', // LATER: https://stats.avix.finance
+            name: 'Stats (SOON)', // LATER: Stats
             css: 'fas fa-chart-line',
             key: Math.random() + 5,
           },
@@ -404,7 +590,7 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
     render() {
       const { items, activePath } = this.state
       return (
-        <div className="sidebar">
+        <div className={isDarkMode ? 'sidebar sidebar-dark-mode' : 'sidebar'}>
           {items.map((item) => {
             return (
               <SidebarItem

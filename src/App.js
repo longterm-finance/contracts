@@ -7,6 +7,13 @@ import ErrorBoundary from './components/Layout/ErrorBoundary'
 import './App.css'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Web3ReactProvider } from '@web3-react/core'
+import Web3 from 'web3'
+import 'semantic-ui-css/semantic.min.css'
+
+function getLibrary(provider) {
+  return new Web3(provider)
+}
 
 const DashboardLayout = lazy(() =>
   import('./components/Dashboard/DashboardLayout'),
@@ -36,37 +43,39 @@ const App = () => {
   )
 
   return (
-    <Provider store={store}>
-      <Router>
-        <ErrorBoundary>
-          <Suspense fallback={<Spinner />}>
-            <DashboardLayout
-              switchMode={() => setDarkMode(!darkMode)}
-              isDarkMode={darkMode ? true : false}
-            />
-            <Switch>
-              <Route exact path="/" component={Vault} />
-              <Route exact path="/trade" component={Trade} />
-              <Route exact path="/pool" component={Pool} />
-              <Route exact path="/farm" component={Farm} />
-              <Route exact path="/learn" component={Learn} />
-              <Route component={NotFound} />
-            </Switch>
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-          </Suspense>
-        </ErrorBoundary>
-      </Router>
-    </Provider>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Provider store={store}>
+        <Router>
+          <ErrorBoundary>
+            <Suspense fallback={<Spinner />}>
+              <DashboardLayout
+                switchMode={() => setDarkMode(!darkMode)}
+                isDarkMode={darkMode ? true : false}
+              />
+              <Switch>
+                <Route exact path="/" component={Vault} />
+                <Route exact path="/trade" component={Trade} />
+                <Route exact path="/pool" component={Pool} />
+                <Route exact path="/farm" component={Farm} />
+                <Route exact path="/learn" component={Learn} />
+                <Route component={NotFound} />
+              </Switch>
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            </Suspense>
+          </ErrorBoundary>
+        </Router>
+      </Provider>
+    </Web3ReactProvider>
   )
 }
 

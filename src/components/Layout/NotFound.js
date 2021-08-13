@@ -16,9 +16,9 @@ const NotFound = ({ isDarkMode }) => {
             We couldn't find the page...
           </p>
 
-          <button className="btn shadow-btn btn-404">
+          <button className="btn shadow-btn btn-404 ml-2">
             <Link to="/" style={{ color: '#fff', fontWeight: 'bold' }}>
-              Back to Dashboard
+              Back to Avix Vault
             </Link>
           </button>
         </div>
