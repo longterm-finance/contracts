@@ -41,6 +41,10 @@
   color: #343741;
   opacity: 0.9;
 }
+.nav-link {
+  font-size: 1.3rem !important;
+  margin-bottom: 5px;
+}
 .nav-links .nav-link:hover {
   opacity: 1;
   font-weight: bold;

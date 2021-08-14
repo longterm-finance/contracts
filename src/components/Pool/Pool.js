@@ -9,7 +9,7 @@ import usdc from '../../assets/images/usdc.png'
 import matic from '../../assets/images/matic.png'
 
 const Pool = ({ isDarkMode }) => {
-  const TradeCard = ({
+  const PoolCard = ({
     icon1,
     icon2,
     tradingPair,
@@ -54,7 +54,7 @@ const Pool = ({ isDarkMode }) => {
           <strong>Total Liquidity:</strong> {tradingVolume}
         </p>
         <div className="trading-buttons">
-          <button className="btn regular-btn border-rad-05 mr-3">
+          <button className="btn regular-btn border-rad-05 mr-3" type="button">
             <a
               target="_blank"
               rel="noreferrer"
@@ -65,7 +65,7 @@ const Pool = ({ isDarkMode }) => {
               Analytics
             </a>
           </button>
-          <button className="btn regular-btn border-rad-05">
+          <button className="btn regular-btn border-rad-05" type="button">
             <a
               target="_blank"
               rel="noreferrer"
@@ -93,11 +93,14 @@ const Pool = ({ isDarkMode }) => {
       <br />
       <br />
       <br />
-      <h1 className="text-center bold mb-5 mt-5" style={{ fontSize: '2.5rem' }}>
+      <h1
+        className="text-center bold mb-5 mt-5"
+        style={{ fontSize: '2.75rem' }}
+      >
         Most Popular dVIX & AVIX Liquidity Pools
       </h1>
       <div className="trade-grid">
-        <TradeCard
+        <PoolCard
           icon1={dvix}
           icon2={eth}
           tradingPair="dVIX / WETH"
@@ -106,7 +109,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={avix}
           icon2={eth}
           tradingPair="AVIX / WETH"
@@ -115,7 +118,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={dvix}
           icon2={matic}
           tradingPair="dVIX / MATIC"
@@ -124,7 +127,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={avix}
           icon2={matic}
           tradingPair="AVIX / MATIC"
@@ -133,7 +136,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={dvix}
           icon2={dai}
           tradingPair="dVIX / DAI"
@@ -142,7 +145,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={avix}
           icon2={dai}
           tradingPair="AVIX / DAI"
@@ -151,7 +154,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={dvix}
           icon2={usdc}
           tradingPair="dVIX / USDC"
@@ -160,7 +163,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={avix}
           icon2={usdc}
           tradingPair="AVIX / USDC"
@@ -169,7 +172,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={dvix}
           icon2={wbtc}
           tradingPair="dVIX / WBTC"
@@ -178,7 +181,7 @@ const Pool = ({ isDarkMode }) => {
           analyticsLink="https://analytics.sushi.com/pairs/"
           tradeLink="https://app.sushi.com/#/add/"
         />
-        <TradeCard
+        <PoolCard
           icon1={avix}
           icon2={wbtc}
           tradingPair="AVIX / WBTC"

@@ -42,6 +42,9 @@ textarea {
 .page-bg-color {
   background-color: #fafbfd;
 }
+.doc-link:hover {
+  text-decoration: underline !important;
+}
 .shadow-btn {
   background-color: #e84142 !important;
   font-weight: bold;

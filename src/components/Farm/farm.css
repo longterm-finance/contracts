@@ -106,3 +106,52 @@
     margin-left: -2.5%;
   }
 }
+
+.early-card-container {
+  width: 275px;
+  height: 310px;
+}
+
+.early-adopter-note {
+  width: 70%;
+  margin: auto !important;
+  line-height: 2rem;
+  font-size: 1.25rem;
+}
+
+.early-adopter-note-dark-mode {
+  width: 70%;
+  margin: auto !important;
+  line-height: 2rem;
+  font-size: 1.25rem;
+  color: #fafafa !important;
+}
+
+@media screen and (max-width: 992px) {
+  .early-adopter-note,
+  .early-adopter-note-dark-mode,
+  .mining-note,
+  .mining-note-dark-mode {
+    width: 90%;
+  }
+}
+
+.mining-card-container {
+  width: 275px;
+  height: 442px;
+}
+
+.mining-note {
+  width: 70%;
+  margin: auto !important;
+  line-height: 2rem;
+  font-size: 1.25rem;
+}
+
+.mining-note-dark-mode {
+  width: 70%;
+  margin: auto !important;
+  line-height: 2rem;
+  font-size: 1.25rem;
+  color: #fafafa !important;
+}

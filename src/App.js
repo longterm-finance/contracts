@@ -10,6 +10,13 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
 import 'semantic-ui-css/semantic.min.css'
+import {
+  WETHVault,
+  MATICVault,
+  DAIVault,
+  USDCVault,
+  WBTCVault,
+} from './components/Vault/Vault'
 
 function getLibrary(provider) {
   return new Web3(provider)
@@ -18,7 +25,6 @@ function getLibrary(provider) {
 const DashboardLayout = lazy(() =>
   import('./components/Dashboard/DashboardLayout'),
 )
-const VaultImported = lazy(() => import('./components/Vault/Vault'))
 const TradeImported = lazy(() => import('./components/Trade/Trade'))
 const PoolImported = lazy(() => import('./components/Pool/Pool'))
 const FarmImported = lazy(() => import('./components/Farm/Farm'))
@@ -28,16 +34,15 @@ const NotFoundImported = lazy(() => import('./components/Layout/NotFound'))
 const App = () => {
   const [darkMode, setDarkMode] = useState(false)
 
-  const Vault = () => <VaultImported isDarkMode={darkMode ? true : false} />
-
+  const WETH = () => <WETHVault isDarkMode={darkMode ? true : false} />
+  const MATIC = () => <MATICVault isDarkMode={darkMode ? true : false} />
+  const DAI = () => <DAIVault isDarkMode={darkMode ? true : false} />
+  const USDC = () => <USDCVault isDarkMode={darkMode ? true : false} />
+  const WBTC = () => <WBTCVault isDarkMode={darkMode ? true : false} />
   const Trade = () => <TradeImported isDarkMode={darkMode ? true : false} />
-
   const Pool = () => <PoolImported isDarkMode={darkMode ? true : false} />
-
   const Farm = () => <FarmImported isDarkMode={darkMode ? true : false} />
-
   const Learn = () => <LearnImported isDarkMode={darkMode ? true : false} />
-
   const NotFound = () => (
     <NotFoundImported isDarkMode={darkMode ? true : false} />
   )
@@ -53,7 +58,11 @@ const App = () => {
                 isDarkMode={darkMode ? true : false}
               />
               <Switch>
-                <Route exact path="/" component={Vault} />
+                <Route exact path="/" component={WETH} />
+                <Route exact path="/MATIC" component={MATIC} />
+                <Route exact path="/DAI" component={DAI} />
+                <Route exact path="/USDC" component={USDC} />
+                <Route exact path="/WBTC" component={WBTC} />
                 <Route exact path="/trade" component={Trade} />
                 <Route exact path="/pool" component={Pool} />
                 <Route exact path="/farm" component={Farm} />

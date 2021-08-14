@@ -54,7 +54,7 @@ const Trade = ({ isDarkMode }) => {
           <strong>24h Volume:</strong> {tradingVolume}
         </p>
         <div className="trading-buttons">
-          <button className="btn regular-btn border-rad-05 mr-3">
+          <button className="btn regular-btn border-rad-05 mr-3" type="button">
             <a
               target="_blank"
               rel="noreferrer"
@@ -65,7 +65,7 @@ const Trade = ({ isDarkMode }) => {
               Analytics
             </a>
           </button>
-          <button className="btn regular-btn border-rad-05">
+          <button className="btn regular-btn border-rad-05" type="button">
             <a
               target="_blank"
               rel="noreferrer"
@@ -93,7 +93,10 @@ const Trade = ({ isDarkMode }) => {
       <br />
       <br />
       <br />
-      <h1 className="text-center bold mb-5 mt-5" style={{ fontSize: '2.5rem' }}>
+      <h1
+        className="text-center bold mb-5 mt-5"
+        style={{ fontSize: '2.75rem' }}
+      >
         Most Popular dVIX & AVIX Trading Pairs
       </h1>
       <div className="trade-grid">

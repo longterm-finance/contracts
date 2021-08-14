@@ -236,9 +236,14 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
           {
             <List className="mobile-menu">
               <button
-                className="btn shadow-btn mt-2 bold"
+                className="btn regular-btn mt-3 bold"
                 type="button"
-                style={{ marginLeft: '22px', fontWeight: 'bold' }}
+                style={{
+                  marginLeft: '22px',
+                  fontWeight: 'bold',
+                  height: '50px',
+                  fontSize: '1.125em',
+                }}
               >
                 Connect Wallet
               </button>
