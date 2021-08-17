@@ -1,5 +1,10 @@
 /* Global CSS */
 
+/* Lighter Shade for Dashboard Dark Mode: #212429 */
+/* Lighter Shade for Dashboard Dark Mode: #191b1f */
+/*  Tablet Breakpoint: 992px */
+/* Mobile Breakpoint: 787px */
+
 * {
   box-sizing: border-box;
 }
@@ -44,6 +49,11 @@ textarea {
 }
 .doc-link:hover {
   text-decoration: underline !important;
+}
+.bigger-btn {
+  font-family: 1.125rem !important;
+  font-weight: bold;
+  height: 50px;
 }
 .shadow-btn {
   background-color: #e84142 !important;
@@ -157,6 +167,3 @@ textarea {
 .dark-text {
   color: black !important;
 }
-
-/* Lighter Shade for Dashboard Dark Mode: #212429 */
-/* Lighter Shade for Dashboard Dark Mode: #191b1f */

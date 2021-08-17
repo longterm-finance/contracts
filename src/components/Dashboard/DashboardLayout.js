@@ -206,23 +206,48 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
               <i className="fas fa-tractor" />{' '}
               <span className="mobile-menu-tab-name">Farm</span>
             </Link>
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href="https://gov.avix.finance"
+            <Link
+              to="/nft"
               className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
             >
+              <i className="fas fa-shapes" />{' '}
+              <span className="mobile-menu-tab-name">Collectibles</span>
+            </Link>
+            {/*  eslint-disable-next-line */}
+            <a
+              // ADD LATER: target="_blank"
+              // REPLACE LATER: https://gov.avix.finance
+              rel="noreferrer"
+              // eslint-disable-next-line
+              href="javascript:void(0)"
+              className={`nav-link ${
+                isDarkMode && 'nav-link-dark-mode'
+              } disabled-link`}
+            >
+              {/* REMOVE THE "disabled-link" CLASSNAME LATER */}
               <i className="fas fa-bullhorn" />{' '}
-              <span className="mobile-menu-tab-name">Governance</span>
+              <span className="mobile-menu-tab-name">
+                {/* REPLACE LATER: Governance */}
+                Vote (SOON)
+              </span>
             </a>
+            {/*  eslint-disable-next-line */}
             <a
-              target="_blank"
+              // ADD LATER: target="_blank"
+              // REPLACE LATER: https://stats.avix.finance
               rel="noreferrer"
-              href="https://stats.avix.finance"
-              className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
+              // eslint-disable-next-line
+              href="javascript:void(0)"
+              className={`nav-link ${
+                isDarkMode && 'nav-link-dark-mode'
+              } disabled-link`}
             >
+              {/* REMOVE THE "disabled-link" CLASSNAME LATER */}
               <i className="fas fa-chart-line" />{' '}
-              <span className="mobile-menu-tab-name">Stats</span>
+              <span className="mobile-menu-tab-name">
+                {/* REPLACE LATER: Stats */}
+                Stats (SOON)
+              </span>
             </a>
             <Link
               to="/learn"
@@ -544,7 +569,7 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
         items: [
           {
             path: '/',
-            name: 'Vault',
+            name: 'Vaults',
             css: 'fas vault',
             key: Math.random(),
           },
@@ -567,22 +592,30 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
             key: Math.random() + 3,
           },
           {
-            path: 'javascript:void(0)', // LATER: https://gov.avix.finance
-            name: 'Vote (SOON)', // LATER: Governance
-            css: 'fas fa-bullhorn',
+            path: '/nft',
+            name: 'Collectibles',
+            css: 'fas fa-shapes',
             key: Math.random() + 4,
           },
           {
-            path: 'javascript:void(0 + 0)', // LATER: https://stats.avix.finance
-            name: 'Stats (SOON)', // LATER: Stats
-            css: 'fas fa-chart-line',
+            // eslint-disable-next-line
+            path: 'javascript:void(0)', // REPLACE LATER: https://gov.avix.finance
+            name: 'Vote (SOON)', // REPLACE LATER: Governance
+            css: 'fas fa-bullhorn',
             key: Math.random() + 5,
+          },
+          {
+            // eslint-disable-next-line
+            path: 'javascript:void(0 + 0)', // REPLACE LATER: https://stats.avix.finance
+            name: 'Stats (SOON)', // REPLACE LATER: Stats
+            css: 'fas fa-chart-line',
+            key: Math.random() + 6,
           },
           {
             path: '/learn',
             name: 'Learn',
             css: 'fas fa-book-open',
-            key: Math.random() + 6,
+            key: Math.random() + 7,
           },
         ],
       }

@@ -3,3 +3,172 @@
   margin-right: 50px;
   margin-bottom: 50px !important;
 }
+
+.learn-container-dark-mode {
+  padding-left: 245px;
+  padding-right: 50px;
+  margin-bottom: 50px !important;
+  background-color: #212429;
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 50px;
+}
+
+.learn-card {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  width: 95%;
+  height: 250px;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.learn-card-dark-mode {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  width: 95%;
+  height: 250px;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
+  border-radius: 10px;
+  padding: 30px;
+  background-color: #191b1f;
+  color: #fff !important;
+}
+
+@media screen and (max-width: 1240px) {
+  .learn-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .learn-grid {
+    padding-left: 7%;
+    padding-right: 7% !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .learn-grid {
+    padding-right: 15% !important;
+  }
+}
+
+/* What is Avix Finance */
+
+.what-is-avix-title {
+  font-size: 2.75rem;
+}
+
+.what-is-avix-desc {
+  font-size: 1.125rem;
+}
+
+.what-is-avix-container {
+  height: 420px;
+}
+
+/* Video */
+
+.video-title {
+  font-size: 2.75rem;
+}
+
+.video-container {
+  height: 420px;
+}
+
+/* Instructions */
+
+.instructions-title {
+  font-size: 2.75rem;
+}
+
+.instruction-desc {
+  font-size: 1.125rem;
+}
+
+.instructions-container {
+  height: 230px;
+}
+
+/* Resources */
+
+.resources-title {
+  font-size: 2.75rem;
+}
+
+.resources-link {
+  font-size: 1.125rem;
+}
+
+.resources-link-inner {
+  color: #e84142 !important;
+  font-weight: bold;
+}
+
+.resources-container {
+  height: 230px;
+}
+
+.resources-blocks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1px;
+}
+
+/* Support */
+
+.support-title {
+  font-size: 2.75rem;
+}
+
+.support-desc {
+  font-size: 1.125rem;
+}
+
+.support-container {
+  height: 350px;
+}
+
+.copy-address-span {
+  color: #e84142;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.copy-address-span:hover {
+  text-decoration: underline;
+}
+
+/* Community */
+
+.community-title {
+  font-size: 2.75rem;
+}
+
+.community-link {
+  font-size: 1.125rem;
+}
+
+.community-link-inner {
+  color: #e84142 !important;
+  font-weight: bold;
+}
+
+.community-container {
+  height: 230px;
+}
+.community-blocks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1px;
+}

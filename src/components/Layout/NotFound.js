@@ -4,10 +4,16 @@ import './layout.css'
 
 const NotFound = ({ isDarkMode }) => {
   return (
-    <div className="container">
-      <div className="not-found">
+    <div className="containr">
+      <div className={isDarkMode ? 'not-found-dark-mode' : 'not-found'}>
         <div className="content-404">
-          <h1 className="title-404 bold text-center">Oops!</h1>
+          <h1
+            className={`${
+              isDarkMode ? 'title-404-dark-mode' : 'title-404'
+            } bold text-center`}
+          >
+            Oops!
+          </h1>
           <p
             className={`desc-404 ${
               isDarkMode ? 'text-muted-dark-mode' : 'text-muted'
@@ -16,9 +22,13 @@ const NotFound = ({ isDarkMode }) => {
             We couldn't find the page...
           </p>
 
-          <button className="btn shadow-btn btn-404 ml-2">
+          <button
+            style={{ fontSize: '1.125rem', height: '50px' }}
+            className="btn regular-btn bigger-btn border-rad-05 btn-404 ml-4"
+            type="button"
+          >
             <Link to="/" style={{ color: '#fff', fontWeight: 'bold' }}>
-              Back to Avix Vault
+              Back to Avix Vaults
             </Link>
           </button>
         </div>

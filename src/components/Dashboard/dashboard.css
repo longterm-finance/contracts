@@ -307,6 +307,6 @@ input:checked + .slider:before {
 
 .disabled-link,
 .disabled-link:hover {
-  opacity: 0.5;
+  opacity: 0.5 !important;
   cursor: not-allowed;
 }

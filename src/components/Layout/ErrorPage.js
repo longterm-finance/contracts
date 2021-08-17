@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive'
 import errorImg from '../../assets/images/error-img.png'
 
 const ErrorPage = () => {
-  const isMobile = useMediaQuery({ query: '(max-width: 900px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 992px)' })
 
   return (
     <React.Fragment>
@@ -40,7 +40,6 @@ const ErrorPage = () => {
           className="img-not-found"
           src={errorImg}
           alt="Page Not Found"
-          title="Page Not Found"
           style={{
             display: 'inline-block',
             backfroundSize: 'cover',

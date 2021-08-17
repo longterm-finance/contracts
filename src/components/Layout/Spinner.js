@@ -2,11 +2,18 @@ import React from 'react'
 import './layout.css'
 import spinner from '../../assets/other/spinner.gif'
 
-const Spinner = () => {
+const Spinner = ({ isDarkMode }) => {
   return (
-    <React.Fragment>
+    <div className={isDarkMode && 'dark-mode-spinner'}>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <img src={spinner} alt="Loading..." className="spinner" />
-    </React.Fragment>
+      <div className="loading">Loading...</div>
+    </div>
   )
 }
 

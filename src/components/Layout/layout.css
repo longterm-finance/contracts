@@ -5,6 +5,14 @@
   flex-direction: column;
   padding: 170px 0 150px;
 }
+.not-found-dark-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 170px 0 61.1vh;
+  background-color: #212429;
+}
 .not-found .img-404 {
   width: 500px;
   height: 250px;
@@ -15,14 +23,19 @@
     height: 125px;
   }
 }
-.not-found .content-404 {
+.content-404 {
   margin-top: 40px;
 }
 .not-found .content-404 .title-404 {
-  font-size: 2.75em;
+  font-size: 2.75em !important;
 }
-.not-found .content-404 .desc-404 {
+.not-found-dark-mode .content-404 .title-404-dark-mode {
+  font-size: 2.75em !important;
+  color: #fff;
+}
+.desc-404 {
   text-align: center;
+  font-size: 1.25rem;
 }
 .not-found .content-404 .btn-404 {
   color: #fff !important;
@@ -45,8 +58,32 @@
 .come-back-later {
   font-size: 1.25em;
 }
+
 .spinner {
-  width: 50px;
+  width: 65px;
   margin: auto;
   display: block;
+  margin-top: 27.5vh;
+}
+
+.dark-mode-spinner {
+  background-color: #212429;
+  color: #fff;
+  padding-bottom: 48.75vh;
+}
+
+@media screen and (max-width: 300px) {
+  .dark-mode-spinner {
+    padding-bottom: 52.75vh;
+  }
+}
+
+.loading {
+  margin: auto;
+  display: block;
+  width: 95px;
+  text-align: left;
+  margin-top: 25px;
+  font-size: 2rem;
+  font-weight: bold;
 }
