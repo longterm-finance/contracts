@@ -5,9 +5,9 @@ import "./IVaultHandler.sol";
 import "./Orchestrator.sol";
 
 /**
- * @title ERC-20 TCAP Vault
- * @author Cryptex.finance
- * @notice Contract in charge of handling the TCAP Vault and stake using a Collateral ERC20
+ * @title ERC-20 dVIX Vault
+ * @author Avix Finance
+ * @notice Contract in charge of handling the dVIX Vault and stake using a Collateral ERC20 tokens 
  */
 contract ERC20VaultHandler is IVaultHandler {
   /**
@@ -17,11 +17,11 @@ contract ERC20VaultHandler is IVaultHandler {
    * @param _ratio uint256
    * @param _burnFee uint256
    * @param _liquidationPenalty uint256
-   * @param _tcapOracle address
-   * @param _tcapAddress address
+   * @param _vixOracle address
+   * @param _dvixAddress address
    * @param _collateralAddress address
    * @param _collateralOracle address
-   * @param _ethOracle address
+   * @param _avaxOracle address
    * @param _rewardHandler address
    * @param _treasury address
    */
@@ -31,11 +31,11 @@ contract ERC20VaultHandler is IVaultHandler {
     uint256 _ratio,
     uint256 _burnFee,
     uint256 _liquidationPenalty,
-    address _tcapOracle,
-    TCAP _tcapAddress,
+    address _vixOracle,
+    DVIX _dvixAddress,
     address _collateralAddress,
     address _collateralOracle,
-    address _ethOracle,
+    address _avaxOracle,
     address _rewardHandler,
     address _treasury
   )
@@ -45,11 +45,11 @@ contract ERC20VaultHandler is IVaultHandler {
       _ratio,
       _burnFee,
       _liquidationPenalty,
-      _tcapOracle,
-      _tcapAddress,
+      _vixOracle,
+      _dvixAddress,
       _collateralAddress,
       _collateralOracle,
-      _ethOracle,
+      _avaxOracle,
       _rewardHandler,
       _treasury
     )

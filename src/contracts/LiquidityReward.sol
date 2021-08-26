@@ -27,7 +27,7 @@ contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
   using SafeMath for uint256;
   using SafeERC20 for IERC20;
 
-  /// @notice Address of the reward
+  /// @notice Address of the reward token (AVIX)
   IERC20 public immutable rewardsToken;
 
   /// @notice Address of the staking token
@@ -39,7 +39,7 @@ contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
   uint256 public rewardRate = 0;
 
   /// @notice How long the rewards lasts, it updates when more rewards are added
-  uint256 public rewardsDuration = 186 days;
+  uint256 public rewardsDuration = 732 days; // ~ 2 years
 
   /// @notice Last time rewards were updated
   uint256 public lastUpdateTime;
@@ -53,7 +53,7 @@ contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
   /// @notice Tracks the user rewards
   mapping(address => uint256) public rewards;
 
-  /// @notice Time were vesting ends
+  /// @notice Time where vesting ends
   uint256 public immutable vestingEnd;
 
   /// @notice Vesting ratio
@@ -152,7 +152,7 @@ contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
     whenNotPaused
     updateReward(msg.sender)
   {
-    require(_amount > 0, "LiquidityReward::Stake:Cannot stake 0");
+    require(_amount > 0, "LiquidityReward::Stake:Cannot stake 0 tokens");
     _totalSupply = _totalSupply.add(_amount);
     _balances[msg.sender] = _balances[msg.sender].add(_amount);
     stakingToken.safeTransferFrom(msg.sender, address(this), _amount);
@@ -297,7 +297,7 @@ contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
     nonReentrant
     updateReward(msg.sender)
   {
-    require(_amount > 0, "LiquidityReward::withdraw: Cannot withdraw 0");
+    require(_amount > 0, "LiquidityReward::withdraw: Cannot withdraw 0 tokens");
     _totalSupply = _totalSupply.sub(_amount);
     _balances[msg.sender] = _balances[msg.sender].sub(_amount);
     stakingToken.safeTransfer(msg.sender, _amount);

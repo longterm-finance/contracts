@@ -36,8 +36,18 @@ contract Timelock is IERC165 {
     uint256 eta
   );
 
+  // @notice hard-coded grace period for completing governance-voted actions
   uint256 public constant GRACE_PERIOD = 14 days;
+
+  /* @notice each proposed action will be published at a minimum of 
+  *  2 days in the future from the time of announcement
+  */
   uint256 public constant MINIMUM_DELAY = 2 days;
+
+  /* @notice major upgrades, such as changing the risk system, adding a new 
+  *  chain or asset, or very technically complex upgrades may have up to
+  *  a 30 day delay
+  */
   uint256 public constant MAXIMUM_DELAY = 30 days;
 
   address public admin;

@@ -99,6 +99,7 @@ const Pool = ({ isDarkMode }) => {
       >
         Most Popular dVIX & AVIX Liquidity Pools
       </h1>
+      <br />
       <div className="trade-grid">
         <PoolCard
           icon1={dvix}

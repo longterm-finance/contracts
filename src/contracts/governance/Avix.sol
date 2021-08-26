@@ -5,18 +5,18 @@ pragma experimental ABIEncoderV2;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
-contract Ctx {
+contract Avix {
   /// @notice EIP-20 token name for this token
-  string public constant name = "Cryptex";
+  string public constant name = "Avix";
 
   /// @notice EIP-20 token symbol for this token
-  string public constant symbol = "CTX";
+  string public constant symbol = "AVIX";
 
   /// @notice EIP-20 token decimals for this token
   uint8 public constant decimals = 18;
 
   /// @notice Total number of tokens in circulation
-  uint256 public totalSupply = 10000000e18; // 10 million CTX
+  uint256 public totalSupply = 10000000e18; // 10 million AVIX
 
   /// @notice Address which may mint new tokens
   address public minter;
@@ -70,7 +70,7 @@ contract Ctx {
   /// @notice A record of states for signing / validating signatures
   mapping(address => uint256) public nonces;
 
-  /// @notice An event thats emitted when the minter address is changed
+  /// @notice An event that's emitted when the minter address is changed
   event MinterChanged(address minter, address newMinter);
 
   /// @notice An event thats emitted when an account changes its delegate
@@ -98,7 +98,7 @@ contract Ctx {
   );
 
   /**
-   * @notice Construct a new Ctx token
+   * @notice Construct a new Avix token
    * @param account The initial account to grant all the tokens
    * @param minter_ The account with minting ability
    * @param mintingAllowedAfter_ The timestamp after which minting may occur
@@ -110,7 +110,7 @@ contract Ctx {
   ) {
     require(
       mintingAllowedAfter_ >= block.timestamp,
-      "Ctx::constructor: minting can only begin after deployment"
+      "Avix::constructor: minting can only begin after deployment"
     );
 
     balances[account] = uint96(totalSupply);
@@ -127,7 +127,7 @@ contract Ctx {
   function setMinter(address minter_) external {
     require(
       msg.sender == minter,
-      "Ctx::setMinter: only the minter can change the minter address"
+      "Avix::setMinter: only the minter can change the minter address"
     );
     emit MinterChanged(minter, minter_);
     minter = minter_;
@@ -139,18 +139,18 @@ contract Ctx {
    * @param rawAmount The number of tokens to be minted
    */
   function mint(address dst, uint256 rawAmount) external {
-    require(msg.sender == minter, "Ctx::mint: only the minter can mint");
+    require(msg.sender == minter, "Avix::mint: only the minter can mint");
     require(
       block.timestamp >= mintingAllowedAfter,
-      "Ctx::mint: minting not allowed yet"
+      "Avix::mint: minting not allowed yet"
     );
     require(
       dst != address(0),
-      "Ctx::mint: cannot transfer to the zero address"
+      "Avix::mint: cannot transfer to the zero address"
     );
     require(
       dst != address(this),
-      "Ctx::mint: cannot transfer to the Ctx address"
+      "Avix::mint: cannot transfer to the Avix address"
     );
 
     // record the mint
@@ -160,21 +160,21 @@ contract Ctx {
     );
 
     // mint the amount
-    uint96 amount = safe96(rawAmount, "Ctx::mint: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "Avix::mint: amount exceeds 96 bits");
     require(
       amount <= SafeMath.div(SafeMath.mul(totalSupply, mintCap), 100),
-      "Ctx::mint: exceeded mint cap"
+      "Avix::mint: exceeded mint cap"
     );
     totalSupply = safe96(
       SafeMath.add(totalSupply, amount),
-      "Ctx::mint: totalSupply exceeds 96 bits"
+      "Avix::mint: totalSupply exceeds 96 bits"
     );
 
     // transfer the amount to the recipient
     balances[dst] = add96(
       balances[dst],
       amount,
-      "Ctx::mint: transfer amount overflows"
+      "Avix::mint: transfer amount overflows"
     );
     emit Transfer(address(0), dst, amount);
 
@@ -214,11 +214,11 @@ contract Ctx {
   ) internal virtual {
     require(
       owner != address(0),
-      "Ctx::_approve: approve from the zero address"
+      "Avix::_approve: approve from the zero address"
     );
     require(
       spender != address(0),
-      "Ctx::_approve: approve to the zero address"
+      "Avix::_approve: approve to the zero address"
     );
 
     allowances[owner][spender] = amount;
@@ -238,7 +238,7 @@ contract Ctx {
     if (rawAmount == uint256(-1)) {
       amount = uint96(-1);
     } else {
-      amount = safe96(rawAmount, "Ctx::approve: amount exceeds 96 bits");
+      amount = safe96(rawAmount, "Avix::approve: amount exceeds 96 bits");
     }
     _approve(msg.sender, spender, amount);
     return true;
@@ -264,7 +264,7 @@ contract Ctx {
     } else {
       amount = safe96(
         addedValue,
-        "Ctx::increaseAllowance: amount exceeds 96 bits"
+        "Avix::increaseAllowance: amount exceeds 96 bits"
       );
     }
     _approve(
@@ -273,7 +273,7 @@ contract Ctx {
       add96(
         allowances[msg.sender][spender],
         amount,
-        "Ctx::increaseAllowance: transfer amount overflows"
+        "Avix::increaseAllowance: transfer amount overflows"
       )
     );
     return true;
@@ -300,7 +300,7 @@ contract Ctx {
     } else {
       amount = safe96(
         subtractedValue,
-        "Ctx::decreaseAllowance: amount exceeds 96 bits"
+        "Avix::decreaseAllowance: amount exceeds 96 bits"
       );
     }
 
@@ -310,7 +310,7 @@ contract Ctx {
       sub96(
         allowances[msg.sender][spender],
         amount,
-        "Ctx::decreaseAllowance: decreased allowance below zero"
+        "Avix::decreaseAllowance: decreased allowance below zero"
       )
     );
     return true;
@@ -339,7 +339,7 @@ contract Ctx {
     if (rawAmount == uint256(-1)) {
       amount = uint96(-1);
     } else {
-      amount = safe96(rawAmount, "Ctx::permit: amount exceeds 96 bits");
+      amount = safe96(rawAmount, "Avix::permit: amount exceeds 96 bits");
     }
 
     bytes32 domainSeparator =
@@ -365,9 +365,9 @@ contract Ctx {
     bytes32 digest =
       keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash));
     address signatory = ecrecover(digest, v, r, s);
-    require(signatory != address(0), "Ctx::permit: invalid signature");
-    require(signatory == owner, "Ctx::permit: unauthorized");
-    require(block.timestamp <= deadline, "Ctx::permit: signature expired");
+    require(signatory != address(0), "Avix::permit: invalid signature");
+    require(signatory == owner, "Avix::permit: unauthorized");
+    require(block.timestamp <= deadline, "Avix::permit: signature expired");
 
     allowances[owner][spender] = amount;
 
@@ -390,7 +390,7 @@ contract Ctx {
    * @return Whether or not the transfer succeeded
    */
   function transfer(address dst, uint256 rawAmount) external returns (bool) {
-    uint96 amount = safe96(rawAmount, "Ctx::transfer: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "Avix::transfer: amount exceeds 96 bits");
     _transferTokens(msg.sender, dst, amount);
     return true;
   }
@@ -409,14 +409,14 @@ contract Ctx {
   ) external returns (bool) {
     address spender = msg.sender;
     uint96 spenderAllowance = allowances[src][spender];
-    uint96 amount = safe96(rawAmount, "Ctx::approve: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "Avix::approve: amount exceeds 96 bits");
 
     if (spender != src && spenderAllowance != uint96(-1)) {
       uint96 newAllowance =
         sub96(
           spenderAllowance,
           amount,
-          "Ctx::transferFrom: transfer amount exceeds spender allowance"
+          "Avix::transferFrom: transfer amount exceeds spender allowance"
         );
       allowances[src][spender] = newAllowance;
 
@@ -466,9 +466,9 @@ contract Ctx {
     bytes32 digest =
       keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash));
     address signatory = ecrecover(digest, v, r, s);
-    require(signatory != address(0), "Ctx::delegateBySig: invalid signature");
-    require(nonce == nonces[signatory]++, "Ctx::delegateBySig: invalid nonce");
-    require(block.timestamp <= expiry, "Ctx::delegateBySig: signature expired");
+    require(signatory != address(0), "Avix::delegateBySig: invalid signature");
+    require(nonce == nonces[signatory]++, "Avix::delegateBySig: invalid nonce");
+    require(block.timestamp <= expiry, "Avix::delegateBySig: signature expired");
     return _delegate(signatory, delegatee);
   }
 
@@ -496,7 +496,7 @@ contract Ctx {
   {
     require(
       blockNumber < block.number,
-      "Ctx::getPriorVotes: not yet determined"
+      "Avix::getPriorVotes: not yet determined"
     );
 
     uint32 nCheckpoints = numCheckpoints[account];
@@ -547,26 +547,26 @@ contract Ctx {
   ) internal {
     require(
       src != address(0),
-      "Ctx::_transferTokens: cannot transfer from the zero address"
+      "Avix::_transferTokens: cannot transfer from the zero address"
     );
     require(
       dst != address(0),
-      "Ctx::_transferTokens: cannot transfer to the zero address"
+      "Avix::_transferTokens: cannot transfer to the zero address"
     );
     require(
       dst != address(this),
-      "Ctx::_transferTokens: cannot transfer to the Ctx address"
+      "Avix::_transferTokens: cannot transfer to the Avix address"
     );
 
     balances[src] = sub96(
       balances[src],
       amount,
-      "Ctx::_transferTokens: transfer amount exceeds balance"
+      "Avix::_transferTokens: transfer amount exceeds balance"
     );
     balances[dst] = add96(
       balances[dst],
       amount,
-      "Ctx::_transferTokens: transfer amount overflows"
+      "Avix::_transferTokens: transfer amount overflows"
     );
     emit Transfer(src, dst, amount);
 
@@ -584,7 +584,7 @@ contract Ctx {
         uint96 srcRepOld =
           srcRepNum > 0 ? checkpoints[srcRep][srcRepNum - 1].votes : 0;
         uint96 srcRepNew =
-          sub96(srcRepOld, amount, "Ctx::_moveVotes: vote amount underflows");
+          sub96(srcRepOld, amount, "Avix::_moveVotes: vote amount underflows");
         _writeCheckpoint(srcRep, srcRepNum, srcRepOld, srcRepNew);
       }
 
@@ -593,7 +593,7 @@ contract Ctx {
         uint96 dstRepOld =
           dstRepNum > 0 ? checkpoints[dstRep][dstRepNum - 1].votes : 0;
         uint96 dstRepNew =
-          add96(dstRepOld, amount, "Ctx::_moveVotes: vote amount overflows");
+          add96(dstRepOld, amount, "Avix::_moveVotes: vote amount overflows");
         _writeCheckpoint(dstRep, dstRepNum, dstRepOld, dstRepNew);
       }
     }
@@ -608,7 +608,7 @@ contract Ctx {
     uint32 blockNumber =
       safe32(
         block.number,
-        "Ctx::_writeCheckpoint: block number exceeds 32 bits"
+        "Avix::_writeCheckpoint: block number exceeds 32 bits"
       );
 
     if (

@@ -4,14 +4,14 @@ pragma solidity 0.7.5;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/introspection/ERC165Checker.sol";
 import "./IVaultHandler.sol";
-import "./TCAP.sol";
+import "./DVIX";
 import "./oracles/ChainlinkOracle.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
- * @title TCAP Orchestrator
- * @author Cryptex.finance
- * @notice Orchestrator contract in charge of managing the settings of the vaults, rewards and TCAP token. It acts as the owner of these contracts.
+ * @title dVIX Orchestrator
+ * @author Avix Finance
+ * @notice Orchestrator contract in charge of managing the settings of the vaults, rewards and dVIX token. It acts as the owner of these contracts.
  */
 contract Orchestrator is Ownable {
   /// @dev Enum which saves the available functions to emergency call.
@@ -22,7 +22,7 @@ contract Orchestrator is Ownable {
 
   /** @dev Interface constants*/
   bytes4 private constant _INTERFACE_ID_IVAULT = 0x9e75ab0c;
-  bytes4 private constant _INTERFACE_ID_TCAP = 0xbd115939;
+  bytes4 private constant _INTERFACE_ID_DVIX = 0xbd115939;
   bytes4 private constant _INTERFACE_ID_CHAINLINK_ORACLE = 0x85be402b;
 
   /// @dev tracks which vault was emergency called
@@ -46,7 +46,7 @@ contract Orchestrator is Ownable {
   constructor(address _guardian) {
     require(
       _guardian != address(0),
-      "Orchestrator::constructor: guardian can't be zero"
+      "Orchestrator::constructor: guardian can't be zero address"
     );
     guardian = _guardian;
   }
@@ -73,13 +73,13 @@ contract Orchestrator is Ownable {
   }
 
   /**
-   * @notice Throws if TCAP Token is not valid
-   * @param _tcap address
+   * @notice Throws if dVIX Token is not valid
+   * @param _dvix address
    */
-  modifier validTCAP(TCAP _tcap) {
+  modifier validDVIX(DVIX _dvix) {
     require(
-      ERC165Checker.supportsInterface(address(_tcap), _INTERFACE_ID_TCAP),
-      "Orchestrator::validTCAP: not a valid TCAP ERC20"
+      ERC165Checker.supportsInterface(address(_dvix), _INTERFACE_ID_DVIX),
+      "Orchestrator::validDVIX: not a valid DVIX ERC20"
     );
     _;
   }
@@ -107,7 +107,7 @@ contract Orchestrator is Ownable {
   function setGuardian(address _guardian) external onlyOwner {
     require(
       _guardian != address(0),
-      "Orchestrator::setGuardian: guardian can't be zero"
+      "Orchestrator::setGuardian: guardian can't be zero address"
     );
     guardian = _guardian;
     emit GuardianSet(msg.sender, _guardian);
@@ -226,67 +226,67 @@ contract Orchestrator is Ownable {
   }
 
   /**
-   * @notice Enables or disables the TCAP Cap
-   * @param _tcap address
+   * @notice Enables or disables the dVIX Cap
+   * @param _dvix address
    * @param _enable bool
    * @dev Only owner can call it
-   * @dev Validates if _tcap is valid
+   * @dev Validates if _dvix is valid
    */
-  function enableTCAPCap(TCAP _tcap, bool _enable)
+  function enableDVIXCap(DVIX _dvix, bool _enable)
     external
     onlyOwner
-    validTCAP(_tcap)
+    validDVIX(_dvix)
   {
-    _tcap.enableCap(_enable);
+    _dvix.enableCap(_enable);
   }
 
   /**
-   * @notice Sets the TCAP maximum minting value
-   * @param _tcap address
+   * @notice Sets the dVIX maximum minting value
+   * @param _dvix address
    * @param _cap uint value
    * @dev Only owner can call it
-   * @dev Validates if _tcap is valid
+   * @dev Validates if _dvix is valid
    */
-  function setTCAPCap(TCAP _tcap, uint256 _cap)
+  function setDVIXCap(DVIX _dvix, uint256 _cap)
     external
     onlyOwner
-    validTCAP(_tcap)
+    validDVIX(_dvix)
   {
-    _tcap.setCap(_cap);
+    _dvix.setCap(_cap);
   }
 
   /**
-   * @notice Adds Vault to TCAP ERC20
-   * @param _tcap address
+   * @notice Adds Vault to DVIX ERC20
+   * @param _dvix address
    * @param _vault address
    * @dev Only owner can call it
-   * @dev Validates if _tcap is valid
+   * @dev Validates if _dvix is valid
    * @dev Validates if _vault is valid
    */
-  function addTCAPVault(TCAP _tcap, IVaultHandler _vault)
+  function addDVIXVault(DVIX _dvix, IVaultHandler _vault)
     external
     onlyOwner
-    validTCAP(_tcap)
+    validDVIX(_dvix)
     validVault(_vault)
   {
-    _tcap.addVaultHandler(address(_vault));
+    _dvix.addVaultHandler(address(_vault));
   }
 
   /**
-   * @notice Removes Vault to TCAP ERC20
-   * @param _tcap address
+   * @notice Removes Vault to DVIX ERC20
+   * @param _dvix address
    * @param _vault address
    * @dev Only owner can call it
-   * @dev Validates if _tcap is valid
+   * @dev Validates if _dvix is valid
    * @dev Validates if _vault is valid
    */
-  function removeTCAPVault(TCAP _tcap, IVaultHandler _vault)
+  function removeDVIXVault(DVIX _dvix, IVaultHandler _vault)
     external
     onlyOwner
-    validTCAP(_tcap)
+    validDVIX(_dvix)
     validVault(_vault)
   {
-    _tcap.removeVaultHandler(address(_vault));
+    _dvix.removeVaultHandler(address(_vault));
   }
 
   /**
@@ -312,7 +312,7 @@ contract Orchestrator is Ownable {
 
     require(
       target != address(0),
-      "Orchestrator::executeTransaction: target can't be zero"
+      "Orchestrator::executeTransaction: target can't be zero address"
     );
 
     // solium-disable-next-line security/no-call-value
@@ -330,19 +330,19 @@ contract Orchestrator is Ownable {
   }
 
   /**
-   * @notice Retrieves the eth stuck on the orchestrator
+   * @notice Retrieves the AVAX stuck on the orchestrator
    * @param _to address
    * @dev Only owner can call it
    */
-  function retrieveETH(address _to) external onlyOwner {
+  function retrieveAVAX(address _to) external onlyOwner {
     require(
       _to != address(0),
-      "Orchestrator::retrieveETH: address can't be zero"
+      "Orchestrator::retrieveAVAX: address can't be zero address"
     );
     uint256 amount = address(this).balance;
     payable(_to).transfer(amount);
   }
 
-  /// @notice Allows the contract to receive ETH
+  /// @notice Allows the contract to receive AVAX
   receive() external payable {}
 }

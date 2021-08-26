@@ -12,7 +12,9 @@
 /build
 
 # misc
+package-lock.json
 .DS_Store
+
 .env
 .env.local
 .env.development.local
@@ -25,12 +27,16 @@ yarn-error.log*
 
 TODO
 
-# eth
+# solidity
 /bin
 artifacts
 .secret
+/coverage
 coverage.json
 /cache
 /typechain
 /.idea
 /.idea/workspace.xml
+/scripts/run.md
+truffle-config.js
+/migrations

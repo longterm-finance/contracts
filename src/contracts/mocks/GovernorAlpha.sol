@@ -6,17 +6,17 @@ pragma experimental ABIEncoderV2;
 
 contract GovernorAlpha {
   /// @notice The name of this contract
-  string public constant name = "Cryptex Governor Alpha";
+  string public constant name = "Avix Governor Alpha";
 
   /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
   function quorumVotes() public pure returns (uint256) {
-    return 400_000e18;
-  } // 4% of Ctx
+    return 500_000e18;
+  } // 5% of Avix total supply
 
   /// @notice The number of votes required in order for a voter to become a proposer
   function proposalThreshold() public pure returns (uint256) {
-    return 100_000e18;
-  } // 1% of Ctx
+    return 50_000e18;
+  } // 0.5% of Avix total supply
 
   /// @notice The maximum number of actions that can be included in a proposal
   function proposalMaxOperations() public pure returns (uint256) {
@@ -30,14 +30,14 @@ contract GovernorAlpha {
 
   /// @notice The duration of voting on a proposal, in blocks
   function votingPeriod() public pure returns (uint256) {
-    return 17_280;
-  } // ~3 days in blocks (assuming 15s blocks)
+    return 172_800;
+  } // ~3 days in blocks (assuming 1.5s blocks)
 
-  /// @notice The address of the Ctx Protocol Timelock
+  /// @notice The address of the Avix Protocol Timelock
   TimelockInterface public timelock;
 
-  /// @notice The address of the Ctx governance token
-  CtxInterface public ctx;
+  /// @notice The address of the Avix governance token
+  AvixInterface public avix;
 
   /// @notice The total number of proposals
   uint256 public proposalCount;
@@ -142,9 +142,9 @@ contract GovernorAlpha {
   /// @notice An event emitted when a proposal has been executed in the Timelock
   event ProposalExecuted(uint256 id);
 
-  constructor(address timelock_, address ctx_) {
+  constructor(address timelock_, address avix_) {
     timelock = TimelockInterface(timelock_);
-    ctx = CtxInterface(ctx_);
+    avix = AvixInterface(avix_);
   }
 
   function propose(
@@ -155,7 +155,7 @@ contract GovernorAlpha {
     string memory description
   ) public returns (uint256) {
     require(
-      ctx.getPriorVotes(msg.sender, sub256(block.number, 1)) >
+      avix.getPriorVotes(msg.sender, sub256(block.number, 1)) >
         proposalThreshold(),
       "GovernorAlpha::propose: proposer votes below proposal threshold"
     );
@@ -163,7 +163,7 @@ contract GovernorAlpha {
       targets.length == values.length &&
         targets.length == signatures.length &&
         targets.length == calldatas.length,
-      "GovernorAlpha::propose: proposal function information arity mismatch"
+      "GovernorAlpha::propose: proposal function information parity mismatch"
     );
     require(
       targets.length != 0,
@@ -171,7 +171,7 @@ contract GovernorAlpha {
     );
     require(
       targets.length <= proposalMaxOperations(),
-      "GovernorAlpha::propose: too many actions"
+      "GovernorAlpha::propose: too many actions - 10 is the limit"
     );
 
     uint256 latestProposalId = latestProposalIds[msg.sender];
@@ -261,7 +261,7 @@ contract GovernorAlpha {
     timelock.queueTransaction(target, value, signature, data, eta);
   }
 
-  /// @notice executes the transaction, but uses the msg.value from the eth stored in the timelock
+  /// @notice executes the transaction, but uses the msg.value from the avax stored in the timelock
   function execute(uint256 proposalId) public payable {
     require(
       state(proposalId) == ProposalState.Queued,
@@ -290,7 +290,7 @@ contract GovernorAlpha {
 
     Proposal storage proposal = proposals[proposalId];
     require(
-      ctx.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
+      avix.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
         proposalThreshold(),
       "GovernorAlpha::cancel: proposer above threshold"
     );
@@ -412,7 +412,7 @@ contract GovernorAlpha {
       receipt.hasVoted == false,
       "GovernorAlpha::_castVote: voter already voted"
     );
-    uint96 votes = ctx.getPriorVotes(voter, proposal.startBlock);
+    uint96 votes = avix.getPriorVotes(voter, proposal.startBlock);
 
     if (support) {
       proposal.forVotes = add256(proposal.forVotes, votes);
@@ -481,7 +481,7 @@ interface TimelockInterface {
   ) external payable returns (bytes memory);
 }
 
-interface CtxInterface {
+interface AvixInterface {
   function getPriorVotes(address account, uint256 blockNumber)
     external
     view

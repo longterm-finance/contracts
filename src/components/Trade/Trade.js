@@ -99,6 +99,7 @@ const Trade = ({ isDarkMode }) => {
       >
         Most Popular dVIX & AVIX Trading Pairs
       </h1>
+      <br />
       <div className="trade-grid">
         <TradeCard
           icon1={dvix}

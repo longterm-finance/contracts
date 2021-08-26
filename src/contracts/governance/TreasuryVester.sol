@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 contract TreasuryVester {
   using SafeMath for uint256;
 
-  address public ctx;
+  address public avix;
   address public recipient;
 
   uint256 public vestingAmount;
@@ -18,7 +18,7 @@ contract TreasuryVester {
   uint256 public lastUpdate;
 
   constructor(
-    address ctx_,
+    address avix_,
     address recipient_,
     uint256 vestingAmount_,
     uint256 vestingBegin_,
@@ -31,14 +31,14 @@ contract TreasuryVester {
     );
     require(
       vestingCliff_ >= vestingBegin_,
-      "TreasuryVester::constructor: cliff is too early"
+      "TreasuryVester::constructor: vesting cliff is too early"
     );
     require(
       vestingEnd_ > vestingCliff_,
-      "TreasuryVester::constructor: end is too early"
+      "TreasuryVester::constructor: vesting end is too early"
     );
 
-    ctx = ctx_;
+    avix = avix_;
     recipient = recipient_;
 
     vestingAmount = vestingAmount_;
@@ -64,18 +64,18 @@ contract TreasuryVester {
     );
     uint256 amount;
     if (block.timestamp >= vestingEnd) {
-      amount = ICtx(ctx).balanceOf(address(this));
+      amount = IAvix(avix).balanceOf(address(this));
     } else {
       amount = vestingAmount.mul(block.timestamp - lastUpdate).div(
         vestingEnd - vestingBegin
       );
       lastUpdate = block.timestamp;
     }
-    ICtx(ctx).transfer(recipient, amount);
+    IAvix(avix).transfer(recipient, amount);
   }
 }
 
-interface ICtx {
+interface IAvix {
   function balanceOf(address account) external view returns (uint256);
 
   function transfer(address dst, uint256 rawAmount) external returns (bool);

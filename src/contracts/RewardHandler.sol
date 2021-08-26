@@ -52,19 +52,19 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
   /// @notice Tracks the user rewards
   mapping(address => uint256) public rewards;
 
-  /// @dev Tracks the total supply of the minted TCAPs
+  /// @dev Tracks the total supply of the minted dVIXs
   uint256 private _totalSupply;
 
-  /// @dev Tracks the amount of TCAP minted per user
+  /// @dev Tracks the amount of dVIX minted per user
   mapping(address => uint256) private _balances;
 
   /// @notice An event emitted when a reward is added
   event RewardAdded(uint256 reward);
 
-  /// @notice An event emitted when TCAP is minted and staked to earn rewards
+  /// @notice An event emitted when dVIX is minted and staked to earn rewards
   event Staked(address indexed user, uint256 amount);
 
-  /// @notice An event emitted when TCAP is burned and removed of stake
+  /// @notice An event emitted when dVIX is burned and removed of stake
   event Withdrawn(address indexed user, uint256 amount);
 
   /// @notice An event emitted when reward is paid to a user
@@ -73,7 +73,7 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
   /// @notice An event emitted when the rewards duration is updated
   event RewardsDurationUpdated(uint256 newDuration);
 
-  /// @notice An event emitted when a erc20 token is recovered
+  /// @notice An event emitted when a ERC20 token is recovered
   event Recovered(address token, uint256 amount);
 
   /**
@@ -124,13 +124,13 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
     _;
   }
 
-  /// @notice Returns the total amount of TCAP tokens minted and getting reward on this vault.
+  /// @notice Returns the total amount of dVIX tokens minted and getting reward on this vault.
   function totalSupply() external view returns (uint256) {
     return _totalSupply;
   }
 
   /**
-   * @notice Returns the amount of TCAP tokens minted and getting reward from specific user.
+   * @notice Returns the amount of dVIX tokens minted and getting reward from specific user.
    * @param _account address
    */
   function balanceOf(address _account) external view returns (uint256) {
@@ -143,7 +143,7 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
   }
 
   /**
-   * @notice Called when TCAP is minted, adds the minted value as stake
+   * @notice Called when dVIX is minted, adds the minted value as stake
    * @param _staker address
    * @param _amount uint
    * @dev Only vault can call it
@@ -156,7 +156,7 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
     whenNotPaused
     updateReward(_staker)
   {
-    require(_amount > 0, "Cannot stake 0");
+    require(_amount > 0, "Cannot stake 0 tokens");
     _totalSupply = _totalSupply.add(_amount);
     _balances[_staker] = _balances[_staker].add(_amount);
     emit Staked(_staker, _amount);
@@ -283,7 +283,7 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
   }
 
   /**
-   * @notice Called when TCAP is burned or liquidated, removes the burned value as stake
+   * @notice Called when dVIX is burned or liquidated, removes the burned value as stake
    * @param _staker address
    * @param _amount uint
    * @dev Only vault can call it
@@ -295,14 +295,14 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
     nonReentrant
     updateReward(_staker)
   {
-    require(_amount > 0, "Cannot withdraw 0");
+    require(_amount > 0, "Cannot withdraw 0 tokens");
     _totalSupply = _totalSupply.sub(_amount);
     _balances[_staker] = _balances[_staker].sub(_amount);
     emit Withdrawn(_staker, _amount);
   }
 
   /**
-   * @notice Called when TCAP is burned or liquidated, transfers to the staker the current amount of rewards tokens earned.
+   * @notice Called when dVIX is burned or liquidated, transfers to the staker the current amount of rewards tokens earned.
    * @param _staker address
    * @dev Only vault can call it
    * @dev Updates rewards on call

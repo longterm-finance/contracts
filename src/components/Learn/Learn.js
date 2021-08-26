@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useMediaQuery } from 'react-responsive'
 import './learn.css'
+import { useMediaQuery } from 'react-responsive'
 import RedditIcon from '@material-ui/icons/Reddit'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import TelegramIcon from '@material-ui/icons/Telegram'
@@ -13,6 +13,8 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 // import AuditReportIcon from '@material-ui/icons/BugReport'
 
 const Learn = ({ isDarkMode }) => {
+  const isMobileView = useMediaQuery({ query: '(max-width: 510px)' })
+
   const WhatIsAvix = () => {
     return (
       <div
@@ -67,8 +69,6 @@ const Learn = ({ isDarkMode }) => {
   }
 
   const Video = () => {
-    const isMobile = useMediaQuery({ query: '(max-width: 1240px)' })
-
     return (
       <div
         className={`video-container ${
@@ -77,14 +77,13 @@ const Learn = ({ isDarkMode }) => {
       >
         <h2 className="video-title mb-4">Intro to Avix Finance</h2>
         <iframe
-          width={isMobile ? '280' : '560'}
-          height={isMobile ? '157.5' : '315'}
           src="https://www.youtube.com/embed/NpEaa2P7qZI"
           title="YouTube Video Player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></iframe>
+          className="mr-4 video"
+        />
       </div>
     )
   }
@@ -309,12 +308,15 @@ const Learn = ({ isDarkMode }) => {
             }}
             className="copy-address-span"
           >
-            0xa275a30492B138639726b43385D0703aa65F8107
+            {isMobileView
+              ? // eslint-disable-next-line
+                '0xa275a30492B138639726b43385' + ' ' + 'D0703aa65F8107'
+              : '0xa275a30492B138639726b43385D0703aa65F8107'}
           </span>{' '}
           <span
             style={{ display: 'block', color: '#1771f8', fontWeight: 'bold' }}
           >
-            [Click address to copy]{' '}
+            [Click on the address to copy]{' '}
             {copyAddressClicked1 && (
               <span
                 className="ml-2"
@@ -340,12 +342,15 @@ const Learn = ({ isDarkMode }) => {
             }}
             className="copy-address-span"
           >
-            bc1qdkryvyvvm52mujn587ut608n3xhkj0dm8dsrz7
+            {isMobileView
+              ? // eslint-disable-next-line
+                'bc1qdkryvyvvm52mujn587ut608n3' + ' ' + 'xhkj0dm8dsrz7'
+              : 'bc1qdkryvyvvm52mujn587ut608n3xhkj0dm8dsrz7'}
           </span>{' '}
           <span
             style={{ display: 'block', color: '#1771f8', fontWeight: 'bold' }}
           >
-            [Click address to copy]{' '}
+            [Click on the address to copy]{' '}
             {copyAddressClicked2 && (
               <span
                 className="ml-2"
@@ -361,6 +366,34 @@ const Learn = ({ isDarkMode }) => {
               </span>
             )}
           </span>
+        </p>
+        <p className="support-desc">
+          Also, you can ask our community for the support in our{' '}
+          <a
+            href="https://t.me/joinchat/vcN1SWLifF01M2M0"
+            target="_blank"
+            rel="noreferrer"
+            className="doc-link community-link-inner"
+          >
+            Telegram Group,{' '}
+          </a>
+          <a
+            href="https://discord.com/invite/ahu8kpwXM3"
+            target="_blank"
+            rel="noreferrer"
+            className="doc-link community-link-inner"
+          >
+            Discord Server,{' '}
+          </a>
+          or{' '}
+          <a
+            href="https://www.reddit.com/r/AvixFinance"
+            target="_blank"
+            rel="noreferrer"
+            className="doc-link community-link-inner"
+          >
+            Avix Subreddit.
+          </a>
         </p>
       </div>
     )
@@ -536,7 +569,7 @@ const Learn = ({ isDarkMode }) => {
       <br />
 
       <h1
-        className="text-center bold mb-5 mt-5"
+        className="text-center bold mb-5 mt-5 learn-title"
         style={{ fontSize: '3.15rem', color: isDarkMode && '#fff' }}
       >
         Learn About Avix Finance

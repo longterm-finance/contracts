@@ -1,6 +1,6 @@
 .learn-container {
-  margin-left: 245px;
-  margin-right: 50px;
+  padding-left: 245px;
+  padding-right: 50px;
   margin-bottom: 50px !important;
 }
 
@@ -9,6 +9,28 @@
   padding-right: 50px;
   margin-bottom: 50px !important;
   background-color: #212429;
+}
+
+@media screen and (max-width: 992px) {
+  .learn-container,
+  .learn-container-dark-mode {
+    padding-left: 10%;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  /* .learn-container,
+  .learn-container-dark-mode {
+    padding-left: 5% !important;
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 5% !important;
+  } */
+
+  .what-is-avix-container {
+    height: 650px !important;
+  }
 }
 
 .learn-grid {
@@ -43,24 +65,18 @@
   color: #fff !important;
 }
 
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 1378px) {
   .learn-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
   .learn-grid {
     padding-left: 7%;
     padding-right: 7% !important;
   }
-}
-
-@media screen and (max-width: 400px) {
-  .learn-grid {
-    padding-right: 15% !important;
-  }
-}
+} */
 
 /* What is Avix Finance */
 
@@ -136,7 +152,7 @@
 }
 
 .support-container {
-  height: 350px;
+  height: 422.5px;
 }
 
 .copy-address-span {
@@ -171,4 +187,149 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1px;
+}
+
+@media screen and (max-width: 1530px) {
+  .what-is-avix-container {
+    height: 550px;
+  }
+
+  .support-container {
+    height: 550px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .learn-grid {
+    padding-left: -5% !important;
+    padding-right: 0% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .what-is-avix-container,
+  .video-container,
+  .instructions-container,
+  .resources-container,
+  .support-container,
+  .community-container {
+    width: 85%;
+    margin-left: 4%;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .what-is-avix-container,
+  .support-container {
+    height: 750px !important;
+  }
+}
+
+@media screen and (max-width: 455px) {
+  .what-is-avix-container,
+  .support-container {
+    height: 900px !important;
+  }
+}
+
+@media screen and (max-width: 390px) {
+}
+
+.video {
+  width: 560px;
+  height: 315px;
+}
+
+@media screen and (max-width: 992px) {
+  .video {
+    width: 420px;
+    height: 236.25px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .video {
+    width: 280px;
+    height: 157.5px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .video {
+    width: 185px;
+    height: 105px;
+    margin-left: 15%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .video {
+    margin-left: 5%;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .video {
+    margin-left: 0%;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .copy-address-span {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .copy-address-span {
+    font-size: 0.775rem;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .community-link,
+  .resources-link {
+    font-size: 0.9rem;
+  }
+
+  .instructions-container {
+    height: 280px;
+  }
+
+  .instructions-title,
+  .community-title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .video {
+    margin-left: -2% !important;
+  }
+
+  .video-container {
+    height: 300px !important;
+  }
+
+  .what-is-avix-title,
+  .video-title,
+  .resources-title,
+  .support-title {
+    font-size: 2rem;
+  }
+
+  .learn-title {
+    font-size: 2.25rem !important;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .video {
+    margin-left: -9% !important;
+  }
+
+  .community-link,
+  .resources-link {
+    font-size: 0.8rem;
+  }
 }
