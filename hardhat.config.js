@@ -2,13 +2,13 @@
  * @type import('hardhat/config').HardhatUserConfig
  */
 
-import '@nomiclabs/hardhat-waffle'
-import '@nomiclabs/hardhat-ethers'
-import 'hardhat-deploy'
-import '@nomiclabs/hardhat-etherscan'
-import 'solidity-coverage'
-import 'hardhat-gas-reporter'
-import 'hardhat-tracer'
+require('@nomiclabs/hardhat-waffle')
+require('@nomiclabs/hardhat-ethers')
+require('hardhat-deploy')
+require('@nomiclabs/hardhat-etherscan')
+require('solidity-coverage')
+// require('hardhat-gas-reporter')
+require('hardhat-tracer')
 require('dotenv').config()
 
 const mnemonic = process.env.DEPLOYER_MNEMONIC
@@ -59,4 +59,4 @@ const config = {
   //  },
 }
 
-export default config
+module.exports = config

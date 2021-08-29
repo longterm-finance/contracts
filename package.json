@@ -14,7 +14,7 @@
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-etherscan": "^2.1.5",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "@openzeppelin/contracts": "^4.3.0",
+    "@openzeppelin/contracts": "^3.4.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -62,7 +62,7 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
-    "solc": "^0.7.5",
+    "solc": "^0.6.0",
     "solidity-coverage": "^0.7.16",
     "solidity-docgen": "^0.5.13",
     "source-map-support": "^0.5.19",
@@ -81,7 +81,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "buildContracts": "npm run typechain",
+    "testContracts": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "coverage": "npx hardhat coverage",
+    "typechain": "npx hardhat compile && typechain --outDir typechain --target ethers 'artifacts/*.json'",
+    "deploy": "npx hardhat deploy",
+    "verify": "npx hardhat verify etherscan-verify",
+    "docgen": "yarn run solidity-docgen --solc-module solc-0.7"
   },
   "eslintConfig": {
     "extends": [

@@ -1,4 +1,4 @@
-import { deployments, hardhatArguments } from 'hardhat'
+const { deployments, hardhatArguments } = require('hardhat')
 
 const governance = async function (hre) {
   console.log('FUJI TESTNET DEPLOY')
@@ -63,4 +63,5 @@ const governance = async function (hre) {
     }
   }
 }
-export default governance
+
+module.exports = governance

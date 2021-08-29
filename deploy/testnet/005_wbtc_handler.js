@@ -1,5 +1,5 @@
-import { hardhatArguments } from 'hardhat'
-import { deployments } from 'hardhat'
+const { hardhatArguments } = require('hardhat')
+const { deployments } = require('hardhat')
 
 const WBTCVaultHandler = async (hre) => {
   let initial_run = process.env.INITIAL_RUN === 'true' ? true : false
@@ -78,4 +78,4 @@ const WBTCVaultHandler = async (hre) => {
   }
 }
 
-export default WBTCVaultHandler
+module.exports = WBTCVaultHandler

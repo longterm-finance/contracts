@@ -4,7 +4,7 @@ pragma solidity 0.7.5;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/introspection/ERC165Checker.sol";
 import "./IVaultHandler.sol";
-import "./DVIX";
+import "./DVIX.sol";
 import "./oracles/ChainlinkOracle.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 

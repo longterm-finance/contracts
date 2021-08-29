@@ -1,5 +1,5 @@
-import { hardhatArguments } from 'hardhat'
-import { deployments } from 'hardhat'
+const { hardhatArguments } = require('hardhat')
+const { deployments } = require('hardhat')
 
 const AVAXVaultHandler = async (hre) => {
   let initial_run = process.env.INITIAL_RUN === 'true' ? true : false
@@ -84,4 +84,5 @@ const AVAXVaultHandler = async (hre) => {
     }
   }
 }
-export default AVAXVaultHandler
+
+module.exports = AVAXVaultHandler

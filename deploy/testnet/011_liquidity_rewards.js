@@ -1,5 +1,6 @@
-import { ethers as ethershardhat, hardhatArguments } from 'hardhat'
-import { deployments } from 'hardhat'
+const { ethers, hardhatArguments } = require('hardhat')
+const ethershardhat = ethers
+const { deployments } = require('hardhat')
 require('dotenv').config()
 
 module.exports = async (hre) => {

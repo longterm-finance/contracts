@@ -16,7 +16,7 @@
 
 // Contract name, token name, and token symbol modified by Ava Labs 2020
 
-pragma solidity 0.7.5;
+pragma solidity >=0.4.22 <0.6;
 
 contract WAVAX {
   string public name = "Wrapped AVAX";

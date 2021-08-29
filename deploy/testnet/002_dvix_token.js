@@ -1,4 +1,4 @@
-import { hardhatArguments } from 'hardhat'
+const { hardhatArguments } = require('hardhat')
 require('dotenv').config()
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
@@ -40,4 +40,5 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     }
   }
 }
+
 module.exports.tags = ['AVIX']

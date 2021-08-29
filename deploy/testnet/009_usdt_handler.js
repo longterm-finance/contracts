@@ -1,5 +1,5 @@
-import { hardhatArguments } from 'hardhat'
-import { deployments } from 'hardhat'
+const { hardhatArguments } = require('hardhat')
+const { deployments } = require('hardhat')
 
 const USDTVaultHandler = async (hre) => {
   let initial_run = process.env.INITIAL_RUN === 'true' ? true : false
@@ -78,4 +78,4 @@ const USDTVaultHandler = async (hre) => {
   }
 }
 
-export default USDTVaultHandler
+module.exports = USDTVaultHandler

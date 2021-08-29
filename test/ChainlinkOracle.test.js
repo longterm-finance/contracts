@@ -1,6 +1,7 @@
-var expect = require('chai').expect
-var ethersProvider = require('ethers')
+var { before, expect } = require('chai')
+var ethers = require('ethers')
 
+// eslint-disable-next-line
 describe('Chainlink Oracle', async function () {
   let chainlinkInstance
   let [owner, addr1, handler, handler2] = []
@@ -27,12 +28,12 @@ describe('Chainlink Oracle', async function () {
     const oracle = await ethers.getContractFactory('ChainlinkOracle')
     chainlinkInstance = await oracle.deploy(aggregatorInstance.address)
     await chainlinkInstance.deployed()
-    expect(chainlinkInstance.address).properAddress
+    expect(chainlinkInstance.address).properAddress()
   })
 
   it('...should get the oracle answer', async () => {
-    const price = ethersProvider.BigNumber.from('39752768946')
+    const price = ethers.BigNumber.from('39752768946')
     let ethPrice = await chainlinkInstance.getLatestAnswer()
-    expect(ethPrice).to.eq(price)
+    expect(ethPrice).to().eq(price)
   })
 })

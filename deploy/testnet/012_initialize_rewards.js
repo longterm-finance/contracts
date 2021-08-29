@@ -1,4 +1,5 @@
-import { ethers as ethershardhat, hardhatArguments } from 'hardhat'
+const { ethers, hardhatArguments } = require('hardhat')
+const ethershardhat = ethers
 require('dotenv').config()
 
 module.exports = async ({ deployments }) => {
@@ -58,4 +59,5 @@ module.exports = async ({ deployments }) => {
     console.log('no transfer')
   }
 }
+
 module.exports.tags = ['Initialize']

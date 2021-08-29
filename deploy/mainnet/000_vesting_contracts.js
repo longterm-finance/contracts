@@ -1,4 +1,4 @@
-import { deployments, hardhatArguments } from 'hardhat'
+const { deployments, hardhatArguments } = require('hardhat')
 
 const governorBeta = async function (hre) {
   const ethers = hre.ethers
@@ -36,4 +36,5 @@ const governorBeta = async function (hre) {
     }
   }
 }
-export default governorBeta
+
+module.exports = governorBeta

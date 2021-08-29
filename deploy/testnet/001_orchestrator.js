@@ -1,4 +1,4 @@
-import { hardhatArguments } from 'hardhat'
+const { hardhatArguments } = require('hardhat')
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
   let initial_run = process.env.INITIAL_RUN === 'true' ? true : false
@@ -34,4 +34,5 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     }
   }
 }
+
 module.exports.tags = ['Orchestrator']

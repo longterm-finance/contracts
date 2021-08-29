@@ -1,5 +1,5 @@
-import { hardhatArguments } from 'hardhat'
-import { deployments } from 'hardhat'
+const { hardhatArguments } = require('hardhat')
+const { deployments } = require('hardhat')
 
 const DAIVaultHandler = async (hre) => {
   let initial_run = process.env.INITIAL_RUN === 'true' ? true : false
@@ -78,4 +78,4 @@ const DAIVaultHandler = async (hre) => {
   }
 }
 
-export default DAIVaultHandler
+module.exports = DAIVaultHandler

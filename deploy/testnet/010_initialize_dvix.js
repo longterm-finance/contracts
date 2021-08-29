@@ -1,4 +1,5 @@
-import { ethers as ethershardhat, hardhatArguments } from 'hardhat'
+const { ethers, hardhatArguments } = require('hardhat')
+const ethershardhat = ethers
 require('dotenv').config()
 
 module.exports = async ({ deployments }) => {
@@ -29,4 +30,5 @@ module.exports = async ({ deployments }) => {
     await orchestrator.addDVIXVault(dvix.address, USDTHandler.address)
   }
 }
+
 module.exports.tags = ['Initialize']
