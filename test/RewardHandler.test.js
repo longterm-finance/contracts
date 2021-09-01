@@ -1,6 +1,7 @@
-var expect = require('chai').expect
-var ethers = require('hardhat').ethers
+var { expect, describe, before } = require('chai')
+var ethers = require('ethers')
 
+// eslint-disable-next-line
 describe('Reward Handler', async () => {
   let rewardHandlerInstance, ercTokenInstance, rewardTokenInstance
   let [owner, user, vault] = []
@@ -19,6 +20,7 @@ describe('Reward Handler', async () => {
 
   it('...should deploy the contract', async () => {
     const collateral = await ethers.getContractFactory('WBTC')
+    // eslint-disable-next-line
     ercTokenInstance = await collateral.deploy()
     const reward = await ethers.getContractFactory('WBTC')
     rewardTokenInstance = await reward.deploy()
@@ -32,14 +34,16 @@ describe('Reward Handler', async () => {
       vaultAddr,
     )
     await rewardHandlerInstance.deployed()
-    expect(rewardHandlerInstance.address).properAddress
+    expect(rewardHandlerInstance.address).properAddress()
   })
 
   it('...should set the constructor values', async () => {
-    expect(ownerAddr).to.eq(await rewardHandlerInstance.owner())
-    expect(rewardTokenInstance.address).to.eq(
-      await rewardHandlerInstance.rewardsToken(),
-    )
+    expect(ownerAddr)
+      .to()
+      .eq(await rewardHandlerInstance.owner())
+    expect(rewardTokenInstance.address)
+      .to()
+      .eq(await rewardHandlerInstance.rewardsToken())
   })
 
   it('...should allow a vault to stake for a user', async () => {
@@ -50,19 +54,26 @@ describe('Reward Handler', async () => {
 
     await expect(
       rewardHandlerInstance.connect(user).stake(userAddr, stakeAmount),
-    ).to.be.revertedWith('RewardHandler::OnlyVault: not calling from vault')
+    )
+      .to()
+      .be.revertedWith('RewardHandler::OnlyVault: not calling from vault')
 
-    await expect(
-      rewardHandlerInstance.connect(vault).stake(userAddr, 0),
-    ).to.be.revertedWith('Cannot stake 0')
+    await expect(rewardHandlerInstance.connect(vault).stake(userAddr, 0))
+      .to()
+      .be.revertedWith('Cannot stake 0')
     await expect(
       rewardHandlerInstance.connect(vault).stake(userAddr, stakeAmount),
     )
-      .to.emit(rewardHandlerInstance, 'Staked')
+      .to()
+      .emit(rewardHandlerInstance, 'Staked')
       .withArgs(userAddr, stakeAmount)
 
-    expect(await rewardHandlerInstance.totalSupply()).to.eq(stakeAmount)
-    expect(await rewardHandlerInstance.balanceOf(userAddr)).to.eq(stakeAmount)
+    expect(await rewardHandlerInstance.totalSupply())
+      .to()
+      .eq(stakeAmount)
+    expect(await rewardHandlerInstance.balanceOf(userAddr))
+      .to()
+      .eq(stakeAmount)
   })
 
   it('...should allow owner to fund the reward handler', async () => {
@@ -86,11 +97,15 @@ describe('Reward Handler', async () => {
     await expect(
       rewardHandlerInstance.connect(owner).notifyRewardAmount(rewardAmount),
     )
-      .to.emit(rewardHandlerInstance, 'RewardAdded')
+      .to()
+      .emit(rewardHandlerInstance, 'RewardAdded')
       .withArgs(rewardAmount)
 
     let _rateBefore = await rewardHandlerInstance.getRewardForDuration()
-    expect(_rateBefore > 0).to.be.true
+    expect(_rateBefore > 0)
+      .to()
+      .be()
+      .true()
   })
 
   it('...should allow user to earn rewards', async () => {
@@ -102,8 +117,11 @@ describe('Reward Handler', async () => {
     await ethers.provider.send('evm_increaseTime', [ONE_DAY])
     await ethers.provider.send('evm_mine', [])
     let _after = await rewardHandlerInstance.earned(userAddr)
-    expect(_after.gt(_before)).to.be.true
-    expect(_after > 0).to.be.true
+    expect(_after.gt(_before)).to().be().true()
+    expect(_after > 0)
+      .to()
+      .be()
+      .true()
 
     // Add more rewards, rate should increase
     await rewardTokenInstance.mint(ownerAddr, rewardAmount)
@@ -113,19 +131,19 @@ describe('Reward Handler', async () => {
     await rewardHandlerInstance.connect(owner).notifyRewardAmount(rewardAmount)
 
     let _rateAfter = await rewardHandlerInstance.getRewardForDuration()
-    expect(_rateAfter.gt(_rateBefore)).to.be.true
+    expect(_rateAfter.gt(_rateBefore)).to().be().true()
   })
 
   it('...should allow user to retrieve rewards', async () => {
     // Retrieve tokens
     let _balanceBefore = await rewardTokenInstance.balanceOf(userAddr)
-    expect(_balanceBefore).to.eq(0)
-    await expect(rewardHandlerInstance.connect(user).getReward()).to.emit(
-      rewardHandlerInstance,
-      'RewardPaid',
-    )
+    expect(_balanceBefore).to().eq(0)
+    await expect(rewardHandlerInstance.connect(user).getReward())
+      .to()
+      .emit(rewardHandlerInstance, 'RewardPaid')
 
     let _balanceAfter = await rewardTokenInstance.balanceOf(userAddr)
+    // eslint-disable-next-line
     expect(_balanceAfter.gt(_balanceBefore))
   })
 
@@ -133,41 +151,54 @@ describe('Reward Handler', async () => {
     let stakeAmount = ethers.utils.parseEther('100')
     await expect(
       rewardHandlerInstance.connect(user).withdraw(userAddr, stakeAmount),
-    ).to.be.revertedWith('RewardHandler::OnlyVault: not calling from vault')
+    )
+      .to()
+      .be.revertedWith('RewardHandler::OnlyVault: not calling from vault')
 
     await expect(
       rewardHandlerInstance.connect(vault).withdraw(userAddr, stakeAmount),
     )
-      .to.emit(rewardHandlerInstance, 'Withdrawn')
+      .to()
+      .emit(rewardHandlerInstance, 'Withdrawn')
       .withArgs(userAddr, stakeAmount)
 
-    await expect(
-      rewardHandlerInstance.connect(vault).withdraw(userAddr, 0),
-    ).to.be.revertedWith('Cannot withdraw 0')
-    expect(await rewardHandlerInstance.totalSupply()).to.eq(0)
-    expect(await rewardHandlerInstance.balanceOf(userAddr)).to.eq(0)
+    await expect(rewardHandlerInstance.connect(vault).withdraw(userAddr, 0))
+      .to()
+      .be.revertedWith('Cannot withdraw 0')
+    expect(await rewardHandlerInstance.totalSupply())
+      .to()
+      .eq(0)
+    expect(await rewardHandlerInstance.balanceOf(userAddr))
+      .to()
+      .eq(0)
   })
 
   it('...should allow vault to exit', async () => {
     let stakeAmount = ethers.utils.parseEther('100')
     await rewardHandlerInstance.connect(vault).stake(userAddr, stakeAmount)
 
-    await expect(
-      rewardHandlerInstance.connect(user).exit(userAddr),
-    ).to.be.revertedWith('RewardHandler::OnlyVault: not calling from vault')
+    await expect(rewardHandlerInstance.connect(user).exit(userAddr))
+      .to()
+      .be.revertedWith('RewardHandler::OnlyVault: not calling from vault')
 
     let _balanceBefore = await rewardTokenInstance.balanceOf(userAddr)
     await expect(rewardHandlerInstance.connect(vault).exit(userAddr))
-      .to.emit(rewardHandlerInstance, 'Withdrawn')
+      .to()
+      .emit(rewardHandlerInstance, 'Withdrawn')
       .withArgs(userAddr, stakeAmount)
     let _balanceAfter = await rewardTokenInstance.balanceOf(userAddr)
 
+    // eslint-disable-next-line
     expect(_balanceAfter.gt(_balanceBefore))
-    expect(await rewardHandlerInstance.totalSupply()).to.eq(0)
-    expect(await rewardHandlerInstance.balanceOf(userAddr)).to.eq(0)
+    expect(await rewardHandlerInstance.totalSupply())
+      .to()
+      .eq(0)
+    expect(await rewardHandlerInstance.balanceOf(userAddr))
+      .to()
+      .eq(0)
   })
 
-  it("...shouldn't allow to earn after period finish ", async () => {
+  it("...shouldn't allow to earn after period finish", async () => {
     let stakeAmount = ethers.utils.parseEther('100')
     await rewardHandlerInstance.connect(vault).stake(userAddr, stakeAmount)
 
@@ -184,6 +215,6 @@ describe('Reward Handler', async () => {
 
     let _after = await rewardHandlerInstance.earned(userAddr)
     // Earn 0 after period finished
-    expect(_after).to.eq(0)
+    expect(_after).to().eq(0)
   })
 })

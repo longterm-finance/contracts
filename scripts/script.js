@@ -1,4 +1,4 @@
 module.exports = async function (callback) {
-  // script
+  // script function body...
   callback()
 }

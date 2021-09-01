@@ -1,12 +1,9 @@
-import { expect } from 'chai'
-import { Contract, BigNumber } from 'ethers'
-// import { MockProvider, createFixtureLoader, deployContract } from "ethereum-waffle";
-
-import TreasuryVester from '../../artifacts/contracts/governance/TreasuryVester.sol/TreasuryVester.json'
-
-import { governanceFixture } from './fixtures'
-import { mineBlock, expandTo18Decimals } from './utils'
-import { waffle } from 'hardhat'
+var { expect, describe, beforeEach } = require('chai')
+// var { MockProvider, createFixtureLoader, deployContract } = require("ethereum-waffle")
+var TreasuryVester = require('../../artifacts/contracts/governance/TreasuryVester.sol/TreasuryVester.json')
+var { governanceFixture } = require('./fixtures')
+var { mineBlock, expandTo18Decimals } = require('./utils')
+var { waffle } = require('hardhat')
 
 describe('scenario:TreasuryVester', () => {
   // const provider = new MockProvider({
@@ -19,19 +16,20 @@ describe('scenario:TreasuryVester', () => {
   const [wallet] = waffle.provider.getWallets()
   const loadFixture = waffle.createFixtureLoader([wallet], waffle.provider)
 
-  let ctx: Contract
-  let timelock: Contract
+  let avix
+  let timelock
   beforeEach(async () => {
     const fixture = await loadFixture(governanceFixture)
-    ctx = fixture.ctx
+    avix = fixture.avix
     timelock = fixture.timelock
   })
 
-  let treasuryVester: Contract
-  let vestingAmount: BigNumber
-  let vestingBegin: number
-  let vestingCliff: number
-  let vestingEnd: number
+  let treasuryVester
+  let vestingAmount
+  let vestingBegin
+  let vestingCliff
+  let vestingEnd
+
   beforeEach('deploy treasury vesting contract', async () => {
     const { timestamp: now } = await waffle.provider.getBlock('latest')
     vestingAmount = expandTo18Decimals(100)
@@ -39,7 +37,7 @@ describe('scenario:TreasuryVester', () => {
     vestingCliff = vestingBegin + 60
     vestingEnd = vestingBegin + 60 * 60 * 24 * 365
     treasuryVester = await waffle.deployContract(wallet, TreasuryVester, [
-      ctx.address,
+      avix.address,
       timelock.address,
       vestingAmount,
       vestingBegin,
@@ -48,23 +46,23 @@ describe('scenario:TreasuryVester', () => {
     ])
 
     // fund the treasury
-    await ctx.transfer(treasuryVester.address, vestingAmount)
+    await avix.transfer(treasuryVester.address, vestingAmount)
   })
 
   it('setRecipient:fail', async () => {
-    await expect(
-      treasuryVester.setRecipient(wallet.address),
-    ).to.be.revertedWith('TreasuryVester::setRecipient: unauthorized')
+    await expect(treasuryVester.setRecipient(wallet.address))
+      .to()
+      .be.revertedWith('TreasuryVester::setRecipient: unauthorized')
   })
 
   it('claim:fail', async () => {
-    await expect(treasuryVester.claim()).to.be.revertedWith(
-      'TreasuryVester::claim: not time yet',
-    )
+    await expect(treasuryVester.claim())
+      .to()
+      .be.revertedWith('TreasuryVester::claim: not time yet')
     await mineBlock(waffle.provider, vestingBegin + 1)
-    await expect(treasuryVester.claim()).to.be.revertedWith(
-      'TreasuryVester::claim: not time yet',
-    )
+    await expect(treasuryVester.claim())
+      .to()
+      .be.revertedWith('TreasuryVester::claim: not time yet')
   })
 
   it('claim:~half', async () => {
@@ -73,20 +71,23 @@ describe('scenario:TreasuryVester', () => {
       vestingBegin + Math.floor((vestingEnd - vestingBegin) / 2),
     )
     await treasuryVester.claim()
-    const balance = await ctx.balanceOf(timelock.address)
+    const balance = await avix.balanceOf(timelock.address)
     expect(
       vestingAmount
         .div(2)
         .sub(balance)
         .abs()
         .lte(vestingAmount.div(2).div(10000)),
-    ).to.be.true
+    )
+      .to()
+      .be()
+      .true()
   })
 
   it('claim:all', async () => {
     await mineBlock(waffle.provider, vestingEnd)
     await treasuryVester.claim()
-    const balance = await ctx.balanceOf(timelock.address)
-    expect(balance).to.be.eq(vestingAmount)
+    const balance = await avix.balanceOf(timelock.address)
+    expect(balance).to().be().eq(vestingAmount)
   })
 })

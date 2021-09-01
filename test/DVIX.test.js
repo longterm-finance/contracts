@@ -1,8 +1,10 @@
-var expect = require('chai').expect
-var ethersProvider = require('ethers')
+var { expect, before, describe } = require('chai')
+var ethers = require('ethers')
+var ethersProvider = ethers
 
-describe('TCAP Token', async function () {
-  let tcapInstance
+// eslint-disable-next-line
+describe('DVIX Token', async function () {
+  let dvixInstance
   let orchestratorInstance
   let [owner, addr1, handler, handler2, guardian] = []
   let accounts = []
@@ -29,61 +31,60 @@ describe('TCAP Token', async function () {
       await guardian.getAddress(),
     )
     await orchestratorInstance.deployed()
-    expect(orchestratorInstance.address).properAddress
+    expect(orchestratorInstance.address).properAddress()
 
     let cap = ethers.utils.parseEther('100')
-    const TCAP = await ethers.getContractFactory('TCAP')
-    tcapInstance = await TCAP.deploy(
-      'Total Market Cap Token',
-      'TCAP',
+    const DVIX = await ethers.getContractFactory('DVIX')
+    dvixInstance = await DVIX.deploy(
+      'dVIX Token',
+      'dVIX',
       cap,
       orchestratorInstance.address,
     )
-    await tcapInstance.deployed()
-    expect(tcapInstance.address).properAddress
+    await dvixInstance.deployed()
+    expect(dvixInstance.address).properAddress()
   })
 
   it('...should set the correct initial values', async () => {
-    const symbol = await tcapInstance.symbol()
-    const name = await tcapInstance.name()
-    const decimals = await tcapInstance.decimals()
-    const defaultOwner = await tcapInstance.owner()
-    const cap = await tcapInstance.cap()
-    expect(defaultOwner).to.eq(orchestratorInstance.address)
-    expect(symbol).to.eq('TCAP', 'Symbol should equal TCAP')
-    expect(name).to.eq('Total Market Cap Token')
-    expect(decimals).to.eq(18, 'Decimals should be 18')
-    expect(cap).to.eq(
-      ethers.utils.parseEther('100'),
-      'Cap should be 100 Tokens',
-    )
+    const symbol = await dvixInstance.symbol()
+    const name = await dvixInstance.name()
+    const decimals = await dvixInstance.decimals()
+    const defaultOwner = await dvixInstance.owner()
+    const cap = await dvixInstance.cap()
+    expect(defaultOwner).to().eq(orchestratorInstance.address)
+    expect(symbol).to().eq('DVIX', 'Symbol should equal DVIX')
+    expect(name).to().eq('Total Market Cap Token')
+    expect(decimals).to().eq(18, 'Decimals should be 18')
+    expect(cap)
+      .to()
+      .eq(ethers.utils.parseEther('100'), 'Cap should be 100 Tokens')
   })
 
   it('...should have the ERC20 standard functions', async () => {
-    const totalSupply = await tcapInstance.totalSupply()
-    expect(totalSupply).to.eq(0, 'Total supply should be 0')
-    const balance = await tcapInstance.balanceOf(accounts[0])
-    expect(balance).to.eq(0, 'Balance should be 0')
+    const totalSupply = await dvixInstance.totalSupply()
+    expect(totalSupply).to().eq(0, 'Total supply should be 0')
+    const balance = await dvixInstance.balanceOf(accounts[0])
+    expect(balance).to().eq(0, 'Balance should be 0')
   })
 
   it('...should allow to approve tokens', async () => {
     const amount = ethersProvider.utils.parseEther('100')
-    await tcapInstance.connect(owner).approve(accounts[1], amount)
-    const allowance = await tcapInstance.allowance(accounts[0], accounts[1])
-    expect(allowance).to.eq(amount)
+    await dvixInstance.connect(owner).approve(accounts[1], amount)
+    const allowance = await dvixInstance.allowance(accounts[0], accounts[1])
+    expect(allowance).to().eq(amount)
   })
 
   it("...shouldn't allow users to mint", async () => {
     const amount = ethersProvider.utils.parseEther('1000000')
-    await expect(tcapInstance.mint(accounts[0], amount)).to.be.revertedWith(
-      'TCAP::onlyVault: caller is not a vault',
-    )
+    await expect(dvixInstance.mint(accounts[0], amount))
+      .to()
+      .be.revertedWith('DVIX::onlyVault: caller is not a vault')
   })
 
   it("...shouldn't allow users to burn", async () => {
     const amount = ethersProvider.utils.parseEther('1000000')
-    await expect(tcapInstance.burn(accounts[1], amount)).to.be.revertedWith(
-      'TCAP::onlyVault: caller is not a vault',
-    )
+    await expect(dvixInstance.burn(accounts[1], amount))
+      .to()
+      .be.revertedWith('DVIX::onlyVault: caller is not a vault')
   })
 })

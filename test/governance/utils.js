@@ -1,14 +1,11 @@
-import { providers, BigNumber } from 'ethers'
+var { BigNumber } = require('ethers')
 
-export const DELAY = 60 * 60 * 24 * 2
+exports.DELAY = 60 * 60 * 24 * 2
 
-export async function mineBlock(
-  provider: providers.Web3Provider,
-  timestamp: number,
-): Promise<void> {
+exports.mineBlock = async function mineBlock(provider, timestamp) {
   return provider.send('evm_mine', [timestamp])
 }
 
-export function expandTo18Decimals(n: number): BigNumber {
+exports.expandTo18Decimals = function (n) {
   return BigNumber.from(n).mul(BigNumber.from(10).pow(18))
 }

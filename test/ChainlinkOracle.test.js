@@ -1,4 +1,4 @@
-var { before, expect } = require('chai')
+var { before, expect, describe } = require('chai')
 var ethers = require('ethers')
 
 // eslint-disable-next-line
