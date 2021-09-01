@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './nft.css'
 import demoImg from '../../assets/images/coming-soon.jpg'
-import eth from '../../assets/images/eth.png'
+import avax from '../../assets/images/avax.png'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const NFT = ({ isDarkMode }) => {
+const NFT = () => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   const NFTCard = ({
     name,
     status,
@@ -56,7 +59,7 @@ const NFT = ({ isDarkMode }) => {
 
         <div className="nft-card-block-2">
           <span className="nft-price ml-3">
-            <img width="22" height="22" alt="ETH" src={eth} />{' '}
+            <img width="22" height="22" alt="ETH" src={avax} />{' '}
             <span
               className="bold"
               style={{
@@ -65,7 +68,7 @@ const NFT = ({ isDarkMode }) => {
                 top: '1px',
               }}
             >
-              {price} ETH
+              {price} AVAX
             </span>
           </span>
           <button
@@ -153,9 +156,9 @@ const NFT = ({ isDarkMode }) => {
       </h2>
       <div className="exclusive-container">
         <NFTCard
-          name="Exclusive NFT"
+          name="Golden AVIX Coin"
           status="Soon"
-          price={11}
+          price={225}
           buyLink="0x..."
           isExclusive
           isDisabled
@@ -177,63 +180,63 @@ const NFT = ({ isDarkMode }) => {
         <NFTCard
           name="3D Avix Token"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="3D Avix Token (Light)"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="Premium NFT #3"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="Premium NFT #4"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="Premium NFT #5"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="Premium NFT #6"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="Premium NFT #7"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="Premium NFT #8"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
           name="Premium NFT #9"
           status="Soon"
-          price={1}
+          price={25}
           buyLink="0x..."
           isDisabled
         />

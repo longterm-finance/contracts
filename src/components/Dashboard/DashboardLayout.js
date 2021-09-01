@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import './dashboard.css'
@@ -12,32 +12,15 @@ import transparentPNGLogo from '../../assets/images/logo_transparent_bg.png'
 import vaultIcon from '../../assets/images/vault.svg'
 import whiteVaultIcon from '../../assets/images/vault_white.svg'
 import greyVaultIcon from '../../assets/images/vault_grey.svg'
-import { useWeb3React } from '@web3-react/core'
 import { Modal } from 'semantic-ui-react'
-import { InjectedConnector } from '@web3-react/injected-connector'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const injected = new InjectedConnector({
-  supportedChainIds: [137], // 137 = Matic mainnet; later add 1 (Ethereum mainnet)
-})
+const DashboardLayout = () => {
+  const { switchTheme, isDarkMode } = useContext(ThemeContext)
 
-const DashboardLayout = ({ switchMode, isDarkMode }) => {
-  const { active, account, activate, deactivate, chainId } = useWeb3React()
-
-  async function connectWallet() {
-    try {
-      await activate(injected)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  async function disconnectWallet() {
-    try {
-      await deactivate()
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  let active = 0x000000000000000000000000000000000000000000000000000000000000000000000000
+    ? true
+    : false
 
   const [toggleAccountModal, setToggleAccountModal] = useState(false)
   const [mouseOverCopy, setMouseOverCopy] = useState()
@@ -51,7 +34,7 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
 
   const copyAddress = () => {
     const el = document.createElement('input')
-    el.value = account
+    el.value = 0x000000000000000000000000000000000000000000000000000000000000000000000000
     document.body.appendChild(el)
     el.select()
     document.execCommand('copy')
@@ -115,7 +98,7 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
         <span className={!mobileHeader && 'ml-2 mr-3'}>
           <button
             type="button"
-            onClick={switchMode}
+            onClick={switchTheme}
             className={`mode-switcher ${!isDarkMode && 'mode-switcher-moon'} ${
               mobileHeader && 'ml-3'
             }`}
@@ -334,43 +317,14 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
                   fontSize: '1.125em',
                 }}
                 onClick={() => {
-                  if (!active) {
-                    connectWallet()
-                  }
-
-                  if ((chainId && chainId !== 137) || !active) {
-                    alert('Please switch to Matic!')
-                  }
-
-                  openAccountModal()
+                  console.log('Connect Wallet button clicked')
                 }}
               >
-                {active
-                  ? account !== undefined && (
-                      <React.Fragment>
-                        <span className="coin-balance-header mr-3">
-                          14.579 MATIC
-                        </span>{' '}
-                        {account[0] +
-                          account[1] +
-                          account[2] +
-                          account[3] +
-                          '...' +
-                          account[account.length - 4] +
-                          account[account.length - 3] +
-                          account[account.length - 2] +
-                          account[account.length - 1]}
-                      </React.Fragment>
-                    )
-                  : 'Connect Wallet'}
+                Connect Wallet
               </button>
             </div>
 
-            <Modal
-              size="mini"
-              open={toggleAccountModal}
-              onClose={closeAccountModal}
-            >
+            <Modal size="mini" open={false} onClose={false}>
               <Modal.Header
                 className="text-center bold"
                 style={{ fontSize: '1.75em' }}
@@ -408,16 +362,7 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
                 >
-                  {account !== undefined &&
-                    account[0] +
-                      account[1] +
-                      account[2] +
-                      account[3] +
-                      '...' +
-                      account[account.length - 4] +
-                      account[account.length - 3] +
-                      account[account.length - 2] +
-                      account[account.length - 1]}{' '}
+                  0x000000000000000000000000000000000000000000000000000000000000000000000000
                   {mouseOverCopy && <i className="ml-2 far fa-copy" />}
                 </button>
                 {copyAddressClicked && (
@@ -444,11 +389,11 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
                   <a
                     target="_blank"
                     rel="noreferrer"
-                    href={`https://polygonscan.com/address/${account}`}
+                    href={`https://cchain.explorer.avax.network/address/${0x000000000000000000000000000000000000000000000000000000000000000000000000}`}
                     className="bold"
                     style={{ color: '#000' }}
                   >
-                    View on Polygonscan
+                    View on Explorer
                   </a>
                 </button>
 
@@ -460,8 +405,7 @@ const DashboardLayout = ({ switchMode, isDarkMode }) => {
                     border: '1.5px solid #e84142',
                   }}
                   onClick={() => {
-                    disconnectWallet()
-                    closeAccountModal()
+                    console.log('Disconnect Wallet button clicked')
                   }}
                 >
                   Disconnect

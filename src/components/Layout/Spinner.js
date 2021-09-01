@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './layout.css'
 import spinner from '../../assets/other/spinner.gif'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const Spinner = ({ isDarkMode }) => {
+const Spinner = () => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   return (
     <div className={isDarkMode && 'dark-mode-spinner'}>
       <br />

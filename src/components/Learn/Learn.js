@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './learn.css'
 import { useMediaQuery } from 'react-responsive'
 import RedditIcon from '@material-ui/icons/Reddit'
@@ -11,8 +11,10 @@ import LitepaperIcon from '@material-ui/icons/LibraryBooks'
 import FAQIcon from '@material-ui/icons/Help'
 import GitHubIcon from '@material-ui/icons/GitHub'
 // import AuditReportIcon from '@material-ui/icons/BugReport'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const Learn = ({ isDarkMode }) => {
+const Learn = () => {
+  const { isDarkMode } = useContext(ThemeContext)
   const isMobileView = useMediaQuery({ query: '(max-width: 510px)' })
 
   const WhatIsAvix = () => {

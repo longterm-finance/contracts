@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './layout.css'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const NotFound = ({ isDarkMode }) => {
+const NotFound = () => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   return (
     <div className="containr">
       <div className={isDarkMode ? 'not-found-dark-mode' : 'not-found'}>

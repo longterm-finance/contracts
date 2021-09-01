@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './trade.css'
 import dai from '../../assets/images/dai.png'
 import wbtc from '../../assets/images/wbtc.png'
@@ -7,8 +7,11 @@ import avix from '../../assets/images/favicon.png'
 import dvix from '../../assets/images/dVIX_favicon.png'
 import usdc from '../../assets/images/usdc.png'
 import matic from '../../assets/images/matic.png'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const Trade = ({ isDarkMode }) => {
+const Trade = () => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   const TradeCard = ({
     icon1,
     icon2,

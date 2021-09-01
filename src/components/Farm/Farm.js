@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './farm.css'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
@@ -9,8 +9,11 @@ import avix from '../../assets/images/favicon.png'
 import dvix from '../../assets/images/dVIX_favicon.png'
 import usdc from '../../assets/images/usdc.png'
 import matic from '../../assets/images/matic.png'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const Farm = ({ isDarkMode }) => {
+const Farm = () => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   function claimEarlyAdopterRewards(vaultName) {
     alert(
       `Early adopter rewards claimed for the ${

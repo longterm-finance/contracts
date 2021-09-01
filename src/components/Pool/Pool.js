@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './pool.css'
 import dai from '../../assets/images/dai.png'
 import wbtc from '../../assets/images/wbtc.png'
@@ -7,8 +7,11 @@ import avix from '../../assets/images/favicon.png'
 import dvix from '../../assets/images/dVIX_favicon.png'
 import usdc from '../../assets/images/usdc.png'
 import matic from '../../assets/images/matic.png'
+import { ThemeContext } from '../../state/ThemeContext'
 
-const Pool = ({ isDarkMode }) => {
+const Pool = () => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   const PoolCard = ({
     icon1,
     icon2,

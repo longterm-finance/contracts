@@ -10,7 +10,7 @@ import "./Orchestrator.sol";
 /**
  * @title derived VIX (dVIX) Token
  * @author Avix Finance
- * @notice ERC20 token on the Avalanche C-Chain that tracks the CBOE Volatility Index (VIX)
+ * @notice ARC20 token on the Avalanche C-Chain that tracks the CBOE Volatility Index (VIX)
  */
 contract DVIX is ERC20, Ownable, IERC165 {
   /// @notice Open Zeppelin libraries
