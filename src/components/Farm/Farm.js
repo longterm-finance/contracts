@@ -1,25 +1,25 @@
-import React, { useContext } from 'react'
-import './farm.css'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
-import dai from '../../assets/images/dai.png'
-import wbtc from '../../assets/images/wbtc.png'
-import eth from '../../assets/images/eth.png'
-import avix from '../../assets/images/favicon.png'
-import dvix from '../../assets/images/dVIX_favicon.png'
-import usdc from '../../assets/images/usdc.png'
-import matic from '../../assets/images/matic.png'
-import { ThemeContext } from '../../state/ThemeContext'
+import React, { useContext } from "react";
+import "./farm.css";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import dai from "../../assets/images/dai.png";
+import wbtc from "../../assets/images/wbtc.png";
+import eth from "../../assets/images/eth.png";
+import avix from "../../assets/images/favicon.png";
+import dvix from "../../assets/images/dVIX_favicon.png";
+import avax from "../../assets/images/avax.png";
+import usdt from "../../assets/images/usdt.png";
+import { ThemeContext } from "../../state/ThemeContext";
 
 const Farm = () => {
-  const { isDarkMode } = useContext(ThemeContext)
+  const { isDarkMode } = useContext(ThemeContext);
 
   function claimEarlyAdopterRewards(vaultName) {
     alert(
       `Early adopter rewards claimed for the ${
-        vaultName && vaultName.split(' ')[0]
-      } vault.`,
-    )
+        vaultName && vaultName.split(" ")[0]
+      } vault.`
+    );
   }
 
   const EarlyCard = ({
@@ -33,8 +33,8 @@ const Farm = () => {
       <div
         className={`${
           !isDarkMode
-            ? 'trade-card-container early-card-container'
-            : 'trade-card-container-dark-mode early-card-container'
+            ? "trade-card-container early-card-container"
+            : "trade-card-container-dark-mode early-card-container"
         }`}
       >
         <div className="trade-card-icons">
@@ -42,10 +42,10 @@ const Farm = () => {
             src={icon}
             width="42"
             height="42"
-            alt={vaultName && vaultName.split(' ')[0]}
+            alt={vaultName && vaultName.split(" ")[0]}
             className="trade-icon-1"
             style={{
-              border: icon === matic && '2px solid #2B6DEF',
+              border: "none",
             }}
           />
         </div>
@@ -63,9 +63,13 @@ const Farm = () => {
         <div className="trading-buttons">
           <button className="btn regular-btn border-rad-05 mr-3" type="button">
             <Link
-              to={`/${vaultName && vaultName.split(' ')[0]}`}
+              to={
+                vaultName === "AVAX Vault"
+                  ? "/"
+                  : `/${vaultName && vaultName.split(" ")[0]}`
+              }
               className="trade-card-analytics-link"
-              style={{ color: 'white', fontWeight: 'bold' }}
+              style={{ color: "white", fontWeight: "bold" }}
             >
               Mint
             </Link>
@@ -74,29 +78,29 @@ const Farm = () => {
             className="btn regular-btn border-rad-05"
             type="button"
             onClick={() => claimEarlyAdopterRewards(vaultName)}
-            style={{ fontWeight: 'bold' }}
+            style={{ fontWeight: "bold" }}
           >
             Claim
           </button>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   function stakeForLiquidityMiningRewards(tradingPair, dex) {
     alert(
-      `Staked ${tradingPair} ${dex} LP tokens to earn liquidity mining rewards.`,
-    )
+      `Staked ${tradingPair} ${dex} LP tokens to earn liquidity mining rewards.`
+    );
   }
 
   function claimLiquidityMiningRewards(tradingPair, dex) {
-    alert(`Liquidity mining rewards claimed for the ${tradingPair} ${dex} LP.`)
+    alert(`Liquidity mining rewards claimed for the ${tradingPair} ${dex} LP.`);
   }
 
   function unstakeLiquidityMiningStake(tradingPair, dex) {
     alert(
-      `${tradingPair} ${dex} LP tokens withdrawn from the Avix's liquidity mining farm.`,
-    )
+      `${tradingPair} ${dex} LP tokens withdrawn from the Avix's liquidity mining farm.`
+    );
   }
 
   const MiningCard = ({
@@ -115,8 +119,8 @@ const Farm = () => {
       <div
         className={`${
           !isDarkMode
-            ? 'trade-card-container mining-card-container'
-            : 'trade-card-container-dark-mode mining-card-container'
+            ? "trade-card-container mining-card-container"
+            : "trade-card-container-dark-mode mining-card-container"
         }`}
       >
         <div className="trade-card-icons">
@@ -124,21 +128,21 @@ const Farm = () => {
             src={icon1}
             width="42"
             height="42"
-            alt={tradingPair && tradingPair.split('/')[0]}
+            alt={tradingPair && tradingPair.split("/")[0]}
             className="trade-icon-1"
           />
           <img
             src={icon2}
             width="42"
             height="42"
-            alt={tradingPair && tradingPair.split('/')[1]}
+            alt={tradingPair && tradingPair.split("/")[1]}
             className="trade-icon-2"
             style={{
-              border: icon2 === matic && '2px solid #2B6DEF',
+              border: "none",
             }}
           />
         </div>
-        <h3 className="trade-card-title">{tradingPair + ' Pool'}</h3>
+        <h3 className="trade-card-title">{tradingPair + " LP Token"}</h3>
         <br />
         <p className="trade-card-dex">
           <strong>DEX:</strong> {dex}
@@ -156,7 +160,7 @@ const Farm = () => {
           <strong>Locked Rewards:</strong> {lockedReward} AVIX
         </p>
         <p className="trade-card-trading-volume">
-          <strong>Locked Until:</strong> {moment(lockedUntil).format('ll')}
+          <strong>Locked Until:</strong> {moment(lockedUntil).format("ll")}
         </p>
         <p className="trade-card-trading-volume">
           <strong>Estimated APY:</strong> {estAPY}%
@@ -166,7 +170,7 @@ const Farm = () => {
             className="btn regular-btn border-rad-05 mr-3"
             type="button"
             onClick={() => stakeForLiquidityMiningRewards(tradingPair, dex)}
-            style={{ fontWeight: 'bold' }}
+            style={{ fontWeight: "bold" }}
           >
             Stake
           </button>
@@ -174,7 +178,7 @@ const Farm = () => {
             className="btn regular-btn border-rad-05 mr-3"
             type="button"
             onClick={() => claimLiquidityMiningRewards(tradingPair, dex)}
-            style={{ fontWeight: 'bold' }}
+            style={{ fontWeight: "bold" }}
           >
             Claim
           </button>
@@ -182,19 +186,19 @@ const Farm = () => {
             className="btn regular-btn border-rad-05"
             type="button"
             onClick={() => unstakeLiquidityMiningStake(tradingPair, dex)}
-            style={{ fontWeight: 'bold' }}
+            style={{ fontWeight: "bold" }}
           >
             Unstake
           </button>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div
       className={`${
-        !isDarkMode ? 'trade-container' : 'trade-container-dark-mode'
+        !isDarkMode ? "trade-container" : "trade-container-dark-mode"
       } mb-5`}
     >
       <br />
@@ -204,29 +208,29 @@ const Farm = () => {
       <br />
       <br />
 
-      {/* @NOTE: DELETE EARLY ADOPTER REWARDS PART 30 DAYS AFTER LAUNCH! */}
+      {/* @NOTE: DELETE EARLY ADOPTER REWARDS PART 30 DAYS AFTER THE LAUNCH! */}
       <h1
         className="text-center bold mb-5 mt-5"
-        style={{ fontSize: '2.75rem' }}
+        style={{ fontSize: "2.75rem" }}
       >
         Early Adopter Rewards
       </h1>
 
       <p
         className={`text-muted text-center ml-5 mr-5 mb-5 ${
-          isDarkMode ? 'early-adopter-note-dark-mode' : 'early-adopter-note'
+          isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
         }`}
       >
         <strong>
           Early adopter rewards are issued over the 30 day period after the
           launch of Avix Finance,
-        </strong>{' '}
-        for a total of 50,000 AVIX (5% of the max supply). This reward is{' '}
+        </strong>{" "}
+        for a total of 50,000 AVIX (5% of the max supply). This reward is{" "}
         <strong>
           split across the dVIX minters (debtors), with 100% of the reward being
           immediately available.
-        </strong>{' '}
-        The main aim of the Early Adopter Rewards program is to bootstrap the{' '}
+        </strong>{" "}
+        The main aim of the Early Adopter Rewards program is to bootstrap the{" "}
         <strong>Avix decentralized governance system.</strong>
       </p>
 
@@ -235,6 +239,13 @@ const Farm = () => {
 
       <div className="trade-grid">
         <EarlyCard
+          icon={avax}
+          vaultName="AVAX Vault"
+          myCurrentMint={0.0}
+          myCurrentReward={0.0}
+          estAPY={255.39}
+        />
+        <EarlyCard
           icon={eth}
           vaultName="WETH Vault"
           myCurrentMint={0.0}
@@ -242,8 +253,8 @@ const Farm = () => {
           estAPY={255.39}
         />
         <EarlyCard
-          icon={matic}
-          vaultName="MATIC Vault"
+          icon={wbtc}
+          vaultName="WBTC Vault"
           myCurrentMint={0.0}
           myCurrentReward={0.0}
           estAPY={255.39}
@@ -256,15 +267,8 @@ const Farm = () => {
           estAPY={255.39}
         />
         <EarlyCard
-          icon={usdc}
-          vaultName="USDC Vault"
-          myCurrentMint={0.0}
-          myCurrentReward={0.0}
-          estAPY={255.39}
-        />
-        <EarlyCard
-          icon={wbtc}
-          vaultName="WBTC Vault"
+          icon={usdt}
+          vaultName="USDT Vault"
           myCurrentMint={0.0}
           myCurrentReward={0.0}
           estAPY={255.39}
@@ -275,25 +279,28 @@ const Farm = () => {
       <br />
 
       {/* @NOTE: DELETE LIQUIDITY MINING REWARDS PART & THE ENTIRE FARM
-      TAB 2 YEARS AFTER LAUNCH! */}
-      <h1 className="text-center bold mb-5 mt-5" style={{ fontSize: '2.5rem' }}>
+      TAB 2 YEARS AFTER THE LAUNCH! */}
+      <h1 className="text-center bold mb-5 mt-5" style={{ fontSize: "2.5rem" }}>
         Liquidity Mining Rewards
       </h1>
 
       <p
         className={`text-muted text-center ml-5 mr-5 mb-5 ${
-          isDarkMode ? 'early-adopter-note-dark-mode' : 'early-adopter-note'
+          isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
         }`}
       >
-        <strong>Claimable Rewards</strong> (25% of total rewards) are available
-        to claim immediately. <strong>Locked Rewards</strong> (75% of total
+        {" "}
+        You can <strong>earn AVIX governance tokens</strong> by staking your LP
+        tokens for any of the pairs listed below.
+        <strong>Claimable Rewards</strong> (20% of total rewards) are available
+        to claim immediately. <strong>Locked Rewards</strong> (80% of total
         rewards) are unlocked after the 6 month vesting period. To learn more
-        about how AVIX rewards are distributed, check out{' '}
+        about how AVIX rewards are distributed, check out{" "}
         <a
           target="_blank"
           rel="noreferrer"
           href="https://docs.avix.finance/tokenomics/avix-distribution"
-          style={{ color: '#e84142' }}
+          style={{ color: "#e84142" }}
           className="doc-link"
         >
           <strong>our official documentation.</strong>
@@ -305,22 +312,10 @@ const Farm = () => {
 
       <div className="trade-grid">
         <MiningCard
-          icon1={dvix}
-          icon2={eth}
-          tradingPair="dVIX / WETH"
-          dex="SushiSwap"
-          myBalance={0.0}
-          stakedBalance={0.0}
-          claimableReward={0.0}
-          lockedReward={0.0}
-          lockedUntil={new Date()}
-          estAPY={123.47}
-        />
-        <MiningCard
           icon1={avix}
-          icon2={eth}
-          tradingPair="AVIX / WETH"
-          dex="SushiSwap"
+          icon2={avax}
+          tradingPair="AVIX / AVAX"
+          dex="Trader Joe"
           myBalance={0.0}
           stakedBalance={0.0}
           claimableReward={0.0}
@@ -330,21 +325,9 @@ const Farm = () => {
         />
         <MiningCard
           icon1={dvix}
-          icon2={matic}
-          tradingPair="dVIX / MATIC"
-          dex="SushiSwap"
-          myBalance={0.0}
-          stakedBalance={0.0}
-          claimableReward={0.0}
-          lockedReward={0.0}
-          lockedUntil={new Date()}
-          estAPY={123.47}
-        />
-        <MiningCard
-          icon1={avix}
-          icon2={matic}
-          tradingPair="AVIX / MATIC"
-          dex="SushiSwap"
+          icon2={avax}
+          tradingPair="dVIX / AVAX"
+          dex="Trader Joe"
           myBalance={0.0}
           stakedBalance={0.0}
           claimableReward={0.0}
@@ -354,45 +337,9 @@ const Farm = () => {
         />
         <MiningCard
           icon1={dvix}
-          icon2={dai}
-          tradingPair="dVIX / DAI"
-          dex="SushiSwap"
-          myBalance={0.0}
-          stakedBalance={0.0}
-          claimableReward={0.0}
-          lockedReward={0.0}
-          lockedUntil={new Date()}
-          estAPY={123.47}
-        />
-        <MiningCard
-          icon1={avix}
-          icon2={dai}
-          tradingPair="AVIX / DAI"
-          dex="SushiSwap"
-          myBalance={0.0}
-          stakedBalance={0.0}
-          claimableReward={0.0}
-          lockedReward={0.0}
-          lockedUntil={new Date()}
-          estAPY={123.47}
-        />
-        <MiningCard
-          icon1={dvix}
-          icon2={usdc}
-          tradingPair="dVIX / USDC"
-          dex="SushiSwap"
-          myBalance={0.0}
-          stakedBalance={0.0}
-          claimableReward={0.0}
-          lockedReward={0.0}
-          lockedUntil={new Date()}
-          estAPY={123.47}
-        />
-        <MiningCard
-          icon1={avix}
-          icon2={usdc}
-          tradingPair="AVIX / USDC"
-          dex="SushiSwap"
+          icon2={eth}
+          tradingPair="dVIX / WETH"
+          dex="Trader Joe"
           myBalance={0.0}
           stakedBalance={0.0}
           claimableReward={0.0}
@@ -404,7 +351,7 @@ const Farm = () => {
           icon1={dvix}
           icon2={wbtc}
           tradingPair="dVIX / WBTC"
-          dex="SushiSwap"
+          dex="Trader Joe"
           myBalance={0.0}
           stakedBalance={0.0}
           claimableReward={0.0}
@@ -413,10 +360,22 @@ const Farm = () => {
           estAPY={123.47}
         />
         <MiningCard
-          icon1={avix}
-          icon2={wbtc}
-          tradingPair="AVIX / WBTC"
-          dex="SushiSwap"
+          icon1={dvix}
+          icon2={dai}
+          tradingPair="dVIX / DAI"
+          dex="Trader Joe"
+          myBalance={0.0}
+          stakedBalance={0.0}
+          claimableReward={0.0}
+          lockedReward={0.0}
+          lockedUntil={new Date()}
+          estAPY={123.47}
+        />
+        <MiningCard
+          icon1={dvix}
+          icon2={usdt}
+          tradingPair="dVIX / USDT"
+          dex="Trader Joe"
           myBalance={0.0}
           stakedBalance={0.0}
           claimableReward={0.0}
@@ -429,7 +388,7 @@ const Farm = () => {
       <br />
       <br />
     </div>
-  )
-}
+  );
+};
 
-export default Farm
+export default Farm;

@@ -1,112 +1,149 @@
-import React, { useState } from "react";
-import { ethers } from "ethers";
-import { Contract } from "ethers-multicall";
-import { RewardsContext } from "../state/RewardsContext";
+import { useState, useCallback } from "react";
 
-export const useRewards = (): RewardsContext => {
-  const [wethReward, setWETHReward] = useState<ethers.Contract>();
-  const [daiReward, setDAIReward] = useState<ethers.Contract>();
-  const [wbtcReward, setWBTCReward] = useState<ethers.Contract>();
-  const [wethPoolReward, setWETHPoolReward] = useState<ethers.Contract>();
-  const [daiPoolReward, setDAIPoolReward] = useState<ethers.Contract>();
-  const [wbtcPoolReward, setWBTCPoolReward] = useState<ethers.Contract>();
-  const [ctxPoolReward, setCTXPoolReward] = useState<ethers.Contract>();
-  const [wethRewardRead, setWETHRewardRead] = useState<Contract>();
-  const [daiRewardRead, setDAIRewardRead] = useState<Contract>();
-  const [wbtcRewardRead, setWBTCRewardRead] = useState<Contract>();
-  const [wethPoolRewardRead, setWETHPoolRewardRead] = useState<Contract>();
-  const [daiPoolRewardRead, setDAIPoolRewardRead] = useState<Contract>();
-  const [wbtcPoolRewardRead, setWBTCPoolRewardRead] = useState<Contract>();
-  const [ctxPoolRewardRead, setCTXPoolRewardRead] = useState<Contract>();
+export const useRewards = () => {
+  const [avaxReward, setAVAXReward] = useState();
+  const [usdtReward, setUSDTReward] = useState();
+  const [wethReward, setWETHReward] = useState();
+  const [daiReward, setDAIReward] = useState();
+  const [wbtcReward, setWBTCReward] = useState();
 
-  const setCurrentWETHReward = React.useCallback((currentWETHReward: ethers.Contract): void => {
+  const [avaxPoolReward, setAVAXPoolReward] = useState();
+  const [usdtPoolReward, setUSDTPoolReward] = useState();
+  const [wethPoolReward, setWETHPoolReward] = useState();
+  const [daiPoolReward, setDAIPoolReward] = useState();
+  const [wbtcPoolReward, setWBTCPoolReward] = useState();
+  const [avixPoolReward, setAVIXPoolReward] = useState();
+
+  const [avaxRewardRead, setAVAXRewardRead] = useState();
+  const [usdtRewardRead, setUSDTRewardRead] = useState();
+  const [wethRewardRead, setWETHRewardRead] = useState();
+  const [daiRewardRead, setDAIRewardRead] = useState();
+  const [wbtcRewardRead, setWBTCRewardRead] = useState();
+
+  const [avaxPoolRewardRead, setAVAXPoolRewardRead] = useState();
+  const [usdtPoolRewardRead, setUSDTPoolRewardRead] = useState();
+  const [wethPoolRewardRead, setWETHPoolRewardRead] = useState();
+  const [daiPoolRewardRead, setDAIPoolRewardRead] = useState();
+  const [wbtcPoolRewardRead, setWBTCPoolRewardRead] = useState();
+  const [avixPoolRewardRead, setAVIXPoolRewardRead] = useState();
+
+  const setCurrentAVAXReward = useCallback((currentAVAXReward) => {
+    setAVAXReward(currentAVAXReward);
+  }, []);
+  const setCurrentUSDTReward = useCallback((currentUSDTReward) => {
+    setUSDTReward(currentUSDTReward);
+  }, []);
+  const setCurrentWETHReward = useCallback((currentWETHReward) => {
     setWETHReward(currentWETHReward);
   }, []);
-  const setCurrentDAIReward = React.useCallback((currentDAIReward: ethers.Contract): void => {
+  const setCurrentDAIReward = useCallback((currentDAIReward) => {
     setDAIReward(currentDAIReward);
   }, []);
-  const setCurrentWBTCReward = React.useCallback((currentWBTCReward: ethers.Contract): void => {
+  const setCurrentWBTCReward = useCallback((currentWBTCReward) => {
     setWBTCReward(currentWBTCReward);
   }, []);
-  const setCurrentWETHPoolReward = React.useCallback(
-    (currentWETHPoolReward: ethers.Contract): void => {
-      setWETHPoolReward(currentWETHPoolReward);
-    },
-    []
-  );
-  const setCurrentDAIPoolReward = React.useCallback(
-    (currentDAIPoolReward: ethers.Contract): void => {
-      setDAIPoolReward(currentDAIPoolReward);
-    },
-    []
-  );
-  const setCurrentWBTCPoolReward = React.useCallback(
-    (currentWBTCPoolReward: ethers.Contract): void => {
-      setWBTCPoolReward(currentWBTCPoolReward);
-    },
-    []
-  );
-  const setCurrentCTXPoolReward = React.useCallback(
-    (currentCTXPoolReward: ethers.Contract): void => {
-      setCTXPoolReward(currentCTXPoolReward);
-    },
-    []
-  );
-  const setCurrentWETHRewardRead = React.useCallback((currentWETHReward: Contract): void => {
+
+  const setCurrentAVAXPoolReward = useCallback((currentAVAXPoolReward) => {
+    setAVAXPoolReward(currentAVAXPoolReward);
+  }, []);
+  const setCurrentUSDTPoolReward = useCallback((currentUSDTPoolReward) => {
+    setUSDTPoolReward(currentUSDTPoolReward);
+  }, []);
+  const setCurrentWETHPoolReward = useCallback((currentWETHPoolReward) => {
+    setWETHPoolReward(currentWETHPoolReward);
+  }, []);
+  const setCurrentDAIPoolReward = useCallback((currentDAIPoolReward) => {
+    setDAIPoolReward(currentDAIPoolReward);
+  }, []);
+  const setCurrentWBTCPoolReward = useCallback((currentWBTCPoolReward) => {
+    setWBTCPoolReward(currentWBTCPoolReward);
+  }, []);
+  const setCurrentAVIXPoolReward = useCallback((currentAVIXPoolReward) => {
+    setAVIXPoolReward(currentAVIXPoolReward);
+  }, []);
+
+  const setCurrentAVAXRewardRead = useCallback((currentAVAXReward) => {
+    setAVAXRewardRead(currentAVAXReward);
+  }, []);
+  const setCurrentUSDTRewardRead = useCallback((currentUSDTReward) => {
+    setUSDTRewardRead(currentUSDTReward);
+  }, []);
+  const setCurrentWETHRewardRead = useCallback((currentWETHReward) => {
     setWETHRewardRead(currentWETHReward);
   }, []);
-  const setCurrentDAIRewardRead = React.useCallback((currentDAIReward: Contract): void => {
+  const setCurrentDAIRewardRead = useCallback((currentDAIReward) => {
     setDAIRewardRead(currentDAIReward);
   }, []);
-  const setCurrentWBTCRewardRead = React.useCallback((currentWBTCReward: Contract): void => {
+  const setCurrentWBTCRewardRead = useCallback((currentWBTCReward) => {
     setWBTCRewardRead(currentWBTCReward);
   }, []);
-  const setCurrentWETHPoolRewardRead = React.useCallback(
-    (currentWETHPoolReward: Contract): void => {
-      setWETHPoolRewardRead(currentWETHPoolReward);
-    },
-    []
-  );
-  const setCurrentDAIPoolRewardRead = React.useCallback((currentDAIPoolReward: Contract): void => {
+
+  const setCurrentAVAXPoolRewardRead = useCallback((currentAVAXPoolReward) => {
+    setAVAXPoolRewardRead(currentAVAXPoolReward);
+  }, []);
+  const setCurrentUSDTPoolRewardRead = useCallback((currentUSDTPoolReward) => {
+    setUSDTPoolRewardRead(currentUSDTPoolReward);
+  }, []);
+  const setCurrentWETHPoolRewardRead = useCallback((currentWETHPoolReward) => {
+    setWETHPoolRewardRead(currentWETHPoolReward);
+  }, []);
+  const setCurrentDAIPoolRewardRead = useCallback((currentDAIPoolReward) => {
     setDAIPoolRewardRead(currentDAIPoolReward);
   }, []);
-  const setCurrentWBTCPoolRewardRead = React.useCallback(
-    (currentWBTCPoolReward: Contract): void => {
-      setWBTCPoolRewardRead(currentWBTCPoolReward);
-    },
-    []
-  );
-  const setCurrentCTXPoolRewardRead = React.useCallback((currentCTXPoolReward: Contract): void => {
-    setCTXPoolRewardRead(currentCTXPoolReward);
+  const setCurrentWBTCPoolRewardRead = useCallback((currentWBTCPoolReward) => {
+    setWBTCPoolRewardRead(currentWBTCPoolReward);
   }, []);
+  const setCurrentAVIXPoolRewardRead = useCallback((currentAVIXPoolReward) => {
+    setAVIXPoolRewardRead(currentAVIXPoolReward);
+  }, []);
+
   return {
+    avaxReward,
+    setCurrentAVAXReward,
+    usdtReward,
+    setCurrentUSDTReward,
     wethReward,
     setCurrentWETHReward,
     daiReward,
     setCurrentDAIReward,
     wbtcReward,
     setCurrentWBTCReward,
+
+    avaxPoolReward,
+    setCurrentAVAXPoolReward,
+    usdtPoolReward,
+    setCurrentUSDTPoolReward,
     wethPoolReward,
     setCurrentWETHPoolReward,
     daiPoolReward,
     setCurrentDAIPoolReward,
     wbtcPoolReward,
     setCurrentWBTCPoolReward,
-    ctxPoolReward,
-    setCurrentCTXPoolReward,
+    avixPoolReward,
+    setCurrentAVIXPoolReward,
+
+    avaxRewardRead,
+    setCurrentAVAXRewardRead,
+    usdtRewardRead,
+    setCurrentUSDTRewardRead,
     wethRewardRead,
     setCurrentWETHRewardRead,
     daiRewardRead,
     setCurrentDAIRewardRead,
     wbtcRewardRead,
     setCurrentWBTCRewardRead,
+
+    avaxPoolRewardRead,
+    setCurrentAVAXPoolRewardRead,
+    usdtPoolRewardRead,
+    setCurrentUSDTPoolRewardRead,
     wethPoolRewardRead,
     setCurrentWETHPoolRewardRead,
     daiPoolRewardRead,
     setCurrentDAIPoolRewardRead,
     wbtcPoolRewardRead,
     setCurrentWBTCPoolRewardRead,
-    ctxPoolRewardRead,
-    setCurrentCTXPoolRewardRead,
+    avixPoolRewardRead,
+    setCurrentAVIXPoolRewardRead,
   };
 };

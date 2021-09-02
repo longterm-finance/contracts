@@ -39,7 +39,7 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
   uint256 public rewardRate = 0;
 
   /// @notice How long the rewards last, it updates when more rewards are added
-  uint256 public rewardsDuration = 14 days;
+  uint256 public rewardsDuration = 30 days;
 
   /// @notice Last time rewards were updated
   uint256 public lastUpdateTime;

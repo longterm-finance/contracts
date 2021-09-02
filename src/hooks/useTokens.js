@@ -1,138 +1,185 @@
-import React, { useState } from "react";
-import { ethers } from "ethers";
-import { Contract } from "ethers-multicall";
-import { TokensContext } from "../state/TokensContext";
+import { useState, useCallback } from "react";
 
-export const useTokens = (): TokensContext => {
-  const [wethToken, setETHToken] = useState<ethers.Contract>();
-  const [daiToken, setDAIToken] = useState<ethers.Contract>();
-  const [wbtcToken, setWBTCToken] = useState<ethers.Contract>();
-  const [tcapToken, setTCAPToken] = useState<ethers.Contract>();
-  const [ctxToken, setCtxToken] = useState<ethers.Contract>();
-  const [wethPoolToken, setWETHPoolToken] = useState<ethers.Contract>();
-  const [daiPoolToken, setDAIPoolToken] = useState<ethers.Contract>();
-  const [wbtcPoolToken, setWBTCPoolToken] = useState<ethers.Contract>();
-  const [ctxPoolToken, setCTXPoolToken] = useState<ethers.Contract>();
-  const [wethTokenRead, setETHTokenRead] = useState<Contract>();
-  const [daiTokenRead, setDAITokenRead] = useState<Contract>();
-  const [wbtcTokenRead, setWBTCTokenRead] = useState<Contract>();
-  const [tcapTokenRead, setTCAPTokenRead] = useState<Contract>();
-  const [ctxTokenRead, setCtxTokenRead] = useState<Contract>();
-  const [wethPoolTokenRead, setWETHPoolTokenRead] = useState<Contract>();
-  const [daiPoolTokenRead, setDAIPoolTokenRead] = useState<Contract>();
-  const [wbtcPoolTokenRead, setWBTCPoolTokenRead] = useState<Contract>();
-  const [ctxPoolTokenRead, setCTXPoolTokenRead] = useState<Contract>();
+export const useTokens = () => {
+  const [avaxToken, setAVAXToken] = useState();
+  const [usdtToken, setUSDTToken] = useState();
+  const [wethToken, setETHToken] = useState();
+  const [daiToken, setDAIToken] = useState();
+  const [wbtcToken, setWBTCToken] = useState();
+  const [dvixToken, setDVIXToken] = useState();
+  const [avixToken, setAvixToken] = useState();
 
-  const setCurrentWETHToken = React.useCallback((currentWETHToken: ethers.Contract): void => {
+  const [avaxPoolToken, setAVAXPoolToken] = useState(); // dVIX/WAVAX LP Token
+  const [usdtPoolToken, setUSDTPoolToken] = useState(); // dVIX/USDT LP Token
+  const [wethPoolToken, setWETHPoolToken] = useState(); // dVIX/WETH LP Token
+  const [daiPoolToken, setDAIPoolToken] = useState(); // dVIX/DAI LP Token
+  const [wbtcPoolToken, setWBTCPoolToken] = useState(); // dVIX/WBTC LP Token
+  const [avixPoolToken, setAVIXPoolToken] = useState(); // AVIX/WAVAX LP Token (initial liquidity IDO pair)
+
+  const [avaxTokenRead, setAVAXTokenRead] = useState();
+  const [usdtTokenRead, setUSDTTokenRead] = useState();
+  const [wethTokenRead, setETHTokenRead] = useState();
+  const [daiTokenRead, setDAITokenRead] = useState();
+  const [wbtcTokenRead, setWBTCTokenRead] = useState();
+  const [dvixTokenRead, setDVIXTokenRead] = useState();
+  const [avixTokenRead, setAvixTokenRead] = useState();
+
+  const [avaxPoolTokenRead, setAVAXPoolTokenRead] = useState(); // dVIX/WAVAX LP Token
+  const [usdtPoolTokenRead, setUSDTPoolTokenRead] = useState(); // dVIX/USDT LP Token
+  const [wethPoolTokenRead, setWETHPoolTokenRead] = useState(); // dVIX/WETH LP Token
+  const [daiPoolTokenRead, setDAIPoolTokenRead] = useState(); // dVIX/DAI LP Token
+  const [wbtcPoolTokenRead, setWBTCPoolTokenRead] = useState(); // dVIX/WBTC LP Token
+  const [avixPoolTokenRead, setAVIXPoolTokenRead] = useState(); // AVIX/WAVAX LP Token (initial liquidity IDO pair)
+
+  const setCurrentAVAXToken = useCallback((currentAVAXToken) => {
+    setAVAXToken(currentAVAXToken);
+  }, []);
+  const setCurrentUSDTToken = useCallback((currentUSDTToken) => {
+    setUSDTToken(currentUSDTToken);
+  }, []);
+  const setCurrentWETHToken = useCallback((currentWETHToken) => {
     setETHToken(currentWETHToken);
   }, []);
-  const setCurrentDAIToken = React.useCallback((currentDAIToken: ethers.Contract): void => {
+  const setCurrentDAIToken = useCallback((currentDAIToken) => {
     setDAIToken(currentDAIToken);
   }, []);
-  const setCurrentWBTCToken = React.useCallback((currentWBTCToken: ethers.Contract): void => {
+  const setCurrentWBTCToken = useCallback((currentWBTCToken) => {
     setWBTCToken(currentWBTCToken);
   }, []);
-  const setCurrentTCAPToken = React.useCallback((currentTCAPToken: ethers.Contract): void => {
-    setTCAPToken(currentTCAPToken);
+  const setCurrentDVIXToken = useCallback((currentDVIXToken) => {
+    setDVIXToken(currentDVIXToken);
   }, []);
-  const setCurrentCtxToken = React.useCallback((currentCtx: ethers.Contract): void => {
-    setCtxToken(currentCtx);
-  }, []);
-  const setCurrentWETHPoolToken = React.useCallback(
-    (currentWETHPoolToken: ethers.Contract): void => {
-      setWETHPoolToken(currentWETHPoolToken);
-    },
-    []
-  );
-  const setCurrentDAIPoolToken = React.useCallback((currentDAIPoolToken: ethers.Contract): void => {
-    setDAIPoolToken(currentDAIPoolToken);
-  }, []);
-  const setCurrentWBTCPoolToken = React.useCallback(
-    (currentWBTCPoolToken: ethers.Contract): void => {
-      setWBTCPoolToken(currentWBTCPoolToken);
-    },
-    []
-  );
-  const setCurrentCTXPoolToken = React.useCallback((currentCTXPoolToken: ethers.Contract): void => {
-    setCTXPoolToken(currentCTXPoolToken);
+  const setCurrentAvixToken = useCallback((currentAvix) => {
+    setAvixToken(currentAvix);
   }, []);
 
-  const setCurrentWETHTokenRead = React.useCallback((currentWETHTokenRead: Contract): void => {
+  const setCurrentAVAXPoolToken = useCallback((currentAVAXPoolToken) => {
+    setAVAXPoolToken(currentAVAXPoolToken);
+  }, []);
+  const setCurrentUSDTPoolToken = useCallback((currentUSDTPoolToken) => {
+    setUSDTPoolToken(currentUSDTPoolToken);
+  }, []);
+  const setCurrentWETHPoolToken = useCallback((currentWETHPoolToken) => {
+    setWETHPoolToken(currentWETHPoolToken);
+  }, []);
+  const setCurrentDAIPoolToken = useCallback((currentDAIPoolToken) => {
+    setDAIPoolToken(currentDAIPoolToken);
+  }, []);
+  const setCurrentWBTCPoolToken = useCallback((currentWBTCPoolToken) => {
+    setWBTCPoolToken(currentWBTCPoolToken);
+  }, []);
+  const setCurrentAVIXPoolToken = useCallback((currentAVIXPoolToken) => {
+    setAVIXPoolToken(currentAVIXPoolToken);
+  }, []);
+
+  const setCurrentAVAXTokenRead = useCallback((currentAVAXTokenRead) => {
+    setAVAXTokenRead(currentAVAXTokenRead);
+  }, []);
+  const setCurrentUSDTTokenRead = useCallback((currentUSDTTokenRead) => {
+    setUSDTTokenRead(currentUSDTTokenRead);
+  }, []);
+  const setCurrentWETHTokenRead = useCallback((currentWETHTokenRead) => {
     setETHTokenRead(currentWETHTokenRead);
   }, []);
-  const setCurrentDAITokenRead = React.useCallback((currentDAITokenRead: Contract): void => {
+  const setCurrentDAITokenRead = useCallback((currentDAITokenRead) => {
     setDAITokenRead(currentDAITokenRead);
   }, []);
-  const setCurrentWBTCTokenRead = React.useCallback((currentWBTCTokenRead: Contract): void => {
+  const setCurrentWBTCTokenRead = useCallback((currentWBTCTokenRead) => {
     setWBTCTokenRead(currentWBTCTokenRead);
   }, []);
-  const setCurrentTCAPTokenRead = React.useCallback((currentTCAPTokenRead: Contract): void => {
-    setTCAPTokenRead(currentTCAPTokenRead);
+  const setCurrentDVIXTokenRead = useCallback((currentDVIXTokenRead) => {
+    setDVIXTokenRead(currentDVIXTokenRead);
   }, []);
-  const setCurrentCtxTokenRead = React.useCallback((currentCtxRead: Contract): void => {
-    setCtxTokenRead(currentCtxRead);
+  const setCurrentAvixTokenRead = useCallback((currentAvixRead) => {
+    setAvixTokenRead(currentAvixRead);
   }, []);
-  const setCurrentWETHPoolTokenRead = React.useCallback(
-    (currentWETHPoolTokenRead: Contract): void => {
+
+  const setCurrentAVAXPoolTokenRead = useCallback(
+    (currentAVAXPoolTokenRead) => {
+      setAVAXPoolTokenRead(currentAVAXPoolTokenRead);
+    },
+    []
+  );
+  const setCurrentUSDTPoolTokenRead = useCallback(
+    (currentUSDTPoolTokenRead) => {
+      setUSDTPoolTokenRead(currentUSDTPoolTokenRead);
+    },
+    []
+  );
+  const setCurrentWETHPoolTokenRead = useCallback(
+    (currentWETHPoolTokenRead) => {
       setWETHPoolTokenRead(currentWETHPoolTokenRead);
     },
     []
   );
-  const setCurrentDAIPoolTokenRead = React.useCallback(
-    (currentDAIPoolTokenRead: Contract): void => {
-      setDAIPoolTokenRead(currentDAIPoolTokenRead);
-    },
-    []
-  );
-  const setCurrentWBTCPoolTokenRead = React.useCallback(
-    (currentWBTCPoolTokenRead: Contract): void => {
+  const setCurrentDAIPoolTokenRead = useCallback((currentDAIPoolTokenRead) => {
+    setDAIPoolTokenRead(currentDAIPoolTokenRead);
+  }, []);
+  const setCurrentWBTCPoolTokenRead = useCallback(
+    (currentWBTCPoolTokenRead) => {
       setWBTCPoolTokenRead(currentWBTCPoolTokenRead);
     },
     []
   );
-  const setCurrentCTXPoolTokenRead = React.useCallback(
-    (currentCTXPoolTokenRead: Contract): void => {
-      setCTXPoolTokenRead(currentCTXPoolTokenRead);
+  const setCurrentAVIXPoolTokenRead = useCallback(
+    (currentAVIXPoolTokenRead) => {
+      setAVIXPoolTokenRead(currentAVIXPoolTokenRead);
     },
     []
   );
 
   return {
+    avaxToken,
+    setCurrentAVAXToken,
+    usdtToken,
+    setCurrentUSDTToken,
     wethToken,
     setCurrentWETHToken,
     daiToken,
     setCurrentDAIToken,
     wbtcToken,
     setCurrentWBTCToken,
-    tcapToken,
-    setCurrentTCAPToken,
-    ctxToken,
-    setCurrentCtxToken,
+    dvixToken,
+    setCurrentDVIXToken,
+    avixToken,
+    setCurrentAvixToken,
+    avaxPoolToken,
+    setCurrentAVAXPoolToken,
+    usdtPoolToken,
+    setCurrentUSDTPoolToken,
     wethPoolToken,
     setCurrentWETHPoolToken,
     daiPoolToken,
     setCurrentDAIPoolToken,
     wbtcPoolToken,
     setCurrentWBTCPoolToken,
-    ctxPoolToken,
-    setCurrentCTXPoolToken,
+    avixPoolToken,
+    setCurrentAVIXPoolToken,
+    avaxTokenRead,
+    setCurrentAVAXTokenRead,
+    usdtTokenRead,
+    setCurrentUSDTTokenRead,
     wethTokenRead,
     setCurrentWETHTokenRead,
     daiTokenRead,
     setCurrentDAITokenRead,
     wbtcTokenRead,
     setCurrentWBTCTokenRead,
-    tcapTokenRead,
-    ctxTokenRead,
-    setCurrentCtxTokenRead,
-    setCurrentTCAPTokenRead,
+    dvixTokenRead,
+    avixTokenRead,
+    setCurrentAvixTokenRead,
+    setCurrentDVIXTokenRead,
     wethPoolTokenRead,
     setCurrentWETHPoolTokenRead,
     daiPoolTokenRead,
     setCurrentDAIPoolTokenRead,
     wbtcPoolTokenRead,
     setCurrentWBTCPoolTokenRead,
-    ctxPoolTokenRead,
-    setCurrentCTXPoolTokenRead,
+    avixPoolTokenRead,
+    setCurrentAVIXPoolTokenRead,
+    avaxPoolTokenRead,
+    setCurrentAVAXPoolTokenRead,
+    usdtPoolTokenRead,
+    setCurrentUSDTPoolTokenRead,
   };
 };

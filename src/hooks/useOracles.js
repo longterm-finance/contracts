@@ -1,58 +1,82 @@
-import React, { useState } from "react";
-import { ethers } from "ethers";
-import { Contract } from "ethers-multicall";
-import { OraclesContext } from "../state/OraclesContext";
+import { useState, useCallback } from "react";
 
-export const useOracles = (): OraclesContext => {
-  const [wethOracle, setETHOracle] = useState<ethers.Contract>();
-  const [daiOracle, setDAIOracle] = useState<ethers.Contract>();
-  const [wbtcOracle, setWBTCOracle] = useState<ethers.Contract>();
-  const [tcapOracle, setTCAPOracle] = useState<ethers.Contract>();
-  const [wethOracleRead, setETHOracleRead] = useState<Contract>();
-  const [daiOracleRead, setDAIOracleRead] = useState<Contract>();
-  const [wbtcOracleRead, setWBTCOracleRead] = useState<Contract>();
-  const [tcapOracleRead, setTCAPOracleRead] = useState<Contract>();
+export const useOracles = () => {
+  const [avaxOracle, setAVAXOracle] = useState();
+  const [usdtOracle, setUSDTOracle] = useState();
+  const [wethOracle, setETHOracle] = useState();
+  const [daiOracle, setDAIOracle] = useState();
+  const [wbtcOracle, setWBTCOracle] = useState();
+  const [dvixOracle, setDVIXOracle] = useState();
 
-  const setCurrentWETHOracle = React.useCallback((currentWETHOracle: ethers.Contract): void => {
+  const [avaxOracleRead, setAVAXOracleRead] = useState();
+  const [usdtOracleRead, setUSDTOracleRead] = useState();
+  const [wethOracleRead, setETHOracleRead] = useState();
+  const [daiOracleRead, setDAIOracleRead] = useState();
+  const [wbtcOracleRead, setWBTCOracleRead] = useState();
+  const [dvixOracleRead, setDVIXOracleRead] = useState();
+
+  const setCurrentAVAXOracle = useCallback((currentAVAXOracle) => {
+    setAVAXOracle(currentAVAXOracle);
+  }, []);
+  const setCurrentUSDTOracle = useCallback((currentUSDTOracle) => {
+    setUSDTOracle(currentUSDTOracle);
+  }, []);
+  const setCurrentWETHOracle = useCallback((currentWETHOracle) => {
     setETHOracle(currentWETHOracle);
   }, []);
-  const setCurrentDAIOracle = React.useCallback((currentDAIOracle: ethers.Contract): void => {
+  const setCurrentDAIOracle = useCallback((currentDAIOracle) => {
     setDAIOracle(currentDAIOracle);
   }, []);
-  const setCurrentWBTCOracle = React.useCallback((currentWBTCOracle: ethers.Contract): void => {
+  const setCurrentWBTCOracle = useCallback((currentWBTCOracle) => {
     setWBTCOracle(currentWBTCOracle);
   }, []);
-  const setCurrentTCAPOracle = React.useCallback((currentTCAPOracle: ethers.Contract): void => {
-    setTCAPOracle(currentTCAPOracle);
+  const setCurrentDVIXOracle = useCallback((currentDVIXOracle) => {
+    setDVIXOracle(currentDVIXOracle);
   }, []);
-  const setCurrentWETHOracleRead = React.useCallback((currentWETHOracleRead: Contract): void => {
+
+  const setCurrentAVAXOracleRead = useCallback((currentAVAXOracleRead) => {
+    setAVAXOracleRead(currentAVAXOracleRead);
+  }, []);
+  const setCurrentUSDTOracleRead = useCallback((currentUSDTOracleRead) => {
+    setUSDTOracleRead(currentUSDTOracleRead);
+  }, []);
+  const setCurrentWETHOracleRead = useCallback((currentWETHOracleRead) => {
     setETHOracleRead(currentWETHOracleRead);
   }, []);
-  const setCurrentDAIOracleRead = React.useCallback((currentDAIOracleRead: Contract): void => {
+  const setCurrentDAIOracleRead = useCallback((currentDAIOracleRead) => {
     setDAIOracleRead(currentDAIOracleRead);
   }, []);
-  const setCurrentWBTCOracleRead = React.useCallback((currentWBTCOracleRead: Contract): void => {
+  const setCurrentWBTCOracleRead = useCallback((currentWBTCOracleRead) => {
     setWBTCOracleRead(currentWBTCOracleRead);
   }, []);
-  const setCurrentTCAPOracleRead = React.useCallback((currentTCAPOracleRead: Contract): void => {
-    setTCAPOracleRead(currentTCAPOracleRead);
+  const setCurrentDVIXOracleRead = useCallback((currentDVIXOracleRead) => {
+    setDVIXOracleRead(currentDVIXOracleRead);
   }, []);
+
   return {
+    avaxOracle,
+    setCurrentAVAXOracle,
+    usdtOracle,
+    setCurrentUSDTOracle,
     wethOracle,
     setCurrentWETHOracle,
     daiOracle,
     setCurrentDAIOracle,
     wbtcOracle,
     setCurrentWBTCOracle,
-    tcapOracle,
-    setCurrentTCAPOracle,
+    dvixOracle,
+    setCurrentDVIXOracle,
     wethOracleRead,
     setCurrentWETHOracleRead,
     daiOracleRead,
     setCurrentDAIOracleRead,
     wbtcOracleRead,
     setCurrentWBTCOracleRead,
-    tcapOracleRead,
-    setCurrentTCAPOracleRead,
+    dvixOracleRead,
+    setCurrentDVIXOracleRead,
+    avaxOracleRead,
+    setCurrentAVAXOracleRead,
+    usdtOracleRead,
+    setCurrentUSDTOracleRead,
   };
 };

@@ -1,32 +1,28 @@
-import React, { useState } from "react";
-import { ethers } from "ethers";
-import { Contract } from "ethers-multicall";
-import { GovernanceContext } from "../state/GovernanceContext";
+import { useState, useCallback } from "react";
 
-export const useGovernance = (): GovernanceContext => {
-  const [governorAlpha, setGovernorAlpha] = useState<ethers.Contract>();
-  const [timelock, setTimelock] = useState<ethers.Contract>();
-  const [governorAlphaRead, setGovernorAlphaRead] = useState<Contract>();
-  const [timelockRead, setTimelockRead] = useState<Contract>();
+export const useGovernance = () => {
+  const [governorAlpha, setGovernorAlpha] = useState();
+  const [timelock, setTimelock] = useState();
+  const [governorAlphaRead, setGovernorAlphaRead] = useState();
+  const [timelockRead, setTimelockRead] = useState();
 
-  const setCurrentGovernorAlpha = React.useCallback(
-    (currentGovernorAlpha: ethers.Contract): void => {
-      setGovernorAlpha(currentGovernorAlpha);
-    },
-    []
-  );
-  const setCurrentTimelock = React.useCallback((currentTimelock: ethers.Contract): void => {
+  const setCurrentGovernorAlpha = useCallback((currentGovernorAlpha) => {
+    setGovernorAlpha(currentGovernorAlpha);
+  }, []);
+  const setCurrentTimelock = useCallback((currentTimelock) => {
     setTimelock(currentTimelock);
   }, []);
-  const setCurrentGovernorAlphaRead = React.useCallback(
-    (currentGovernorAlphaRead: Contract): void => {
+
+  const setCurrentGovernorAlphaRead = useCallback(
+    (currentGovernorAlphaRead) => {
       setGovernorAlphaRead(currentGovernorAlphaRead);
     },
     []
   );
-  const setCurrentTimelockRead = React.useCallback((currentTimelockRead: Contract): void => {
+  const setCurrentTimelockRead = useCallback((currentTimelockRead) => {
     setTimelockRead(currentTimelockRead);
   }, []);
+
   return {
     governorAlpha,
     setCurrentGovernorAlpha,

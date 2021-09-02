@@ -1,34 +1,58 @@
-import React, { useState } from "react";
-import { ethers } from "ethers";
-import { Contract } from "ethers-multicall";
-import { VaultsContext } from "../state/VaultsContext";
+import { useState, useCallback } from "react";
 
-export const useVaults = (): VaultsContext => {
-  const [wethVault, setWETHVault] = useState<ethers.Contract>();
-  const [daiVault, setDAIVault] = useState<ethers.Contract>();
-  const [wbtcVault, setWBTCVault] = useState<ethers.Contract>();
-  const [wethVaultRead, setWETHVaultRead] = useState<Contract>();
-  const [daiVaultRead, setDAIVaultRead] = useState<Contract>();
-  const [wbtcVaultRead, setWBTCVaultRead] = useState<Contract>();
+export const useVaults = () => {
+  const [avaxVault, setAVAXVault] = useState();
+  const [usdtVault, setUSDTVault] = useState();
+  const [wethVault, setWETHVault] = useState();
+  const [daiVault, setDAIVault] = useState();
+  const [wbtcVault, setWBTCVault] = useState();
 
-  const setCurrentWETHVault = React.useCallback((currentWETHVault: ethers.Contract): void => {
+  const [avaxVaultRead, setAVAXVaultRead] = useState();
+  const [usdtVaultRead, setUSDTVaultRead] = useState();
+  const [wethVaultRead, setWETHVaultRead] = useState();
+  const [daiVaultRead, setDAIVaultRead] = useState();
+  const [wbtcVaultRead, setWBTCVaultRead] = useState();
+
+  const setCurrentAVAXVault = useCallback((currentAVAXVault) => {
+    setAVAXVault(currentAVAXVault);
+  }, []);
+
+  const setCurrentUSDTVault = useCallback((currentUSDTVault) => {
+    setUSDTVault(currentUSDTVault);
+  }, []);
+
+  const setCurrentWETHVault = useCallback((currentWETHVault) => {
     setWETHVault(currentWETHVault);
   }, []);
-  const setCurrentDAIVault = React.useCallback((currentDAIVault: ethers.Contract): void => {
+
+  const setCurrentDAIVault = useCallback((currentDAIVault) => {
     setDAIVault(currentDAIVault);
   }, []);
-  const setCurrentWBTCVault = React.useCallback((currentWBTCVault: ethers.Contract): void => {
+
+  const setCurrentWBTCVault = useCallback((currentWBTCVault) => {
     setWBTCVault(currentWBTCVault);
   }, []);
-  const setCurrentWETHVaultRead = React.useCallback((currentWETHVaultRead: Contract): void => {
+
+  const setCurrentAVAXVaultRead = useCallback((currentAVAXVaultRead) => {
+    setAVAXVaultRead(currentAVAXVaultRead);
+  }, []);
+
+  const setCurrentUSDTVaultRead = useCallback((currentUSDTVaultRead) => {
+    setUSDTVaultRead(currentUSDTVaultRead);
+  }, []);
+
+  const setCurrentWETHVaultRead = useCallback((currentWETHVaultRead) => {
     setWETHVaultRead(currentWETHVaultRead);
   }, []);
-  const setCurrentDAIVaultRead = React.useCallback((currentDAIVaultRead: Contract): void => {
+
+  const setCurrentDAIVaultRead = useCallback((currentDAIVaultRead) => {
     setDAIVaultRead(currentDAIVaultRead);
   }, []);
-  const setCurrentWBTCVaultRead = React.useCallback((currentWBTCVaultRead: Contract): void => {
+
+  const setCurrentWBTCVaultRead = useCallback((currentWBTCVaultRead) => {
     setWBTCVaultRead(currentWBTCVaultRead);
   }, []);
+
   return {
     wethVault,
     setCurrentWETHVault,
@@ -42,5 +66,13 @@ export const useVaults = (): VaultsContext => {
     setCurrentDAIVaultRead,
     wbtcVaultRead,
     setCurrentWBTCVaultRead,
+    avaxVault,
+    setCurrentAVAXVault,
+    usdtVault,
+    setCurrentUSDTVault,
+    avaxVaultRead,
+    setCurrentAVAXVaultRead,
+    usdtVaultRead,
+    setCurrentUSDTVaultRead,
   };
 };

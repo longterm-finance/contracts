@@ -1,68 +1,37 @@
-import React from 'react'
-import { Contract } from 'ethers-multicall'
-import { ethers } from 'ethers'
-
-export interface TokensContext {
-  wethToken?: ethers.Contract;
-  setCurrentWETHToken: (currentToken: ethers.Contract) => void;
-  daiToken?: ethers.Contract;
-  setCurrentDAIToken: (currentToken: ethers.Contract) => void;
-  wbtcToken?: ethers.Contract;
-  setCurrentWBTCToken: (currentToken: ethers.Contract) => void;
-  tcapToken?: ethers.Contract;
-  setCurrentTCAPToken: (currentToken: ethers.Contract) => void;
-  ctxToken?: ethers.Contract;
-  setCurrentCtxToken: (currentCtx: ethers.Contract) => void;
-  wethPoolToken?: ethers.Contract;
-  setCurrentWETHPoolToken: (currentPoolToken: ethers.Contract) => void;
-  daiPoolToken?: ethers.Contract;
-  setCurrentDAIPoolToken: (currentPoolToken: ethers.Contract) => void;
-  wbtcPoolToken?: ethers.Contract;
-  setCurrentWBTCPoolToken: (currentPoolToken: ethers.Contract) => void;
-  ctxPoolToken?: ethers.Contract;
-  setCurrentCTXPoolToken: (currentPoolToken: ethers.Contract) => void;
-  wethTokenRead?: Contract;
-  setCurrentWETHTokenRead: (currentTokenRead: Contract) => void;
-  daiTokenRead?: Contract;
-  setCurrentDAITokenRead: (currentTokenRead: Contract) => void;
-  wbtcTokenRead?: Contract;
-  setCurrentWBTCTokenRead: (currentTokenRead: Contract) => void;
-  tcapTokenRead?: Contract;
-  setCurrentTCAPTokenRead: (currentTokenRead: Contract) => void;
-  ctxTokenRead?: Contract;
-  setCurrentCtxTokenRead: (currentCtx: Contract) => void;
-  wethPoolTokenRead?: Contract;
-  setCurrentWETHPoolTokenRead: (currentPoolTokenRead: Contract) => void;
-  daiPoolTokenRead?: Contract;
-  setCurrentDAIPoolTokenRead: (currentPoolTokenRead: Contract) => void;
-  wbtcPoolTokenRead?: Contract;
-  setCurrentWBTCPoolTokenRead: (currentPoolTokenRead: Contract) => void;
-  ctxPoolTokenRead?: Contract;
-  setCurrentCTXPoolTokenRead: (currentPoolTokenRead: Contract) => void;
-}
+import React from "react";
 
 export const TOKENS_DEFAULT_VALUE = {
+  setCurrentAVAXToken: () => {},
+  setCurrentUSDTToken: () => {},
   setCurrentWETHToken: () => {},
   setCurrentDAIToken: () => {},
   setCurrentWBTCToken: () => {},
-  setCurrentTCAPToken: () => {},
-  setCurrentCtxToken: () => {},
+  setCurrentDVIXToken: () => {},
+  setCurrentAvixToken: () => {},
 
-  setCurrentWETHPoolToken: () => {},
-  setCurrentDAIPoolToken: () => {},
-  setCurrentWBTCPoolToken: () => {},
-  setCurrentCTXPoolToken: () => {},
+  setCurrentAVAXPoolToken: () => {}, // dVIX/WAVAX LP Token
+  setCurrentUSDTPoolToken: () => {}, // dVIX/USDT LP Token
+  setCurrentWETHPoolToken: () => {}, // dVIX/WETH LP Token
+  setCurrentDAIPoolToken: () => {}, // dVIX/DAI LP Token
+  setCurrentWBTCPoolToken: () => {}, // dVIX/WBTC LP Token
+  setCurrentAVIXPoolToken: () => {}, // AVIX/WAVAX LP Token (initial liquidity IDO pair)
+
+  setCurrentAVAXTokenRead: () => {},
+  setCurrentUSDTTokenRead: () => {},
   setCurrentWETHTokenRead: () => {},
   setCurrentDAITokenRead: () => {},
   setCurrentWBTCTokenRead: () => {},
-  setCurrentTCAPTokenRead: () => {},
-  setCurrentCtxTokenRead: () => {},
-  setCurrentWETHPoolTokenRead: () => {},
-  setCurrentDAIPoolTokenRead: () => {},
-  setCurrentWBTCPoolTokenRead: () => {},
-  setCurrentCTXPoolTokenRead: () => {},
-}
+  setCurrentDVIXTokenRead: () => {},
+  setCurrentAvixTokenRead: () => {},
 
-const tokensContext = React.createContext < TokensContext > TOKENS_DEFAULT_VALUE
+  setCurrentAVAXPoolTokenRead: () => {}, // dVIX/WAVAX LP Token
+  setCurrentUSDTPoolTokenRead: () => {}, // dVIX/USDT LP Token
+  setCurrentWETHPoolTokenRead: () => {}, // dVIX/WETH LP Token
+  setCurrentDAIPoolTokenRead: () => {}, // dVIX/DAI LP Token
+  setCurrentWBTCPoolTokenRead: () => {}, // dVIX/WBTC LP Token
+  setCurrentAVIXPoolTokenRead: () => {}, // AVIX/WAVAX LP Token (initial liquidity IDO pair)
+};
 
-export default tokensContext
+const tokensContext = React.createContext(TOKENS_DEFAULT_VALUE);
+
+export default tokensContext;

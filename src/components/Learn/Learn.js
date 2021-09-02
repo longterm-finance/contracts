@@ -1,27 +1,27 @@
-import React, { useState, useContext } from 'react'
-import './learn.css'
-import { useMediaQuery } from 'react-responsive'
-import RedditIcon from '@material-ui/icons/Reddit'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import TelegramIcon from '@material-ui/icons/Telegram'
-import YouTubeIcon from '@material-ui/icons/YouTube'
-import DocsIcon from '@material-ui/icons/MenuBook'
-import RoadmapIcon from '@material-ui/icons/Timeline'
-import LitepaperIcon from '@material-ui/icons/LibraryBooks'
-import FAQIcon from '@material-ui/icons/Help'
-import GitHubIcon from '@material-ui/icons/GitHub'
+import React, { useState, useContext } from "react";
+import "./learn.css";
+import { useMediaQuery } from "react-responsive";
+import RedditIcon from "@material-ui/icons/Reddit";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import TelegramIcon from "@material-ui/icons/Telegram";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import DocsIcon from "@material-ui/icons/MenuBook";
+import RoadmapIcon from "@material-ui/icons/Timeline";
+import LitepaperIcon from "@material-ui/icons/LibraryBooks";
+import FAQIcon from "@material-ui/icons/Help";
+import GitHubIcon from "@material-ui/icons/GitHub";
 // import AuditReportIcon from '@material-ui/icons/BugReport'
-import { ThemeContext } from '../../state/ThemeContext'
+import { ThemeContext } from "../../state/ThemeContext";
 
 const Learn = () => {
-  const { isDarkMode } = useContext(ThemeContext)
-  const isMobileView = useMediaQuery({ query: '(max-width: 510px)' })
+  const { isDarkMode } = useContext(ThemeContext);
+  const isMobileView = useMediaQuery({ query: "(max-width: 510px)" });
 
   const WhatIsAvix = () => {
     return (
       <div
         className={`what-is-avix-container ${
-          isDarkMode ? 'learn-card-dark-mode' : 'learn-card'
+          isDarkMode ? "learn-card-dark-mode" : "learn-card"
         }`}
       >
         <h2 className="what-is-avix-title mb-4">What is Avix Finance?</h2>
@@ -29,52 +29,52 @@ const Learn = () => {
           <strong>
             Avix Finance makes it possible for everyone to mint derived VIX
             (dVIX),
-          </strong>{' '}
+          </strong>{" "}
           the world’s first token that tracks the CBOE Volatility Index (VIX) in
-          1:1 ratio.{' '}
+          1:1 ratio.{" "}
         </p>
         <p className="what-is-avix-desc">
           <strong>
             dVIX does not experience any time decay as it never expires,
-          </strong>{' '}
+          </strong>{" "}
           which makes it a much more reliable hedge for the broader market
           volatility.
         </p>
         <p className="what-is-avix-desc">
-          dVIX is <strong>safely overcollateralized by at least 150%,</strong>{' '}
-          using crypto assets such as WETH, MATIC, DAI, USDC and WBTC.
+          dVIX is <strong>safely overcollateralized by at least 300%,</strong>{" "}
+          using crypto assets such as AVAX, WETH, WBTC, DAI and USDT.
         </p>
         <p className="what-is-avix-desc">
-          {' '}
-          Avix Finance is currently{' '}
-          <strong>deployed on the Polygon (Matic) network, </strong>
+          {" "}
+          Avix Finance is currently{" "}
+          <strong>deployed on the Avalanche C-Chain, </strong>
           with plans for expansion onto other networks over time.
-        </p>{' '}
+        </p>{" "}
         <p className="what-is-avix-desc">
-          <strong>To learn more about Avix Finance,</strong> please visit{' '}
+          <strong>To learn more about Avix Finance,</strong> please visit{" "}
           <a
             target="_blank"
             rel="noreferrer"
             href="https://avix.finance"
             className="doc-link"
             style={{
-              color: '#e84142',
-              fontWeight: 'bold',
+              color: "#e84142",
+              fontWeight: "bold",
             }}
           >
             our official website
-          </a>{' '}
+          </a>{" "}
           and also check out the available resources on this page.
         </p>
       </div>
-    )
-  }
+    );
+  };
 
   const Video = () => {
     return (
       <div
         className={`video-container ${
-          isDarkMode ? 'learn-card-dark-mode' : 'learn-card'
+          isDarkMode ? "learn-card-dark-mode" : "learn-card"
         }`}
       >
         <h2 className="video-title mb-4">Intro to Avix Finance</h2>
@@ -87,14 +87,14 @@ const Learn = () => {
           className="mr-4 video"
         />
       </div>
-    )
-  }
+    );
+  };
 
   const Instructions = () => {
     return (
       <div
         className={`instructions-container ${
-          isDarkMode ? 'learn-card-dark-mode' : 'learn-card'
+          isDarkMode ? "learn-card-dark-mode" : "learn-card"
         }`}
       >
         <h2 className="instructions-title mb-4">Instructions</h2>
@@ -106,8 +106,8 @@ const Learn = () => {
             href="https://docs.avix.finance/platform-overview/how-to-use-dvix"
             className="doc-link"
             style={{
-              color: '#e84142',
-              fontWeight: 'bold',
+              color: "#e84142",
+              fontWeight: "bold",
             }}
           >
             How to Use dVIX
@@ -122,8 +122,8 @@ const Learn = () => {
             href="https://docs.avix.finance/platform-overview/tutorial-how-to-mint-and-burn-dvix"
             className="doc-link"
             style={{
-              color: '#e84142',
-              fontWeight: 'bold',
+              color: "#e84142",
+              fontWeight: "bold",
             }}
           >
             How to Mint & Burn dVIX
@@ -138,22 +138,22 @@ const Learn = () => {
             href="https://docs.avix.finance/platform-overview/tutorial-advanced-trading-strategies"
             className="doc-link"
             style={{
-              color: '#e84142',
-              fontWeight: 'bold',
+              color: "#e84142",
+              fontWeight: "bold",
             }}
           >
             Advanced Trading Strategies
           </a>
         </p>
       </div>
-    )
-  }
+    );
+  };
 
   const Resources = () => {
     return (
       <div
         className={`resources-container ${
-          isDarkMode ? 'learn-card-dark-mode' : 'learn-card'
+          isDarkMode ? "learn-card-dark-mode" : "learn-card"
         }`}
       >
         <h2 className="resources-title mb-4">Resources</h2>
@@ -167,7 +167,7 @@ const Learn = () => {
                 href="https://docs.avix.finance/"
                 className="doc-link bold resources-link-inner"
               >
-                <DocsIcon style={{ color: isDarkMode ? '#b7b7b7' : '#000' }} />
+                <DocsIcon style={{ color: isDarkMode ? "#b7b7b7" : "#000" }} />
                 <span className="ml-2">Docs</span>
               </a>
             </p>
@@ -179,7 +179,7 @@ const Learn = () => {
                 className="doc-link bold resources-link-inner"
               >
                 <LitepaperIcon
-                  style={{ color: isDarkMode ? '#b7b7b7' : '#000' }}
+                  style={{ color: isDarkMode ? "#b7b7b7" : "#000" }}
                 />
                 <span className="ml-2">Litepaper</span>
               </a>
@@ -192,7 +192,7 @@ const Learn = () => {
                 className="doc-link bold resources-link-inner"
               >
                 <GitHubIcon
-                  style={{ color: isDarkMode ? '#b7b7b7' : '#000' }}
+                  style={{ color: isDarkMode ? "#b7b7b7" : "#000" }}
                 />
                 <span className="ml-2">Github</span>
               </a>
@@ -207,7 +207,7 @@ const Learn = () => {
                 className="doc-link bold resources-link-inner"
               >
                 <RoadmapIcon
-                  style={{ color: isDarkMode ? '#b7b7b7' : '#000' }}
+                  style={{ color: isDarkMode ? "#b7b7b7" : "#000" }}
                 />
                 <span className="ml-2">Roadmap</span>
               </a>
@@ -219,7 +219,7 @@ const Learn = () => {
                 href="https://docs.avix.finance/faqs"
                 className="doc-link bold resources-link-inner"
               >
-                <FAQIcon style={{ color: isDarkMode ? '#b7b7b7' : '#000' }} />
+                <FAQIcon style={{ color: isDarkMode ? "#b7b7b7" : "#000" }} />
                 <span className="ml-2">FAQs</span>
               </a>
             </p>
@@ -240,144 +240,144 @@ const Learn = () => {
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
-  const [copyAddressClicked1, setCopyAddressClicked1] = useState(false)
-  const [copyAddressClicked2, setCopyAddressClicked2] = useState(false)
+  const [copyAddressClicked1, setCopyAddressClicked1] = useState(false);
+  const [copyAddressClicked2, setCopyAddressClicked2] = useState(false);
 
   const copyAddress1 = () => {
-    const el = document.createElement('input')
-    el.value = '0xa275a30492B138639726b43385D0703aa65F8107'
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand('copy')
-    document.body.removeChild(el)
-  }
+    const el = document.createElement("input");
+    el.value = "0xa275a30492B138639726b43385D0703aa65F8107";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+  };
 
   const onCopyAddressClicked1 = () => {
-    setCopyAddressClicked1(true)
-    setTimeout(() => setCopyAddressClicked1(false), 2000)
-  }
+    setCopyAddressClicked1(true);
+    setTimeout(() => setCopyAddressClicked1(false), 2000);
+  };
 
   const copyAddress2 = () => {
-    const el = document.createElement('input')
-    el.value = 'bc1qdkryvyvvm52mujn587ut608n3xhkj0dm8dsrz7'
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand('copy')
-    document.body.removeChild(el)
-  }
+    const el = document.createElement("input");
+    el.value = "bc1qdkryvyvvm52mujn587ut608n3xhkj0dm8dsrz7";
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+  };
 
   const onCopyAddressClicked2 = () => {
-    setCopyAddressClicked2(true)
-    setTimeout(() => setCopyAddressClicked2(false), 2000)
-  }
+    setCopyAddressClicked2(true);
+    setTimeout(() => setCopyAddressClicked2(false), 2000);
+  };
 
   const Support = () => {
     return (
       <div
         className={`support-container ${
-          isDarkMode ? 'learn-card-dark-mode' : 'learn-card'
+          isDarkMode ? "learn-card-dark-mode" : "learn-card"
         }`}
       >
         <h2 className="support-title mb-4">Support</h2>
         <p className="support-desc">
-          The fastest way to get support is to send an email to{' '}
+          The fastest way to get support is to send an email to{" "}
           <a
             href="mailto:wecare@avix.finance"
             className="doc-link bold"
-            style={{ fontWeight: 'bold', color: '#e84142' }}
+            style={{ fontWeight: "bold", color: "#e84142" }}
           >
             wecare@avix.finance
           </a>
         </p>
         <p className="support-desc">
-          Email support is maintained by a{' '}
+          Email support is maintained by a{" "}
           <strong>group of volunteers from the Avix community</strong> and is
           supported by tips.
         </p>
         <p className="support-desc">
-          If you are satisfied by the support group's answers,{' '}
+          If you are satisfied by the support group's answers,{" "}
           <strong>please consider sending some tips:</strong>
         </p>
         <p className="support-desc">
-          <strong>ETH, MATIC & Stablecoins: </strong>
+          <strong>AVAX (C-Chain): </strong>
           <span
             onClick={() => {
-              copyAddress1()
-              onCopyAddressClicked1()
+              copyAddress1();
+              onCopyAddressClicked1();
             }}
             className="copy-address-span"
           >
             {isMobileView
               ? // eslint-disable-next-line
-                '0xa275a30492B138639726b43385' + ' ' + 'D0703aa65F8107'
-              : '0xa275a30492B138639726b43385D0703aa65F8107'}
-          </span>{' '}
+                "0xa275a30492B138639726b43385" + " " + "D0703aa65F8107"
+              : "0xa275a30492B138639726b43385D0703aa65F8107"}
+          </span>{" "}
           <span
-            style={{ display: 'block', color: '#1771f8', fontWeight: 'bold' }}
+            style={{ display: "block", color: "#1771f8", fontWeight: "bold" }}
           >
-            [Click on the address to copy]{' '}
+            [Click on the address to copy]{" "}
             {copyAddressClicked1 && (
               <span
                 className="ml-2"
-                style={{ color: isDarkMode ? '#fff' : '#000' }}
+                style={{ color: isDarkMode ? "#fff" : "#000" }}
               >
                 <i
                   className="far fa-check-circle"
                   style={{
-                    color: 'green',
+                    color: "green",
                   }}
-                />{' '}
+                />{" "}
                 Copied!
               </span>
             )}
           </span>
         </p>
         <p className="support-desc">
-          <strong>BTC: </strong>{' '}
+          <strong>BTC: </strong>{" "}
           <span
             onClick={() => {
-              copyAddress2()
-              onCopyAddressClicked2()
+              copyAddress2();
+              onCopyAddressClicked2();
             }}
             className="copy-address-span"
           >
             {isMobileView
               ? // eslint-disable-next-line
-                'bc1qdkryvyvvm52mujn587ut608n3' + ' ' + 'xhkj0dm8dsrz7'
-              : 'bc1qdkryvyvvm52mujn587ut608n3xhkj0dm8dsrz7'}
-          </span>{' '}
+                "bc1qdkryvyvvm52mujn587ut608n3" + " " + "xhkj0dm8dsrz7"
+              : "bc1qdkryvyvvm52mujn587ut608n3xhkj0dm8dsrz7"}
+          </span>{" "}
           <span
-            style={{ display: 'block', color: '#1771f8', fontWeight: 'bold' }}
+            style={{ display: "block", color: "#1771f8", fontWeight: "bold" }}
           >
-            [Click on the address to copy]{' '}
+            [Click on the address to copy]{" "}
             {copyAddressClicked2 && (
               <span
                 className="ml-2"
-                style={{ color: isDarkMode ? '#fff' : '#000' }}
+                style={{ color: isDarkMode ? "#fff" : "#000" }}
               >
                 <i
                   className="far fa-check-circle"
                   style={{
-                    color: 'green',
+                    color: "green",
                   }}
-                />{' '}
+                />{" "}
                 Copied!
               </span>
             )}
           </span>
         </p>
         <p className="support-desc">
-          Also, you can ask our community for the support in our{' '}
+          Also, you can ask our community for the support in our{" "}
           <a
             href="https://t.me/joinchat/vcN1SWLifF01M2M0"
             target="_blank"
             rel="noreferrer"
             className="doc-link community-link-inner"
           >
-            Telegram Group,{' '}
+            Telegram Group,{" "}
           </a>
           <a
             href="https://discord.com/invite/ahu8kpwXM3"
@@ -385,9 +385,9 @@ const Learn = () => {
             rel="noreferrer"
             className="doc-link community-link-inner"
           >
-            Discord Server,{' '}
+            Discord Server,{" "}
           </a>
-          or{' '}
+          or{" "}
           <a
             href="https://www.reddit.com/r/AvixFinance"
             target="_blank"
@@ -398,8 +398,8 @@ const Learn = () => {
           </a>
         </p>
       </div>
-    )
-  }
+    );
+  };
 
   const MediumIcon = () => {
     return (
@@ -409,12 +409,12 @@ const Learn = () => {
         xmlns="http://www.w3.org/2000/svg"
         fillRule="evenodd"
         clipRule="evenodd"
-        fill={isDarkMode ? '#b7b7b7' : '#000'}
+        fill={isDarkMode ? "#b7b7b7" : "#000"}
       >
         <path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795h6.633v.403l-1.916 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.411.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537v-10.91l-5.389 13.688h-.728l-6.275-13.688v9.174c-.052.385.076.774.347 1.052l2.521 3.058v.404h-7.148v-.404l2.521-3.058c.27-.279.39-.67.325-1.052v-10.608z" />
       </svg>
-    )
-  }
+    );
+  };
 
   const DiscordIcon = () => {
     return (
@@ -444,14 +444,14 @@ const Learn = () => {
           src="chrome-extension://fnnegphlobjdpkhecapkijjdkgcjhkib/inject-script.js"
         />
       </svg>
-    )
-  }
+    );
+  };
 
   const Community = () => {
     return (
       <div
         className={`community-container ${
-          isDarkMode ? 'learn-card-dark-mode' : 'learn-card'
+          isDarkMode ? "learn-card-dark-mode" : "learn-card"
         }`}
       >
         <h2 className="community-title mb-4">Community</h2>
@@ -467,7 +467,7 @@ const Learn = () => {
                 <RedditIcon
                   style={{
                     /* color: isDarkMode ? '#b7b7b7' : '#000'  */
-                    color: '#FF4019',
+                    color: "#FF4019",
                   }}
                 />
                 <span className="ml-2">Reddit</span>
@@ -483,7 +483,7 @@ const Learn = () => {
                 <TwitterIcon
                   style={{
                     /* color: isDarkMode ? '#b7b7b7' : '#000'  */
-                    color: '#1CB7EB',
+                    color: "#1CB7EB",
                   }}
                 />
                 <span className="ml-2">Twitter</span>
@@ -499,7 +499,7 @@ const Learn = () => {
                 <TelegramIcon
                   style={{
                     /* color: isDarkMode ? '#b7b7b7' : '#000'  */
-                    color: '#139BD0',
+                    color: "#139BD0",
                   }}
                 />
                 <span className="ml-2">Telegram</span>
@@ -516,7 +516,7 @@ const Learn = () => {
               >
                 <DiscordIcon
                   style={{
-                    color: isDarkMode ? '#b7b7b7' : '#000',
+                    color: isDarkMode ? "#b7b7b7" : "#000",
                   }}
                 />
                 <span className="ml-2">Discord</span>
@@ -530,7 +530,7 @@ const Learn = () => {
                 className="doc-link bold community-link-inner"
               >
                 <MediumIcon
-                  style={{ color: isDarkMode ? '#b7b7b7' : '#000' }}
+                  style={{ color: isDarkMode ? "#b7b7b7" : "#000" }}
                 />
                 <span className="ml-2">Medium</span>
               </a>
@@ -545,7 +545,7 @@ const Learn = () => {
                 <YouTubeIcon
                   style={{
                     /* color: isDarkMode ? '#b7b7b7' : '#000' */
-                    color: '#FF0000',
+                    color: "#FF0000",
                   }}
                 />
                 <span className="ml-2">YouTube</span>
@@ -554,13 +554,13 @@ const Learn = () => {
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div
       className={`${
-        !isDarkMode ? 'learn-container' : 'learn-container-dark-mode'
+        !isDarkMode ? "learn-container" : "learn-container-dark-mode"
       } mb-5`}
     >
       <br />
@@ -572,7 +572,7 @@ const Learn = () => {
 
       <h1
         className="text-center bold mb-5 mt-5 learn-title"
-        style={{ fontSize: '3.15rem', color: isDarkMode && '#fff' }}
+        style={{ fontSize: "3.15rem", color: isDarkMode && "#fff" }}
       >
         Learn About Avix Finance
       </h1>
@@ -589,7 +589,7 @@ const Learn = () => {
       <br />
       <br />
     </div>
-  )
-}
+  );
+};
 
-export default Learn
+export default Learn;
