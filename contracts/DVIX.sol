@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.5;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/introspection/IERC165.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/math/SafeMath.sol";
+import "./utils/ERC20.sol";
+import "./utils/Ownable.sol";
+import "./utils/IERC165.sol";
+import "./utils/SafeMath.sol";
 import "./Orchestrator.sol";
 
 /**

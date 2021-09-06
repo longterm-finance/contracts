@@ -15,12 +15,12 @@
 
 pragma solidity 0.7.5;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/utils/ReentrancyGuard.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/utils/Pausable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/token/ERC20/SafeERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/math/SafeMath.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/access/AccessControl.sol";
+import "./utils/Ownable.sol";
+import "./utils/ReentrancyGuard.sol";
+import "./utils/Pausable.sol";
+import "./utils/SafeERC20.sol";
+import "./utils/SafeMath.sol";
+import "./utils/AccessControl.sol";
 
 contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
   /// @notice Open Zeppelin libraries

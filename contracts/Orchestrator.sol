@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.5;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/introspection/ERC165Checker.sol";
+import "./utils/Ownable.sol";
+import "./utils/ERC165Checker.sol";
 import "./IVaultHandler.sol";
 import "./DVIX.sol";
 import "./oracles/ChainlinkOracle.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/token/ERC20/IERC20.sol";
+import "./utils/IERC20.sol";
 
 /**
  * @title dVIX Orchestrator

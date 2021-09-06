@@ -2,8 +2,8 @@
 
 pragma solidity 0.7.5;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/math/SafeMath.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/introspection/IERC165.sol";
+import "../utils/SafeMath.sol";
+import "../utils/IERC165.sol";
 
 contract Timelock is IERC165 {
   using SafeMath for uint256;
