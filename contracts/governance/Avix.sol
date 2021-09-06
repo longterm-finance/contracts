@@ -10,13 +10,13 @@ contract Avix {
   string public constant name = "Avix";
 
   /// @notice EIP-20 token symbol for this token
-  string public constant symbol = "AVIX";
+  string public constant symbol = "aVIX";
 
   /// @notice EIP-20 token decimals for this token
   uint8 public constant decimals = 18;
 
   /// @notice Total number of tokens in circulation
-  uint256 public totalSupply = 10000000e18; // 10 million AVIX
+  uint256 public totalSupply = 10000000e18; // 10 million aVIX
 
   /// @notice Address which may mint new tokens
   address public minter;
@@ -98,7 +98,7 @@ contract Avix {
   );
 
   /**
-   * @notice Construct a new Avix token
+   * @notice Construct a new aVIX token
    * @param account The initial account to grant all the tokens
    * @param minter_ The account with minting ability
    * @param mintingAllowedAfter_ The timestamp after which minting may occur
@@ -110,7 +110,7 @@ contract Avix {
   ) {
     require(
       mintingAllowedAfter_ >= block.timestamp,
-      "Avix::constructor: minting can only begin after deployment"
+      "aVIX::constructor: minting can only begin after deployment"
     );
 
     balances[account] = uint96(totalSupply);
@@ -127,7 +127,7 @@ contract Avix {
   function setMinter(address minter_) external {
     require(
       msg.sender == minter,
-      "Avix::setMinter: only the minter can change the minter address"
+      "aVIX::setMinter: only the minter can change the minter address"
     );
     emit MinterChanged(minter, minter_);
     minter = minter_;
@@ -139,18 +139,18 @@ contract Avix {
    * @param rawAmount The number of tokens to be minted
    */
   function mint(address dst, uint256 rawAmount) external {
-    require(msg.sender == minter, "Avix::mint: only the minter can mint");
+    require(msg.sender == minter, "aVIX::mint: only the minter can mint");
     require(
       block.timestamp >= mintingAllowedAfter,
-      "Avix::mint: minting not allowed yet"
+      "aVIX::mint: minting not allowed yet"
     );
     require(
       dst != address(0),
-      "Avix::mint: cannot transfer to the zero address"
+      "aVIX::mint: cannot transfer to the zero address"
     );
     require(
       dst != address(this),
-      "Avix::mint: cannot transfer to the Avix address"
+      "aVIX::mint: cannot transfer to the aVIX address"
     );
 
     // record the mint
@@ -160,21 +160,21 @@ contract Avix {
     );
 
     // mint the amount
-    uint96 amount = safe96(rawAmount, "Avix::mint: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "aVIX::mint: amount exceeds 96 bits");
     require(
       amount <= SafeMath.div(SafeMath.mul(totalSupply, mintCap), 100),
-      "Avix::mint: exceeded mint cap"
+      "aVIX::mint: exceeded mint cap"
     );
     totalSupply = safe96(
       SafeMath.add(totalSupply, amount),
-      "Avix::mint: totalSupply exceeds 96 bits"
+      "aVIX::mint: totalSupply exceeds 96 bits"
     );
 
     // transfer the amount to the recipient
     balances[dst] = add96(
       balances[dst],
       amount,
-      "Avix::mint: transfer amount overflows"
+      "aVIX::mint: transfer amount overflows"
     );
     emit Transfer(address(0), dst, amount);
 
@@ -214,11 +214,11 @@ contract Avix {
   ) internal virtual {
     require(
       owner != address(0),
-      "Avix::_approve: approve from the zero address"
+      "aVIX::_approve: approve from the zero address"
     );
     require(
       spender != address(0),
-      "Avix::_approve: approve to the zero address"
+      "aVIX::_approve: approve to the zero address"
     );
 
     allowances[owner][spender] = amount;
@@ -238,7 +238,7 @@ contract Avix {
     if (rawAmount == uint256(-1)) {
       amount = uint96(-1);
     } else {
-      amount = safe96(rawAmount, "Avix::approve: amount exceeds 96 bits");
+      amount = safe96(rawAmount, "aVIX::approve: amount exceeds 96 bits");
     }
     _approve(msg.sender, spender, amount);
     return true;
@@ -264,7 +264,7 @@ contract Avix {
     } else {
       amount = safe96(
         addedValue,
-        "Avix::increaseAllowance: amount exceeds 96 bits"
+        "aVIX::increaseAllowance: amount exceeds 96 bits"
       );
     }
     _approve(
@@ -273,7 +273,7 @@ contract Avix {
       add96(
         allowances[msg.sender][spender],
         amount,
-        "Avix::increaseAllowance: transfer amount overflows"
+        "aVIX::increaseAllowance: transfer amount overflows"
       )
     );
     return true;
@@ -300,7 +300,7 @@ contract Avix {
     } else {
       amount = safe96(
         subtractedValue,
-        "Avix::decreaseAllowance: amount exceeds 96 bits"
+        "aVIX::decreaseAllowance: amount exceeds 96 bits"
       );
     }
 
@@ -310,7 +310,7 @@ contract Avix {
       sub96(
         allowances[msg.sender][spender],
         amount,
-        "Avix::decreaseAllowance: decreased allowance below zero"
+        "aVIX::decreaseAllowance: decreased allowance below zero"
       )
     );
     return true;
@@ -339,7 +339,7 @@ contract Avix {
     if (rawAmount == uint256(-1)) {
       amount = uint96(-1);
     } else {
-      amount = safe96(rawAmount, "Avix::permit: amount exceeds 96 bits");
+      amount = safe96(rawAmount, "aVIX::permit: amount exceeds 96 bits");
     }
 
     bytes32 domainSeparator =
@@ -365,9 +365,9 @@ contract Avix {
     bytes32 digest =
       keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash));
     address signatory = ecrecover(digest, v, r, s);
-    require(signatory != address(0), "Avix::permit: invalid signature");
-    require(signatory == owner, "Avix::permit: unauthorized");
-    require(block.timestamp <= deadline, "Avix::permit: signature expired");
+    require(signatory != address(0), "aVIX::permit: invalid signature");
+    require(signatory == owner, "aVIX::permit: unauthorized");
+    require(block.timestamp <= deadline, "aVIX::permit: signature expired");
 
     allowances[owner][spender] = amount;
 
@@ -390,7 +390,7 @@ contract Avix {
    * @return Whether or not the transfer succeeded
    */
   function transfer(address dst, uint256 rawAmount) external returns (bool) {
-    uint96 amount = safe96(rawAmount, "Avix::transfer: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "aVIX::transfer: amount exceeds 96 bits");
     _transferTokens(msg.sender, dst, amount);
     return true;
   }
@@ -409,14 +409,14 @@ contract Avix {
   ) external returns (bool) {
     address spender = msg.sender;
     uint96 spenderAllowance = allowances[src][spender];
-    uint96 amount = safe96(rawAmount, "Avix::approve: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "aVIX::approve: amount exceeds 96 bits");
 
     if (spender != src && spenderAllowance != uint96(-1)) {
       uint96 newAllowance =
         sub96(
           spenderAllowance,
           amount,
-          "Avix::transferFrom: transfer amount exceeds spender allowance"
+          "aVIX::transferFrom: transfer amount exceeds spender allowance"
         );
       allowances[src][spender] = newAllowance;
 
@@ -466,9 +466,9 @@ contract Avix {
     bytes32 digest =
       keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash));
     address signatory = ecrecover(digest, v, r, s);
-    require(signatory != address(0), "Avix::delegateBySig: invalid signature");
-    require(nonce == nonces[signatory]++, "Avix::delegateBySig: invalid nonce");
-    require(block.timestamp <= expiry, "Avix::delegateBySig: signature expired");
+    require(signatory != address(0), "aVIX::delegateBySig: invalid signature");
+    require(nonce == nonces[signatory]++, "aVIX::delegateBySig: invalid nonce");
+    require(block.timestamp <= expiry, "aVIX::delegateBySig: signature expired");
     return _delegate(signatory, delegatee);
   }
 
@@ -496,7 +496,7 @@ contract Avix {
   {
     require(
       blockNumber < block.number,
-      "Avix::getPriorVotes: not yet determined"
+      "aVIX::getPriorVotes: not yet determined"
     );
 
     uint32 nCheckpoints = numCheckpoints[account];
@@ -547,26 +547,26 @@ contract Avix {
   ) internal {
     require(
       src != address(0),
-      "Avix::_transferTokens: cannot transfer from the zero address"
+      "aVIX::_transferTokens: cannot transfer from the zero address"
     );
     require(
       dst != address(0),
-      "Avix::_transferTokens: cannot transfer to the zero address"
+      "aVIX::_transferTokens: cannot transfer to the zero address"
     );
     require(
       dst != address(this),
-      "Avix::_transferTokens: cannot transfer to the Avix address"
+      "aVIX::_transferTokens: cannot transfer to the aVIX address"
     );
 
     balances[src] = sub96(
       balances[src],
       amount,
-      "Avix::_transferTokens: transfer amount exceeds balance"
+      "aVIX::_transferTokens: transfer amount exceeds balance"
     );
     balances[dst] = add96(
       balances[dst],
       amount,
-      "Avix::_transferTokens: transfer amount overflows"
+      "aVIX::_transferTokens: transfer amount overflows"
     );
     emit Transfer(src, dst, amount);
 
@@ -584,7 +584,7 @@ contract Avix {
         uint96 srcRepOld =
           srcRepNum > 0 ? checkpoints[srcRep][srcRepNum - 1].votes : 0;
         uint96 srcRepNew =
-          sub96(srcRepOld, amount, "Avix::_moveVotes: vote amount underflows");
+          sub96(srcRepOld, amount, "aVIX::_moveVotes: vote amount underflows");
         _writeCheckpoint(srcRep, srcRepNum, srcRepOld, srcRepNew);
       }
 
@@ -593,7 +593,7 @@ contract Avix {
         uint96 dstRepOld =
           dstRepNum > 0 ? checkpoints[dstRep][dstRepNum - 1].votes : 0;
         uint96 dstRepNew =
-          add96(dstRepOld, amount, "Avix::_moveVotes: vote amount overflows");
+          add96(dstRepOld, amount, "aVIX::_moveVotes: vote amount overflows");
         _writeCheckpoint(dstRep, dstRepNum, dstRepOld, dstRepNew);
       }
     }
@@ -608,7 +608,7 @@ contract Avix {
     uint32 blockNumber =
       safe32(
         block.number,
-        "Avix::_writeCheckpoint: block number exceeds 32 bits"
+        "aVIX::_writeCheckpoint: block number exceeds 32 bits"
       );
 
     if (

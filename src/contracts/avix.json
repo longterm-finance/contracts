@@ -1,5 +1,5 @@
 {
-  "1": {
+  "43114": {
     "mainnet": {
       "name": "mainnet",
       "chainId": "1",
@@ -11481,8 +11481,8 @@
       }
     }
   },
-  "4": {
-    "rinkeby": {
+  "43113": {
+    "fuji": {
       "name": "rinkeby",
       "chainId": "4",
       "contracts": {

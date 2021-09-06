@@ -11,12 +11,12 @@ contract GovernorBeta {
   /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
   function quorumVotes() public pure returns (uint256) {
     return 500_000e18;
-  } // 5% of Avix total supply
+  } // 5% of aVIX total supply
 
   /// @notice The number of votes required in order for a voter to become a proposer
   function proposalThreshold() public pure returns (uint256) {
     return 50_000e18;
-  } // 0.5% of Avix total supply
+  } // 0.5% of aVIX total supply
 
   /// @notice The maximum number of actions that can be included in a proposal
   function proposalMaxOperations() public pure returns (uint256) {
@@ -36,7 +36,7 @@ contract GovernorBeta {
   /// @notice The address of the Avix Protocol Timelock
   TimelockInterface public timelock;
 
-  /// @notice The address of the Avix governance token
+  /// @notice The address of the aVIX governance token
   AvixInterface public avix;
 
   /// @notice The total number of proposals

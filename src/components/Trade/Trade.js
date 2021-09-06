@@ -100,7 +100,7 @@ const Trade = () => {
         className="text-center bold mb-5 mt-5"
         style={{ fontSize: "2.75rem" }}
       >
-        Most Popular dVIX & AVIX Trading Pairs
+        Popular Trading Pairs
       </h1>
       <br />
       <div className="trade-grid">
@@ -122,7 +122,7 @@ const Trade = () => {
           analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
           tradeLink={`https://www.traderjoexyz.com/#/trade/`}
         />
-        <TradeCard
+        {/* <TradeCard
           icon1={dvix}
           icon2={eth}
           tradingPair="dVIX / WETH"
@@ -130,7 +130,7 @@ const Trade = () => {
           tradingVolume="$755,000"
           analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
           tradeLink={`https://www.traderjoexyz.com/#/trade/`}
-        />
+        /> */}
         {/* <TradeCard
           icon1={avix}
           icon2={eth}
@@ -140,7 +140,7 @@ const Trade = () => {
           analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
           tradeLink={`https://www.traderjoexyz.com/#/trade/`}
         /> */}
-        <TradeCard
+        {/* <TradeCard
           icon1={dvix}
           icon2={wbtc}
           tradingPair="dVIX / WBTC"
@@ -148,7 +148,7 @@ const Trade = () => {
           tradingVolume="$755,000"
           analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
           tradeLink={`https://www.traderjoexyz.com/#/trade/`}
-        />
+        /> */}
         {/* <TradeCard
           icon1={avix}
           icon2={wbtc}
@@ -194,6 +194,15 @@ const Trade = () => {
           analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
           tradeLink={`https://www.traderjoexyz.com/#/trade/`}
         /> */}
+        <TradeCard
+          icon1={dvix}
+          icon2={avax}
+          tradingPair="dVIX / AVAX"
+          dex="Pangolin"
+          tradingVolume="$755,000"
+          analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
+          tradeLink={`https://www.traderjoexyz.com/#/trade/`}
+        />
       </div>
       <br />
       <br />

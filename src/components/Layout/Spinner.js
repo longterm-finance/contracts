@@ -15,7 +15,7 @@ const Spinner = () => {
       <br />
       <br />
       <img src={spinner} alt="Loading..." className="spinner" />
-      <div className="loading">Loading...</div>
+      <div className="loading">Please wait...</div>
     </div>
   )
 }

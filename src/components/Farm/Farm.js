@@ -225,7 +225,7 @@ const Farm = () => {
           Early adopter rewards are issued over the 30 day period after the
           launch of Avix Finance,
         </strong>{" "}
-        for a total of 50,000 AVIX (5% of the max supply). This reward is{" "}
+        for a total of 500,000 AVIX (5% of the max supply). This reward is{" "}
         <strong>
           split across the dVIX minters (debtors), with 100% of the reward being
           immediately available.

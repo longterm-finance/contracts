@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import React from "react";
 import { toast } from "react-toastify";
-import toasty from "../assets/images/toasty.png";
+import toasty from "../assets/images/toasty.jpg";
 
 export const makeShortAddress = (address) => {
   const shortAddress = `${address.substr(0, 6).toString()}...${address
@@ -201,7 +201,7 @@ export const getProposalStatus = (
 export const getPriceInUSDFromPair = (reserves0, reservesAVAX, avaxPrice) => {
   const one = ethers.utils.parseEther("1");
   // if ((await pair.token1()) != WAVAX) {
-  //   throw "UniswapV2Pair must be paired with WAVAX"; // Being lazy for now. (modify later for Pangolin/Trader Joe)
+  //   throw "UniswapV2Pair must be paired with WAVAX"; // Being lazy for now. (modify later for Trader Joe DEX)
   // }
 
   // const reserves0 = resp[0];
