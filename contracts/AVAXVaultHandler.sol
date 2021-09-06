@@ -4,7 +4,7 @@ pragma solidity 0.7.5;
 import "./IVaultHandler.sol";
 import "./Orchestrator.sol";
 import "./IWAVAX.sol";
-import "@openzeppelin/contracts/math/SafeMath.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/solc-0.7/contracts/math/SafeMath.sol";
 
 /**
  * @title AVAX Avix Vault
