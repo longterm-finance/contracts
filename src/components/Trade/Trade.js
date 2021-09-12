@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 import "./trade.css";
 import dai from "../../assets/images/dai.png";
-import wbtc from "../../assets/images/wbtc.png";
 import eth from "../../assets/images/eth.png";
-import avix from "../../assets/images/favicon.png";
+import avix from "../../assets/images/avix_logo_new.png";
 import dvix from "../../assets/images/dVIX_favicon.png";
 import avax from "../../assets/images/avax.png";
-import usdt from "../../assets/images/usdt.png";
 import { ThemeContext } from "../../state/ThemeContext";
 
 const Trade = () => {
@@ -17,7 +15,7 @@ const Trade = () => {
     icon2,
     tradingPair,
     dex,
-    tradingVolume,
+    status = "Inactive",
     analyticsLink,
     tradeLink,
   }) => {
@@ -54,7 +52,7 @@ const Trade = () => {
           <strong>DEX:</strong> {dex}
         </p>
         <p className="trade-card-trading-volume">
-          <strong>24h Volume:</strong> {tradingVolume}
+          <strong>Status:</strong> {status}
         </p>
         <div className="trading-buttons">
           <button className="btn regular-btn border-rad-05 mr-3" type="button">
@@ -107,20 +105,20 @@ const Trade = () => {
         <TradeCard
           icon1={avix}
           icon2={avax}
-          tradingPair="AVIX / AVAX"
+          tradingPair="aVIX / AVAX"
           dex="Trader Joe"
-          tradingVolume="$755,000"
-          analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
-          tradeLink={`https://www.traderjoexyz.com/#/trade/`}
+          status={"Active"}
+          analyticsLink={`https://analytics.traderjoexyz.com/pairs/${process?.env?.REACT_APP_POOL_AVIX}`}
+          tradeLink={`https://www.traderjoexyz.com/#/trade/${process?.env?.REACT_APP_POOL_AVIX}`}
         />
         <TradeCard
           icon1={dvix}
           icon2={avax}
           tradingPair="dVIX / AVAX"
           dex="Trader Joe"
-          tradingVolume="$755,000"
-          analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
-          tradeLink={`https://www.traderjoexyz.com/#/trade/`}
+          status={"Active"}
+          analyticsLink={`https://analytics.traderjoexyz.com/pairs/${process?.env?.REACT_APP_POOL_AVAX}`}
+          tradeLink={`https://www.traderjoexyz.com/#/trade/${process?.env?.REACT_APP_POOL_AVAX}`}
         />
         {/* <TradeCard
           icon1={dvix}
@@ -160,12 +158,12 @@ const Trade = () => {
         /> */}
         <TradeCard
           icon1={dvix}
-          icon2={dai}
-          tradingPair="dVIX / DAI"
+          icon2={eth}
+          tradingPair="dVIX / WETH.e"
           dex="Trader Joe"
-          tradingVolume="$755,000"
-          analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
-          tradeLink={`https://www.traderjoexyz.com/#/trade/`}
+          status={"Active"}
+          analyticsLink={`https://analytics.traderjoexyz.com/pairs/${process?.env?.REACT_APP_POOL_WETH}`}
+          tradeLink={`https://www.traderjoexyz.com/#/trade/${process?.env?.REACT_APP_POOL_WETH}`}
         />
         {/* <TradeCard
           icon1={avix}
@@ -178,12 +176,12 @@ const Trade = () => {
         /> */}
         <TradeCard
           icon1={dvix}
-          icon2={usdt}
-          tradingPair="dVIX / USDT"
+          icon2={dai}
+          tradingPair="dVIX / DAI.e"
           dex="Trader Joe"
-          tradingVolume="$755,000"
-          analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
-          tradeLink={`https://www.traderjoexyz.com/#/trade/`}
+          status={"Active"}
+          analyticsLink={`https://analytics.traderjoexyz.com/pairs/${process?.env?.REACT_APP_POOL_DAI}`}
+          tradeLink={`https://www.traderjoexyz.com/#/trade/${process?.env?.REACT_APP_POOL_DAI}`}
         />
         {/* <TradeCard
           icon1={avix}
@@ -194,15 +192,6 @@ const Trade = () => {
           analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
           tradeLink={`https://www.traderjoexyz.com/#/trade/`}
         /> */}
-        <TradeCard
-          icon1={dvix}
-          icon2={avax}
-          tradingPair="dVIX / AVAX"
-          dex="Pangolin"
-          tradingVolume="$755,000"
-          analyticsLink={`https://analytics.traderjoexyz.com/pairs`}
-          tradeLink={`https://www.traderjoexyz.com/#/trade/`}
-        />
       </div>
       <br />
       <br />

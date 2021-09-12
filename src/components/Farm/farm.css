@@ -155,3 +155,7 @@
   font-size: 1.25rem;
   color: #fafafa !important;
 }
+
+.farm-link:hover {
+  text-decoration: underline !important;
+}

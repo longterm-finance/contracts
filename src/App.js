@@ -60,10 +60,10 @@ const Toastify = () => (
   />
 );
 
-// const clientOracle = new ApolloClient({
-//   uri: process.env.REACT_APP_GRAPH_URL, // Add this later
-//   cache: new InMemoryCache(),
-// });
+const clientOracle = new ApolloClient({
+  uri: process.env.REACT_APP_GRAPH_URL, // Add this later
+  cache: new InMemoryCache(),
+});
 
 const App = () => {
   const signer = useSigner();
@@ -431,6 +431,8 @@ const App = () => {
   //   );
   // }
 
+  console.log({ y: window.location.pathname });
+
   return (
     <Router>
       <SignerContext.Provider value={signer}>
@@ -445,12 +447,14 @@ const App = () => {
                         <DashboardLayout />
                         <Toastify />
                         <Switch>
-                          <Route exact path="/" component={Vault} />
-                          <Route exact path="/trade" component={Trade} />
-                          <Route exact path="/pool" component={Pool} />
-                          <Route exact path="/farm" component={Farm} />
-                          <Route exact path="/nft" component={NFT} />
-                          <Route exact path="/learn" component={Learn} />
+                          <ApolloProvider client={clientOracle}>
+                            <Route exact path="/" component={Vault} />
+                            <Route exact path="/trade" component={Trade} />
+                            <Route exact path="/pool" component={Pool} />
+                            <Route exact path="/farm" component={Farm} />
+                            <Route exact path="/nft" component={NFT} />
+                            <Route exact path="/learn" component={Learn} />
+                          </ApolloProvider>
                           <Route component={NotFound} />
                         </Switch>
                       </Suspense>

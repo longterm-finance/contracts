@@ -1,14 +1,11 @@
 import React from "react";
 import Web3Modal from "web3modal";
-// import Portis from "@portis/web3";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import Authereum from "authereum";
 
-let network = "mainnet";
+let network = "avalanche";
 
 switch (process.env.REACT_APP_NETWORK_ID) {
   case "43114":
-    network = "mainnet";
+    network = "avalanche";
     break;
   case "43113":
     network = "fuji";
@@ -18,22 +15,21 @@ switch (process.env.REACT_APP_NETWORK_ID) {
 }
 
 const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider, // required
+  injected: {
+    display: {
+      logo: "",
+      name: "MetaMask",
+      description: "Connect with the MetaMask wallet in your browser",
+    },
+    package: null,
     options: {
-      infuraId: process.env.REACT_APP_PROVIDER, // required
+      rpc: {
+        43114: "https://api.avax.network/ext/bc/C/rpc", // mainnet
+        43113: "https://api.avax-test.network/ext/bc/C/rpc", // testnet
+      },
+      network: "avalanche",
     },
   },
-  // portis: {
-  //   package: Portis, // required
-  //   options: {
-  //     id: process.env.REACT_APP_PORTIS_ID, // required
-  //   },
-  // },
-  authereum: {
-    package: Authereum, // required
-  },
-  /* See Provider Options Section */
 };
 
 const web3Modal = new Web3Modal({

@@ -28,7 +28,7 @@ contract AVAXVaultHandler is IVaultHandler {
    * @param _collateralOracle address
    * @param _avaxOracle address
    * @param _rewardHandler address
-   * @param _treasury address
+   * @param _devAddress address
    */
   constructor(
     Orchestrator _orchestrator,
@@ -42,7 +42,7 @@ contract AVAXVaultHandler is IVaultHandler {
     address _collateralOracle,
     address _avaxOracle,
     address _rewardHandler,
-    address _treasury
+    address _devAddress
   )
     IVaultHandler(
       _orchestrator,
@@ -56,7 +56,7 @@ contract AVAXVaultHandler is IVaultHandler {
       _collateralOracle,
       _avaxOracle,
       _rewardHandler,
-      _treasury
+      _devAddress
     )
   {}
 

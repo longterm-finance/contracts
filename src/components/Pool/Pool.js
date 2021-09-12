@@ -1,12 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./pool.css";
-// import dai from "../../assets/images/dai.png";
-// import wbtc from "../../assets/images/wbtc.png";
-// import eth from "../../assets/images/eth.png";
-import avix from "../../assets/images/favicon.png";
+import dai from "../../assets/images/dai.png";
+import eth from "../../assets/images/eth.png";
+import avix from "../../assets/images/avix_logo_new.png";
 import dvix from "../../assets/images/dVIX_favicon.png";
 import avax from "../../assets/images/avax.png";
-// import usdt from "../../assets/images/usdt.png";
 import { ThemeContext } from "../../state/ThemeContext";
 import { ethers } from "ethers";
 import NumberFormat from "react-number-format";
@@ -23,8 +21,9 @@ const Pool = () => {
   const { isDarkMode } = useContext(ThemeContext);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [wavaxLiquidity, setWavaxLiquidity] = useState("0");
-  const [wavaxLiquidityPNG, setWavaxLiquidityPNG] = useState("0");
+  const [avaxLiquidity, setAvaxLiquidity] = useState("0");
+  const [wethLiquidity, setWethLiquidity] = useState("0");
+  const [daiLiquidity, setDaiLiquidity] = useState("0");
   const [avixLiquidity, setAvixLiquidity] = useState("0");
 
   const signer = useContext(SignerContext);
@@ -34,10 +33,10 @@ const Pool = () => {
 
   const one = ethers.utils.parseEther("1");
 
-  async function getPriceInUSDFromPair(reserves0, reservesWAVAX, avaxPrice) {
-    // amount of token0 required to buy 1 WAVAX
+  async function getPriceInUSDFromPair(reserves0, reservesAVAX, avaxPrice) {
+    // amount of token0 required to buy 1 AVAX
     const amt = parseFloat(
-      ethers.utils.formatEther(one.mul(reserves0).div(reservesWAVAX))
+      ethers.utils.formatEther(one.mul(reserves0).div(reservesAVAX))
     );
     return avaxPrice / amt;
   }
@@ -54,52 +53,73 @@ const Pool = () => {
         tokens.avixTokenRead
       ) {
         const reservesAvixPoolCall = await tokens.avixPoolTokenRead?.getReserves();
-        const wavaxOraclePriceCall = await oracles.avaxOracleRead?.getLatestAnswer();
+        const avaxOraclePriceCall = await oracles.avaxOracleRead?.getLatestAnswer();
         const dvixOraclePriceCall = await oracles.dvixOracleRead?.getLatestAnswer();
 
-        const currentPoolWavaxCall = await tokens.wavaxTokenRead?.balanceOf(
-          process?.env?.REACT_APP_POOL_ETH
+        const currentPoolAvaxCall = await tokens.avaxTokenRead?.balanceOf(
+          process?.env?.REACT_APP_POOL_AVAX
         );
-        const currentWavaxDVIXCall = await tokens.dvixTokenRead?.balanceOf(
-          process?.env?.REACT_APP_POOL_ETH
+        const currentAvaxDVIXCall = await tokens.dvixTokenRead?.balanceOf(
+          process?.env?.REACT_APP_POOL_AVAX
         );
-        const currentPoolWavaxAvixCall = await tokens.wavaxTokenRead?.balanceOf(
-          process?.env?.REACT_APP_POOL_CTX
+
+        const currentPoolWethCall = await tokens.wethTokenRead?.balanceOf(
+          process?.env?.REACT_APP_POOL_WETH
+        );
+        const currentWethDVIXCall = await tokens.dvixTokenRead?.balanceOf(
+          process?.env?.REACT_APP_POOL_WETH
+        );
+
+        const currentPoolDaiCall = await tokens.daiTokenRead?.balanceOf(
+          process?.env?.REACT_APP_POOL_DAI
+        );
+        const currentDaiDVIXCall = await tokens.dvixTokenRead?.balanceOf(
+          process?.env?.REACT_APP_POOL_DAI
+        );
+
+        const currentPoolAvaxAvixCall = await tokens.avaxTokenRead?.balanceOf(
+          process?.env?.REACT_APP_POOL_AVIX
         );
         const currentPoolAvixCall = await tokens.avixTokenRead?.balanceOf(
-          process?.env?.REACT_APP_POOL_CTX
-        );
-        const currentPoolWavaxPNGCall = await tokens.wavaxTokenRead?.balanceOf(
-          process?.env?.REACT_APP_POOL_ETH_UNI
-        );
-        const currentWavaxDVIXPNGCall = await tokens.dvixTokenRead?.balanceOf(
-          process?.env?.REACT_APP_POOL_ETH_UNI
+          process?.env?.REACT_APP_POOL_AVIX
         );
 
         const [
           reservesAvixPool,
-          wavaxOraclePrice,
+          avaxOraclePrice,
           dvixOraclePrice,
-          currentPoolWavax,
-          currentWavaxDVIX,
-          currentPoolWavaxAvix,
+
+          currentPoolAvax,
+          currentAvaxDVIX,
+
+          currentPoolWeth,
+          currentWethDVIX,
+
+          currentPoolDai,
+          currentDaiDVIX,
+
+          currentPoolAvaxAvix,
           currentPoolAvix,
-          currentPoolWavaxPNG,
-          currentWavaxDVIXPNG,
         ] = await signer.ethcallProvider?.all([
           reservesAvixPoolCall,
-          wavaxOraclePriceCall,
+          avaxOraclePriceCall,
           dvixOraclePriceCall,
-          currentPoolWavaxCall,
-          currentWavaxDVIXCall,
-          currentPoolWavaxAvixCall,
+
+          currentPoolAvaxCall,
+          currentAvaxDVIXCall,
+
+          currentPoolWethCall,
+          currentWethDVIXCall,
+
+          currentPoolDaiCall,
+          currentDaiDVIXCall,
+
+          currentPoolAvaxAvixCall,
           currentPoolAvixCall,
-          currentPoolWavaxPNGCall,
-          currentWavaxDVIXPNGCall,
         ]);
 
         const avaxUSD = ethers.utils.formatEther(
-          wavaxOraclePrice.mul(10000000000)
+          avaxOraclePrice.mul(10000000000)
         );
 
         const currentPriceAVIX = await getPriceInUSDFromPair(
@@ -109,24 +129,29 @@ const Pool = () => {
         );
 
         const dvixUSD = ethers.utils.formatEther(dvixOraclePrice);
-        let formatPair1 = ethers.utils.formatEther(currentPoolWavax);
-        let formatPair2 = ethers.utils.formatEther(currentWavaxDVIX);
+
+        let formatPair1 = ethers.utils.formatEther(currentPoolAvax);
+        let formatPair2 = ethers.utils.formatEther(currentAvaxDVIX);
         let totalUSD =
           toUSD(formatPair1, avaxUSD) + toUSD(formatPair2, dvixUSD);
-        setWavaxLiquidity(totalUSD.toString());
+        setAvaxLiquidity(totalUSD.toString());
 
-        formatPair1 = ethers.utils.formatEther(currentPoolWavaxAvix);
+        formatPair1 = ethers.utils.formatEther(currentPoolWeth);
+        formatPair2 = ethers.utils.formatEther(currentWethDVIX);
+        totalUSD = toUSD(formatPair1, avaxUSD) + toUSD(formatPair2, dvixUSD);
+        setWethLiquidity(totalUSD.toString());
+
+        formatPair1 = ethers.utils.formatEther(currentPoolDai);
+        formatPair2 = ethers.utils.formatEther(currentDaiDVIX);
+        totalUSD = toUSD(formatPair1, avaxUSD) + toUSD(formatPair2, dvixUSD);
+        setDaiLiquidity(totalUSD.toString());
+
+        formatPair1 = ethers.utils.formatEther(currentPoolAvaxAvix);
         formatPair2 = ethers.utils.formatEther(currentPoolAvix);
         totalUSD =
           toUSD(formatPair1, avaxUSD) +
           toUSD(formatPair2, currentPriceAVIX.toString());
         setAvixLiquidity(totalUSD.toString());
-
-        formatPair1 = ethers.utils.formatEther(currentPoolWavaxPNG);
-        formatPair2 = ethers.utils.formatEther(currentWavaxDVIXPNG);
-
-        totalUSD = toUSD(formatPair1, avaxUSD) + toUSD(formatPair2, dvixUSD);
-        setWavaxLiquidityPNG(totalUSD.toString());
       }
       setIsLoading(false);
     };
@@ -227,14 +252,14 @@ const Pool = () => {
         className="text-center bold mb-5 mt-5"
         style={{ fontSize: "2.75rem" }}
       >
-        Enabled Liquidity Pools
+        Enabled Pools
       </h1>
       <br />
       <div className="trade-grid">
         <PoolCard
           icon1={avix}
           icon2={avax}
-          tradingPair="AVIX / AVAX"
+          tradingPair="aVIX / AVAX"
           dex="Trader Joe"
           liquidity={
             <NumberFormat
@@ -257,7 +282,7 @@ const Pool = () => {
           liquidity={
             <NumberFormat
               className="number"
-              value={wavaxLiquidity}
+              value={avaxLiquidity}
               displayType="text"
               thousandSeparator
               prefix=""
@@ -269,13 +294,50 @@ const Pool = () => {
         />
         <PoolCard
           icon1={dvix}
+          icon2={eth}
+          tradingPair="dVIX / WETH.e"
+          dex="Trader Joe"
+          liquidity={
+            <NumberFormat
+              className="number"
+              value={wethLiquidity}
+              displayType="text"
+              thousandSeparator
+              prefix=""
+              decimalScale={2}
+            />
+          }
+          analyticsLink={`https://analytics.traderjoexyz.com/pairs/${process?.env?.REACT_APP_POOL_WETH}`}
+          poolLink={`https://traderjoexyz.com/#/pool/${process?.env?.REACT_APP_POOL_WETH}`}
+        />
+        <PoolCard
+          icon1={dvix}
+          icon2={dai}
+          tradingPair="dVIX / DAI.e"
+          dex="Trader Joe"
+          liquidity={
+            <NumberFormat
+              className="number"
+              value={daiLiquidity}
+              displayType="text"
+              thousandSeparator
+              prefix=""
+              decimalScale={2}
+            />
+          }
+          analyticsLink={`https://analytics.traderjoexyz.com/pairs/${process?.env?.REACT_APP_POOL_DAI}`}
+          poolLink={`https://traderjoexyz.com/#/pool/${process?.env?.REACT_APP_POOL_DAI}`}
+        />
+        {/* --- */}
+        {/* <PoolCard
+          icon1={dvix}
           icon2={avax}
           tradingPair="dVIX / AVAX"
           dex="Pangolin"
           liquidity={
             <NumberFormat
               className="number"
-              value={wavaxLiquidityPNG}
+              value={avaxLiquidityPNG}
               displayType="text"
               thousandSeparator
               prefix=""
@@ -284,7 +346,7 @@ const Pool = () => {
           }
           analyticsLink={`https://info.pangolin.exchange/#/pairs/${process?.env?.REACT_APP_POOL_AVAX_PNG}`}
           poolLink={`https://app.pangolin.exchange/#/add/AVAX/${tokens.dvixToken?.address}`}
-        />
+        /> */}
         {/* <PoolCard
           icon1={dvix}
           icon2={eth}
@@ -358,23 +420,6 @@ const Pool = () => {
           poolLink={`https://www.traderjoexyz.com/#/pool/`}
         /> */}
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <br />
       <br />
       <br />

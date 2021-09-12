@@ -8,6 +8,7 @@ import "../utils/IERC165.sol";
 contract Timelock is IERC165 {
   using SafeMath for uint256;
 
+  event AdminSet(address indexed adminSetter, address indexed admin);
   event NewAdmin(address indexed newAdmin);
   event NewPendingAdmin(address indexed newPendingAdmin);
   event NewDelay(uint256 indexed newDelay);
@@ -52,6 +53,8 @@ contract Timelock is IERC165 {
 
   address public admin;
   address public pendingAdmin;
+  address public adminSetter;
+  bool public adminTracker;
   uint256 public delay;
 
   /**
@@ -67,7 +70,7 @@ contract Timelock is IERC165 {
 
   mapping(bytes32 => bool) public queuedTransactions;
 
-  constructor(address admin_, uint256 delay_) {
+  constructor(uint256 delay_) {
     require(
       delay_ >= MINIMUM_DELAY,
       "Timelock::constructor: Delay must exceed minimum delay."
@@ -77,7 +80,7 @@ contract Timelock is IERC165 {
       "Timelock::setDelay: Delay must not exceed maximum delay."
     );
 
-    admin = admin_;
+    adminSetter = msg.sender;
     delay = delay_;
   }
 
@@ -114,6 +117,23 @@ contract Timelock is IERC165 {
   {
     return (_interfaceId == _INTERFACE_ID_TIMELOCK ||
       _interfaceId == _INTERFACE_ID_ERC165);
+  }
+
+  /** 
+   * @notice Sets the Admin after contract has been deployed
+   * @param _admin address of the GovernorBeta contract (admin)
+   * @dev Only adminSetter can call it and it can only be called once
+   */
+  function setAdminInitially(address _admin) public {
+    require(msg.sender == adminSetter, "Timelock::setAdminInitially: Not allowed to set the admin");
+    require(adminTracker == false, "Timelock::setAdminInitially: Admin has already been set");
+    require(_admin != address(0), "Timelock::setAdminIinitially: Admin can't be zero address");
+
+    adminTracker = true;
+
+    admin = _admin;
+
+    emit AdminSet(adminSetter, _admin);
   }
 
   function acceptAdmin() public {

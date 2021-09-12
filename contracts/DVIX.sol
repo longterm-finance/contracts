@@ -21,6 +21,15 @@ contract DVIX is ERC20, Ownable, IERC165 {
 
   /// @notice Maximum value the total supply of dVIX
   uint256 public cap;
+  
+  // @notice: Address that sets the orchestrator after the contract deployment
+  address public orchestratorSetter;
+  
+  // @notice: Orchestrator address
+  Orchestrator public orchestrator;
+  
+  // @notice: Tracks if the orchestrator has been set 
+  bool public orchestratorTracker = false;
 
   /**
    * @notice Address to Vault Handler
@@ -62,24 +71,25 @@ contract DVIX is ERC20, Ownable, IERC165 {
 
   /// @notice An event emitted when the cap is enabled or disabled
   event NewCapEnabled(address indexed _owner, bool _enable);
+  
+  /// @notice An event emitted when the orchestrator is set
+  event OrchestratorSet(address indexed _setter, Orchestrator _orchestrator);
 
   /**
    * @notice Constructor
    * @param _name uint256
    * @param _symbol uint256
    * @param _cap uint256
-   * @param _orchestrator address
    */
   constructor(
     string memory _name,
     string memory _symbol,
-    uint256 _cap,
-    Orchestrator _orchestrator
+    uint256 _cap
   ) ERC20(_name, _symbol) {
     cap = _cap;
 
-    /// @dev transfer ownership to orchestrator
-    transferOwnership(address(_orchestrator));
+    // Sets the Orchestrator setter
+    orchestratorSetter = msg.sender;
   }
 
   /// @notice Reverts if called by any account that is not a vault.
@@ -89,6 +99,25 @@ contract DVIX is ERC20, Ownable, IERC165 {
       "dVIX::onlyVault: caller is not a vault"
     );
     _;
+  }
+  
+  /**
+   * @notice Sets the Orchestrator
+   * @param _orchestrator address of the Orchestrator contract
+   * @dev Only orchestratorSetter can call it and it can only be called once
+   */
+  function setOrchestrator(Orchestrator _orchestrator) public {
+    require(msg.sender == orchestratorSetter, "dVIX::setOrchestrator: Not allowed to set the orchestrator");
+    require(orchestratorTracker == false, "dVIX::setOrchestrator: Orchestrator has already been set");
+      
+    orchestratorTracker = true;
+      
+    /// @dev transfer ownership to orchestrator
+    transferOwnership(address(_orchestrator));
+    
+    orchestrator = _orchestrator;
+    
+    emit OrchestratorSet(orchestratorSetter, _orchestrator);
   }
 
   /**

@@ -31,7 +31,13 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
   IERC20 public immutable rewardsToken;
 
   /// @notice Address of the vault
-  address public immutable vault;
+  address public vault;
+  
+  /// @notice Checks if the vault has been set (it can be set only once, after the initial deployment)
+  bool public vaultTracker;
+  
+  /// @notice Address that can set the vault 
+  address public vaultSetter;
 
   /// @notice Tracks the period where users stop earning rewards
   uint256 public periodFinish = 0;
@@ -57,6 +63,9 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
 
   /// @dev Tracks the amount of dVIX minted per user
   mapping(address => uint256) private _balances;
+  
+  /// @notice An event emitted when the vault is set
+  event VaultSet(address indexed vaultSetter, address indexed vault);
 
   /// @notice An event emitted when a reward is added
   event RewardAdded(uint256 reward);
@@ -80,22 +89,21 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
    * @notice Constructor
    * @param _owner address
    * @param _rewardsToken address
-   * @param _vault uint256
    */
   constructor(
     address _owner,
-    address _rewardsToken,
-    address _vault
+    address _rewardsToken
   ) {
     require(
       _owner != address(0) &&
-        _rewardsToken != address(0) &&
-        _vault != address(0),
+        _rewardsToken != address(0),
       "RewardHandler::constructor: address can't be zero"
     );
+    
+    // Sets the Vault setter
+    vaultSetter = msg.sender;
 
     rewardsToken = IERC20(_rewardsToken);
-    vault = _vault;
     _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
     transferOwnership(_owner);
   }
@@ -122,6 +130,23 @@ contract RewardHandler is Ownable, AccessControl, ReentrancyGuard, Pausable {
       "RewardHandler::OnlyVault: not calling from vault"
     );
     _;
+  }
+  
+    /**
+   * @notice Sets the Vault
+   * @param _vault address of the Vault contract
+   * @dev Only vaultSetter can call it and it can only be called once
+   */
+  function setVault(address _vault) public {
+      require(msg.sender == vaultSetter, "RewardHandler::setVault: Not allowed to set the vault");
+      require(vaultTracker == false, "RewardHandler::setVault: Vault has already been set");
+      require(_vault != address(0), "RewardHandler::setVault: Vault can't be zero address");
+      
+      vaultTracker = true;
+      
+      vault = _vault;
+      
+      emit VaultSet(vaultSetter, _vault);
   }
 
   /// @notice Returns the total amount of dVIX tokens minted and getting reward on this vault.

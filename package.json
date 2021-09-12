@@ -74,6 +74,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
     "solc": "^0.7.5",
+    "solhint": "^3.3.6",
     "solidity-coverage": "^0.7.16",
     "solidity-docgen": "^0.5.13",
     "source-map-support": "^0.5.19",

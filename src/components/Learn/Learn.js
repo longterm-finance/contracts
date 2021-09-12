@@ -41,8 +41,8 @@ const Learn = () => {
           volatility.
         </p>
         <p className="what-is-avix-desc">
-          dVIX is <strong>safely overcollateralized by at least 300%,</strong>{" "}
-          using crypto assets such as AVAX, WETH, WBTC, DAI and USDT.
+          dVIX is <strong>safely overcollateralized by at least 300%.</strong>{" "}
+          Collateral options include AVAX, WETH and DAI.
         </p>
         <p className="what-is-avix-desc">
           {" "}
@@ -77,7 +77,7 @@ const Learn = () => {
           isDarkMode ? "learn-card-dark-mode" : "learn-card"
         }`}
       >
-        <h2 className="video-title mb-4">Intro to Avix Finance</h2>
+        <h2 className="video-title mb-4">Getting Started with Avix </h2>
         <iframe
           src="https://www.youtube.com/embed/NpEaa2P7qZI"
           title="YouTube Video Player"

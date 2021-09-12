@@ -41,3 +41,4 @@ coverage.json
 /scripts/run.md
 truffle-config.js
 /migrations
+/contracts/oracles/VIXOracle.sol
