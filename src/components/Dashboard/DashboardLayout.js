@@ -1,52 +1,52 @@
-import React, { useState, useContext } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import { useMediaQuery } from 'react-responsive'
-import './dashboard.css'
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import List from '@material-ui/core/List'
-import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import Button from '@material-ui/core/Button'
-import transparentPNGLogo from '../../assets/images/logo_transparent_bg.png'
-import vaultIcon from '../../assets/images/vault.svg'
-import whiteVaultIcon from '../../assets/images/vault_white.svg'
-import greyVaultIcon from '../../assets/images/vault_grey.svg'
-import { Modal } from 'semantic-ui-react'
-import { ThemeContext } from '../../state/ThemeContext'
+import React, { useState, useContext } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import "./dashboard.css";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import List from "@material-ui/core/List";
+import clsx from "clsx";
+import { makeStyles } from "@material-ui/core/styles";
+import MenuIcon from "@material-ui/icons/Menu";
+import Button from "@material-ui/core/Button";
+import transparentPNGLogo from "../../assets/images/logo_transparent_bg.png";
+import vaultIcon from "../../assets/images/vault.svg";
+import whiteVaultIcon from "../../assets/images/vault_white.svg";
+import greyVaultIcon from "../../assets/images/vault_grey.svg";
+import { Modal } from "semantic-ui-react";
+import { ThemeContext } from "../../state/ThemeContext";
 
 const DashboardLayout = () => {
-  const { switchTheme, isDarkMode } = useContext(ThemeContext)
+  const { switchTheme, isDarkMode } = useContext(ThemeContext);
 
   let active = 0x000000000000000000000000000000000000000000000000000000000000000000000000
     ? true
-    : false
+    : false;
 
-  const [toggleAccountModal, setToggleAccountModal] = useState(false)
-  const [mouseOverCopy, setMouseOverCopy] = useState()
-  const [copyAddressClicked, setCopyAddressClicked] = useState(false)
+  const [toggleAccountModal, setToggleAccountModal] = useState(false);
+  const [mouseOverCopy, setMouseOverCopy] = useState();
+  const [copyAddressClicked, setCopyAddressClicked] = useState(false);
 
-  const openAccountModal = () => setToggleAccountModal(true)
-  const closeAccountModal = () => setToggleAccountModal(false)
+  const openAccountModal = () => setToggleAccountModal(true);
+  const closeAccountModal = () => setToggleAccountModal(false);
 
-  const onMouseOver = () => setMouseOverCopy(true)
-  const onMouseOut = () => setMouseOverCopy(false)
+  const onMouseOver = () => setMouseOverCopy(true);
+  const onMouseOut = () => setMouseOverCopy(false);
 
   const copyAddress = () => {
-    const el = document.createElement('input')
-    el.value = 0x000000000000000000000000000000000000000000000000000000000000000000000000
-    document.body.appendChild(el)
-    el.select()
-    document.execCommand('copy')
-    document.body.removeChild(el)
-  }
+    const el = document.createElement("input");
+    el.value = 0x000000000000000000000000000000000000000000000000000000000000000000000000;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+  };
 
   const onCopyAddressClicked = () => {
-    setCopyAddressClicked(true)
-    setTimeout(() => setCopyAddressClicked(false), 2000)
-  }
+    setCopyAddressClicked(true);
+    setTimeout(() => setCopyAddressClicked(false), 2000);
+  };
 
-  const mobileHeader = useMediaQuery({ query: '(max-width: 992px)' })
+  const mobileHeader = useMediaQuery({ query: "(max-width: 992px)" });
 
   const Navbar = () => {
     const MoonIcon = () => {
@@ -56,7 +56,7 @@ const DashboardLayout = () => {
           width="20"
           height="20"
           viewBox="0 0 24 24"
-          fill={isDarkMode ? 'none' : '#000'}
+          fill={isDarkMode ? "none" : "#000"}
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
@@ -64,8 +64,8 @@ const DashboardLayout = () => {
         >
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
-      )
-    }
+      );
+    };
 
     const SunIcon = () => {
       return (
@@ -90,72 +90,72 @@ const DashboardLayout = () => {
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
-      )
-    }
+      );
+    };
 
     const ModeSwitcher = () => {
       return (
-        <span className={!mobileHeader && 'ml-2 mr-3'}>
+        <span className={!mobileHeader && "ml-2 mr-3"}>
           <button
             type="button"
             onClick={switchTheme}
-            className={`mode-switcher ${!isDarkMode && 'mode-switcher-moon'} ${
-              mobileHeader && 'ml-3'
+            className={`mode-switcher ${!isDarkMode && "mode-switcher-moon"} ${
+              mobileHeader && "ml-3"
             }`}
           >
             {isDarkMode ? <SunIcon /> : <MoonIcon />}
           </button>
         </span>
-      )
-    }
+      );
+    };
 
     const useStyles = makeStyles({
       list: {
         width: 250,
       },
       fullList: {
-        width: 'auto',
+        width: "auto",
       },
-    })
+    });
 
     function SwipeableTemporaryDrawer() {
-      const classes = useStyles()
+      const classes = useStyles();
       const [state, setState] = useState({
         top: false,
         left: false,
         bottom: false,
         right: false,
-      })
+      });
 
       const toggleDrawer = (anchor, open) => (event) => {
         if (
           event &&
-          event.type === 'keydown' &&
-          (event.key === 'Tab' || event.key === 'Shift')
+          event.type === "keydown" &&
+          (event.key === "Tab" || event.key === "Shift")
         ) {
-          return
+          return;
         }
 
-        setState({ ...state, [anchor]: open })
-      }
+        setState({ ...state, [anchor]: open });
+      };
 
       const list = (anchor) => (
         <div
           className={clsx(classes.list, {
-            [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+            [classes.fullList]: anchor === "top" || anchor === "bottom",
           })}
           role="presentation"
           onClick={toggleDrawer(anchor, false)}
           onKeyDown={toggleDrawer(anchor, false)}
           style={{
-            backgroundColor: isDarkMode && '#191b1f',
-            paddingBottom: isDarkMode && mobileHeader && '250vw',
+            backgroundColor: isDarkMode && "#191b1f",
+            paddingBottom: isDarkMode && mobileHeader && "250vw",
           }}
         >
           <List className="mobile-menu">
             <Link
               to="/"
-              className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
+              className={`nav-link ${isDarkMode && "nav-link-dark-mode"}`}
             >
               <img
                 src={isDarkMode ? whiteVaultIcon : vaultIcon}
@@ -170,45 +170,45 @@ const DashboardLayout = () => {
             </Link>
             <Link
               to="/trade"
-              className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
+              className={`nav-link ${isDarkMode && "nav-link-dark-mode"}`}
             >
-              <i className="fas fa-sync-alt" />{' '}
+              <i className="fas fa-sync-alt" />{" "}
               <span className="mobile-menu-tab-name">Trade</span>
             </Link>
             <Link
               to="/pool"
-              className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
+              className={`nav-link ${isDarkMode && "nav-link-dark-mode"}`}
             >
-              <i className="fas fa-swimming-pool" />{' '}
+              <i className="fas fa-swimming-pool" />{" "}
               <span className="mobile-menu-tab-name">Pool</span>
             </Link>
             <Link
               to="/farm"
-              className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
+              className={`nav-link ${isDarkMode && "nav-link-dark-mode"}`}
             >
-              <i className="fas fa-tractor" />{' '}
+              <i className="fas fa-tractor" />{" "}
               <span className="mobile-menu-tab-name">Farm</span>
             </Link>
             <Link
               to="/nft"
-              className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
+              className={`nav-link ${isDarkMode && "nav-link-dark-mode"}`}
             >
-              <i className="fas fa-shapes" />{' '}
+              <i className="fas fa-shapes" />{" "}
               <span className="mobile-menu-tab-name">Collectibles</span>
             </Link>
             {/*  eslint-disable-next-line */}
             <a
               // ADD LATER: target="_blank"
-              // REPLACE LATER: https://gov.avix.finance
+              // REPLACE LATER: https://app.avix.finance/gov
               rel="noreferrer"
               // eslint-disable-next-line
               href="javascript:void(0)"
               className={`nav-link ${
-                isDarkMode && 'nav-link-dark-mode'
+                isDarkMode && "nav-link-dark-mode"
               } disabled-link`}
             >
               {/* REMOVE THE "disabled-link" CLASSNAME LATER */}
-              <i className="fas fa-bullhorn" />{' '}
+              <i className="fas fa-bullhorn" />{" "}
               <span className="mobile-menu-tab-name">
                 {/* REPLACE LATER: Governance */}
                 Vote (SOON)
@@ -217,16 +217,16 @@ const DashboardLayout = () => {
             {/*  eslint-disable-next-line */}
             <a
               // ADD LATER: target="_blank"
-              // REPLACE LATER: https://stats.avix.finance
+              // REPLACE LATER: https://app.avix.finance/stats
               rel="noreferrer"
               // eslint-disable-next-line
               href="javascript:void(0)"
               className={`nav-link ${
-                isDarkMode && 'nav-link-dark-mode'
+                isDarkMode && "nav-link-dark-mode"
               } disabled-link`}
             >
               {/* REMOVE THE "disabled-link" CLASSNAME LATER */}
-              <i className="fas fa-chart-line" />{' '}
+              <i className="fas fa-chart-line" />{" "}
               <span className="mobile-menu-tab-name">
                 {/* REPLACE LATER: Stats */}
                 Stats (SOON)
@@ -234,9 +234,9 @@ const DashboardLayout = () => {
             </a>
             <Link
               to="/learn"
-              className={`nav-link ${isDarkMode && 'nav-link-dark-mode'}`}
+              className={`nav-link ${isDarkMode && "nav-link-dark-mode"}`}
             >
-              <i className="fas fa-book-open" />{' '}
+              <i className="fas fa-book-open" />{" "}
               <span className="mobile-menu-tab-name">Learn</span>
             </Link>
           </List>
@@ -247,10 +247,10 @@ const DashboardLayout = () => {
                 className="btn regular-btn mt-3 bold"
                 type="button"
                 style={{
-                  marginLeft: '22px',
-                  fontWeight: 'bold',
-                  height: '50px',
-                  fontSize: '1.125em',
+                  marginLeft: "22px",
+                  fontWeight: "bold",
+                  height: "50px",
+                  fontSize: "1.125em",
                 }}
               >
                 Connect Wallet
@@ -258,29 +258,29 @@ const DashboardLayout = () => {
             </List>
           }
         </div>
-      )
+      );
 
       const styles = {
         largeIcon: {
           width: 35,
           height: 35,
-          position: 'relative',
+          position: "relative",
           bottom: 3,
         },
-      }
+      };
 
       return (
         <div>
-          {['right'].map((anchor) => (
+          {["right"].map((anchor) => (
             <React.Fragment key={anchor}>
               <Button
-                style={{ backgroundColor: isDarkMode ? '#191b1f' : '#fafbfd' }}
+                style={{ backgroundColor: isDarkMode ? "#191b1f" : "#fafbfd" }}
                 onClick={toggleDrawer(anchor, true)}
               >
                 <MenuIcon style={styles.largeIcon} className="menu-icon" />
               </Button>
               <SwipeableDrawer
-                anchor={'right'}
+                anchor={"right"}
                 open={state[anchor]}
                 onClose={toggleDrawer(anchor, false)}
                 onOpen={toggleDrawer(anchor, true)}
@@ -290,11 +290,11 @@ const DashboardLayout = () => {
             </React.Fragment>
           ))}
         </div>
-      )
+      );
     }
 
     return (
-      <nav className={`navbar ${isDarkMode && 'navbar-dark-mode'}`}>
+      <nav className={`navbar ${isDarkMode && "navbar-dark-mode"}`}>
         {!mobileHeader ? (
           <React.Fragment>
             <div className="logo">
@@ -312,12 +312,12 @@ const DashboardLayout = () => {
                 className="btn regular-btn mr-4"
                 type="button"
                 style={{
-                  fontWeight: 'bold',
-                  height: '50px',
-                  fontSize: '1.125em',
+                  fontWeight: "bold",
+                  height: "50px",
+                  fontSize: "1.125em",
                 }}
                 onClick={() => {
-                  console.log('Connect Wallet button clicked')
+                  console.log("Connect Wallet button clicked");
                 }}
               >
                 Connect Wallet
@@ -327,22 +327,22 @@ const DashboardLayout = () => {
             <Modal size="mini" open={false} onClose={false}>
               <Modal.Header
                 className="text-center bold"
-                style={{ fontSize: '1.75em' }}
+                style={{ fontSize: "1.75em" }}
               >
                 Account
               </Modal.Header>
               <Modal.Content
                 className="text-center bold"
-                style={{ fontSize: '1.15em' }}
+                style={{ fontSize: "1.15em" }}
               >
                 {active && (
                   <React.Fragment>
                     <i
                       class="far fa-check-circle"
                       style={{
-                        color: 'green',
+                        color: "green",
                       }}
-                    />{' '}
+                    />{" "}
                     Connected with MetaMask
                   </React.Fragment>
                 )}
@@ -352,12 +352,12 @@ const DashboardLayout = () => {
                   className="btn btn-link light-btn border-rad-05 dark-text"
                   type="button"
                   style={{
-                    fontWeight: 'bold',
-                    border: '1.5px solid #e84142',
+                    fontWeight: "bold",
+                    border: "1.5px solid #e84142",
                   }}
                   onClick={() => {
-                    copyAddress()
-                    onCopyAddressClicked()
+                    copyAddress();
+                    onCopyAddressClicked();
                   }}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut}
@@ -370,9 +370,9 @@ const DashboardLayout = () => {
                     <i
                       class="far fa-check-circle"
                       style={{
-                        color: 'green',
+                        color: "green",
                       }}
-                    />{' '}
+                    />{" "}
                     Address Copied!
                   </span>
                 )}
@@ -382,8 +382,8 @@ const DashboardLayout = () => {
                   className="btn light-btn mt-3 mb-4 mr-3 border-rad-05 dark-text"
                   type="button"
                   style={{
-                    fontWeight: 'bold',
-                    border: '1.5px solid #e84142',
+                    fontWeight: "bold",
+                    border: "1.5px solid #e84142",
                   }}
                 >
                   <a
@@ -391,7 +391,7 @@ const DashboardLayout = () => {
                     rel="noreferrer"
                     href={`https://cchain.explorer.avax.network/address/${0x000000000000000000000000000000000000000000000000000000000000000000000000}`}
                     className="bold"
-                    style={{ color: '#000' }}
+                    style={{ color: "#000" }}
                   >
                     View on Explorer
                   </a>
@@ -401,11 +401,11 @@ const DashboardLayout = () => {
                   className="btn light-btn mt-3 mb-4 border-rad-05 dark-text"
                   type="button"
                   style={{
-                    fontWeight: 'bold',
-                    border: '1.5px solid #e84142',
+                    fontWeight: "bold",
+                    border: "1.5px solid #e84142",
                   }}
                   onClick={() => {
-                    console.log('Disconnect Wallet button clicked')
+                    console.log("Disconnect Wallet button clicked");
                   }}
                 >
                   Disconnect
@@ -418,7 +418,7 @@ const DashboardLayout = () => {
             <div
               className="logo"
               style={{
-                position: 'relative',
+                position: "relative",
                 right: 25,
               }}
             >
@@ -428,9 +428,9 @@ const DashboardLayout = () => {
                   src={transparentPNGLogo}
                   alt="Avix Logo"
                   style={{
-                    margin: 'auto',
-                    position: 'relative',
-                    right: '20',
+                    margin: "auto",
+                    position: "relative",
+                    right: "20",
                   }}
                 />
               </Link>
@@ -439,30 +439,30 @@ const DashboardLayout = () => {
           </React.Fragment>
         )}
       </nav>
-    )
-  }
+    );
+  };
 
   class SidebarItem extends React.Component {
     handleClick = () => {
-      const { path, onItemClick } = this.props
-      onItemClick(path)
-    }
+      const { path, onItemClick } = this.props;
+      onItemClick(path);
+    };
 
     render() {
-      const { active } = this.props
+      const { active } = this.props;
       return (
         <React.Fragment>
-          {this.props.path[0] === '/' ? (
+          {this.props.path[0] === "/" ? (
             <Link
               active={active}
               className={`pt-4 ${
-                active ? 'sidebar-item-active' : 'sidebar-item'
+                active ? "sidebar-item-active" : "sidebar-item"
               } ${this.props.css}`}
               to={this.props.path}
               onClick={this.handleClick}
-              style={{ color: active ? '#fff' : '#b8b4b4' }}
+              style={{ color: active ? "#fff" : "#b8b4b4" }}
             >
-              {this.props.path === '/' && (
+              {this.props.path === "/" && (
                 <img
                   src={active ? whiteVaultIcon : greyVaultIcon}
                   alt="Vault"
@@ -476,8 +476,8 @@ const DashboardLayout = () => {
               <span
                 className="sidebar-tab-name"
                 style={{
-                  position: this.props.path === '/' && 'relative',
-                  top: this.props.path === '/' && '1.5px',
+                  position: this.props.path === "/" && "relative",
+                  top: this.props.path === "/" && "1.5px",
                 }}
               >
                 {this.props.name}
@@ -490,89 +490,89 @@ const DashboardLayout = () => {
               href={this.props.path}
               active={active}
               className={`pt-4 ${
-                active ? 'sidebar-item-active' : 'sidebar-item'
+                active ? "sidebar-item-active" : "sidebar-item"
               } ${this.props.css}
                 disabled-link
               `} // REMOVE THE "disabled-link" CLASSNAME LATER
               onClick={this.handleClick}
-              style={{ color: active ? '#fff' : '#b8b4b4' }}
+              style={{ color: active ? "#fff" : "#b8b4b4" }}
             >
               <span className="sidebar-tab-name">{this.props.name}</span>
             </a>
           )}
         </React.Fragment>
-      )
+      );
     }
   }
 
   class Sidebar extends React.Component {
     constructor(props) {
-      super(props)
+      super(props);
       this.state = {
         activePath: props.location.pathname,
         items: [
           {
-            path: '/',
-            name: 'Vaults',
-            css: 'fas vault',
+            path: "/",
+            name: "Vaults",
+            css: "fas vault",
             key: Math.random(),
           },
           {
-            path: '/trade',
-            name: 'Trade',
-            css: 'fas fa-sync-alt',
+            path: "/trade",
+            name: "Trade",
+            css: "fas fa-sync-alt",
             key: Math.random() + 1,
           },
           {
-            path: '/pool',
-            name: 'Pool',
-            css: 'fas fa-swimming-pool',
+            path: "/pool",
+            name: "Pool",
+            css: "fas fa-swimming-pool",
             key: Math.random() + 2,
           },
           {
-            path: '/farm',
-            name: 'Farm',
-            css: 'fas fa-tractor',
+            path: "/farm",
+            name: "Farm",
+            css: "fas fa-tractor",
             key: Math.random() + 3,
           },
           {
-            path: '/nft',
-            name: 'Collectibles',
-            css: 'fas fa-shapes',
+            path: "/nft",
+            name: "Collectibles",
+            css: "fas fa-shapes",
             key: Math.random() + 4,
           },
           {
             // eslint-disable-next-line
-            path: 'javascript:void(0)', // REPLACE LATER: https://gov.avix.finance
-            name: 'Vote (SOON)', // REPLACE LATER: Governance
-            css: 'fas fa-bullhorn',
+            path: "javascript:void(0)", // REPLACE LATER: https://app.avix.finance/gov
+            name: "Vote (SOON)", // REPLACE LATER: Governance
+            css: "fas fa-bullhorn",
             key: Math.random() + 5,
           },
           {
             // eslint-disable-next-line
-            path: 'javascript:void(0 + 0)', // REPLACE LATER: https://stats.avix.finance
-            name: 'Stats (SOON)', // REPLACE LATER: Stats
-            css: 'fas fa-chart-line',
+            path: "javascript:void(0 + 0)", // REPLACE LATER: https://app.avix.finance/stats
+            name: "Stats (SOON)", // REPLACE LATER: Stats
+            css: "fas fa-chart-line",
             key: Math.random() + 6,
           },
           {
-            path: '/learn',
-            name: 'Learn',
-            css: 'fas fa-book-open',
+            path: "/learn",
+            name: "Learn",
+            css: "fas fa-book-open",
             key: Math.random() + 7,
           },
         ],
-      }
+      };
     }
 
     onItemClick = (path) => {
-      this.setState({ activePath: path })
-    }
+      this.setState({ activePath: path });
+    };
 
     render() {
-      const { items, activePath } = this.state
+      const { items, activePath } = this.state;
       return (
-        <div className={isDarkMode ? 'sidebar sidebar-dark-mode' : 'sidebar'}>
+        <div className={isDarkMode ? "sidebar sidebar-dark-mode" : "sidebar"}>
           {items.map((item) => {
             return (
               <SidebarItem
@@ -583,21 +583,21 @@ const DashboardLayout = () => {
                 active={item.path === activePath}
                 key={item.key}
               />
-            )
+            );
           })}
         </div>
-      )
+      );
     }
   }
 
-  const RouterSidebar = withRouter(Sidebar)
+  const RouterSidebar = withRouter(Sidebar);
 
   return (
     <div className="dashboard-layout">
       <Navbar />
       {!mobileHeader && <RouterSidebar />}
     </div>
-  )
-}
+  );
+};
 
-export default DashboardLayout
+export default DashboardLayout;

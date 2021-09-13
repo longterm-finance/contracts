@@ -42,3 +42,4 @@ coverage.json
 truffle-config.js
 /migrations
 /contracts/oracles/VIXOracle.sol
+/contracts/utils/chainlink/CustomOracleInterface.sol
