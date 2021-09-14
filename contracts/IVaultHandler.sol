@@ -63,7 +63,7 @@ abstract contract IVaultHandler is
   /// @notice VIX Oracle Address
   ChainlinkOracle public immutable vixOracle;
 
-  /// @notice Collateral Token Address (e.g. DAI)
+  /// @notice Collateral Token Address (e.g. WETH or DAI)
   IERC20 public immutable collateralContract;
 
   /// @notice Collateral/USD Oracle Address 
@@ -100,10 +100,10 @@ abstract contract IVaultHandler is
   uint256 public constant oracleDigits = 10000000000;
 
   /// @notice Minimum value that the ratio can be set to
-  uint256 public constant MIN_RATIO = 110;
+  uint256 public constant MIN_RATIO = 105;
 
   /// @notice Maximum value that the burn fee can be set to
-  uint256 public constant MAX_FEE = 20;
+  uint256 public constant MAX_FEE = 25;
 
   /**
    * @dev the computed interface ID according to ERC-165. The interface ID is a XOR of interface method selectors.
@@ -608,29 +608,6 @@ abstract contract IVaultHandler is
     return (vault.Id, vault.Collateral, vault.Owner, vault.Debt);
   }
 
-  // todo:
-  // 1.) Replace pseudo code with the real code (NOTE: config for the Avalanche Fuji testnet)
-  // 2.) Test it with the CUSTOM LINK/USD Oracle && DEFAULT LINK/USD Oracle to see if the performance is the same 
-
-  function setOracleType(string memory _vixOracleType) public {
-    require(msg.sender == changerAddress, "Not a changer address");
-    require(_vixOracleType == "DEFAULT" || "CUSTOM", "Not a valid type");
-    vixOracleType = _vixOracleType;
-  }
-
-  function CUSTOM_getVIXOraclePrice(CustomOracle _vixOracle) public view virtual returns (uint256 price) {
-    // Write
-    _vixOracle.requestVIXPriceUpdate();
-
-    // Read
-    price = _vixOracle.getLatestAnswer().toUint256().mul(oracleDigits);
-  }
-
-  function CUSTOM_DVIXPrice() public view virtual returns (uint256 price) {  /// OLD FUNCTION
-    uint256 vixPrice = getVIXOraclePrice(_vixOracle); // _vixOracle is a global variable
-    price = vixPrice.div(divisor);
-  }
-
   /**
    * @notice Returns the price of the chainlink oracle multiplied by the digits to get 18 decimals format
    * @param _oracle to be the price called
@@ -658,16 +635,6 @@ abstract contract IVaultHandler is
   function DVIXPrice() public view virtual returns (uint256 price) {
     uint256 vixPrice = getOraclePrice(vixOracle);
     price = vixPrice.div(divisor);
-  }
-
-  function DVIXPrice_EXP() public view virtual returns (uint256 price) {
-    if (oracleType == "DEFAULT") {
-      uint256 vixPrice = getOraclePrice(vixOracle); // read
-      price = vixPrice.div(divisor);
-    } else if (oracleType == "CUSTOM") {
-      uint256 vixPrice = getVIXOraclePrice(_vixOracle); // write  + read
-      price = vixPrice.div(divisor);
-    }
   }
 
   /**
