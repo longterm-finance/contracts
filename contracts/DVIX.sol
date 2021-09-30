@@ -107,8 +107,8 @@ contract DVIX is ERC20, Ownable, IERC165 {
    * @dev Only orchestratorSetter can call it and it can only be called once
    */
   function setOrchestrator(Orchestrator _orchestrator) public {
-    require(msg.sender == orchestratorSetter, "dVIX::setOrchestrator: Not allowed to set the orchestrator");
-    require(orchestratorTracker == false, "dVIX::setOrchestrator: Orchestrator has already been set");
+    require(msg.sender == orchestratorSetter, "dVIX::setOrchestrator: not allowed to set the orchestrator");
+    require(orchestratorTracker == false, "dVIX::setOrchestrator: orchestrator has already been set");
       
     orchestratorTracker = true;
       
@@ -116,7 +116,6 @@ contract DVIX is ERC20, Ownable, IERC165 {
     transferOwnership(address(_orchestrator));
     
     orchestrator = _orchestrator;
-    
     emit OrchestratorSet(orchestratorSetter, _orchestrator);
   }
 

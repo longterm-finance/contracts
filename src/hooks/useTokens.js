@@ -1,30 +1,30 @@
 import { useState, useCallback } from "react";
 
 export const useTokens = () => {
-  const [avaxToken, setAVAXToken] = useState();
+  const [wavaxToken, setWAVAXToken] = useState();
   const [wethToken, setETHToken] = useState();
   const [daiToken, setDAIToken] = useState();
   const [dvixToken, setDVIXToken] = useState();
   const [avixToken, setAvixToken] = useState();
 
-  const [avaxPoolToken, setAVAXPoolToken] = useState(); // dVIX/WAVAX LP Token
+  const [wavaxPoolToken, setWAVAXPoolToken] = useState(); // dVIX/WAVAX LP Token
   const [wethPoolToken, setWETHPoolToken] = useState(); // dVIX/WETH LP Token
   const [daiPoolToken, setDAIPoolToken] = useState(); // dVIX/DAI LP Token
   const [avixPoolToken, setAVIXPoolToken] = useState(); // AVIX/WAVAX LP Token (initial liquidity IDO pair)
 
-  const [avaxTokenRead, setAVAXTokenRead] = useState();
+  const [wavaxTokenRead, setWAVAXTokenRead] = useState();
   const [wethTokenRead, setETHTokenRead] = useState();
   const [daiTokenRead, setDAITokenRead] = useState();
   const [dvixTokenRead, setDVIXTokenRead] = useState();
   const [avixTokenRead, setAvixTokenRead] = useState();
 
-  const [avaxPoolTokenRead, setAVAXPoolTokenRead] = useState(); // dVIX/WAVAX LP Token
+  const [wavaxPoolTokenRead, setWAVAXPoolTokenRead] = useState(); // dVIX/WAVAX LP Token
   const [wethPoolTokenRead, setWETHPoolTokenRead] = useState(); // dVIX/WETH LP Token
   const [daiPoolTokenRead, setDAIPoolTokenRead] = useState(); // dVIX/DAI LP Token
   const [avixPoolTokenRead, setAVIXPoolTokenRead] = useState(); // AVIX/WAVAX LP Token (initial liquidity IDO pair)
 
-  const setCurrentAVAXToken = useCallback((currentAVAXToken) => {
-    setAVAXToken(currentAVAXToken);
+  const setCurrentWAVAXToken = useCallback((currentWAVAXToken) => {
+    setWAVAXToken(currentWAVAXToken);
   }, []);
   const setCurrentWETHToken = useCallback((currentWETHToken) => {
     setETHToken(currentWETHToken);
@@ -39,8 +39,8 @@ export const useTokens = () => {
     setAvixToken(currentAvix);
   }, []);
 
-  const setCurrentAVAXPoolToken = useCallback((currentAVAXPoolToken) => {
-    setAVAXPoolToken(currentAVAXPoolToken);
+  const setCurrentWAVAXPoolToken = useCallback((currentWAVAXPoolToken) => {
+    setWAVAXPoolToken(currentWAVAXPoolToken);
   }, []);
   const setCurrentWETHPoolToken = useCallback((currentWETHPoolToken) => {
     setWETHPoolToken(currentWETHPoolToken);
@@ -52,8 +52,8 @@ export const useTokens = () => {
     setAVIXPoolToken(currentAVIXPoolToken);
   }, []);
 
-  const setCurrentAVAXTokenRead = useCallback((currentAVAXTokenRead) => {
-    setAVAXTokenRead(currentAVAXTokenRead);
+  const setCurrentWAVAXTokenRead = useCallback((currentWAVAXTokenRead) => {
+    setWAVAXTokenRead(currentWAVAXTokenRead);
   }, []);
   const setCurrentWETHTokenRead = useCallback((currentWETHTokenRead) => {
     setETHTokenRead(currentWETHTokenRead);
@@ -68,9 +68,9 @@ export const useTokens = () => {
     setAvixTokenRead(currentAvixRead);
   }, []);
 
-  const setCurrentAVAXPoolTokenRead = useCallback(
-    (currentAVAXPoolTokenRead) => {
-      setAVAXPoolTokenRead(currentAVAXPoolTokenRead);
+  const setCurrentWAVAXPoolTokenRead = useCallback(
+    (currentWAVAXPoolTokenRead) => {
+      setWAVAXPoolTokenRead(currentWAVAXPoolTokenRead);
     },
     []
   );
@@ -91,8 +91,8 @@ export const useTokens = () => {
   );
 
   return {
-    avaxToken,
-    setCurrentAVAXToken,
+    wavaxToken,
+    setCurrentWAVAXToken,
     wethToken,
     setCurrentWETHToken,
     daiToken,
@@ -101,16 +101,16 @@ export const useTokens = () => {
     setCurrentDVIXToken,
     avixToken,
     setCurrentAvixToken,
-    avaxPoolToken,
-    setCurrentAVAXPoolToken,
+    wavaxPoolToken,
+    setCurrentWAVAXPoolToken,
     wethPoolToken,
     setCurrentWETHPoolToken,
     daiPoolToken,
     setCurrentDAIPoolToken,
     avixPoolToken,
     setCurrentAVIXPoolToken,
-    avaxTokenRead,
-    setCurrentAVAXTokenRead,
+    wavaxTokenRead,
+    setCurrentWAVAXTokenRead,
     wethTokenRead,
     setCurrentWETHTokenRead,
     daiTokenRead,
@@ -125,7 +125,7 @@ export const useTokens = () => {
     setCurrentDAIPoolTokenRead,
     avixPoolTokenRead,
     setCurrentAVIXPoolTokenRead,
-    avaxPoolTokenRead,
-    setCurrentAVAXPoolTokenRead,
+    wavaxPoolTokenRead,
+    setCurrentWAVAXPoolTokenRead,
   };
 };

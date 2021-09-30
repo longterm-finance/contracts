@@ -59,7 +59,7 @@
 .premium-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 40px;
 }
 
 @media screen and (max-width: 1265px) {
@@ -83,7 +83,7 @@
 }
 
 .nft-card {
-  height: 530px;
+  height: 460px;
   width: 85% !important;
   box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
   border-radius: 10px;
@@ -107,13 +107,13 @@
 @media screen and (max-width: 390px) {
   .nft-card,
   .nft-card-dark-mode {
-    height: 555px !important;
+    height: 485px !important;
     margin-left: 2.5% !important;
   }
 }
 
 .nft-card-dark-mode {
-  height: 530px;
+  height: 460px;
   width: 85% !important;
   box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%);
   border-radius: 10px;
@@ -141,7 +141,7 @@
 }
 
 .nft-image {
-  height: 410px;
+  height: 340px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -193,7 +193,7 @@
 @media screen and (max-width: 390px) {
   .exclusive-nft {
     margin-left: 2.5% !important;
-    height: 555px !important;
+    height: 485px !important;
   }
 }
 

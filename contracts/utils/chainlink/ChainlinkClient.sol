@@ -23,7 +23,9 @@ contract ChainlinkClient {
   uint256 constant private OPERATOR_ARGS_VERSION = 2;
   bytes32 constant private ENS_TOKEN_SUBNAME = keccak256("link");
   bytes32 constant private ENS_ORACLE_SUBNAME = keccak256("oracle");
-  address constant private LINK_TOKEN_POINTER = 0xC89bD4E1632D3A43CB03AAAd5262cbe4038Bc571;
+  // mainnet LINK.e address: 0x350a791Bfc2C21F9Ed5d10980Dad2e2638ffa7f6
+  // testnet LINK.e address: 0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846
+  address constant private LINK_TOKEN_POINTER = 0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846; 
 
   ENSInterface private ens;
   bytes32 private ensNode;

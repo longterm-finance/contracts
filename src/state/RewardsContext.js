@@ -1,20 +1,20 @@
 import React from "react";
 
 export const REWARDS_DEFAULT_VALUE = {
-  setCurrentAVAXReward: () => {},
+  setCurrentWAVAXReward: () => {},
   setCurrentWETHReward: () => {},
   setCurrentDAIReward: () => {},
 
-  setCurrentAVAXPoolReward: () => {},
+  setCurrentWAVAXPoolReward: () => {},
   setCurrentWETHPoolReward: () => {},
   setCurrentDAIPoolReward: () => {},
   setCurrentAVIXPoolReward: () => {},
 
-  setCurrentAVAXRewardRead: () => {},
+  setCurrentWAVAXRewardRead: () => {},
   setCurrentWETHRewardRead: () => {},
   setCurrentDAIRewardRead: () => {},
 
-  setCurrentAVAXPoolRewardRead: () => {},
+  setCurrentWAVAXPoolRewardRead: () => {},
   setCurrentWETHPoolRewardRead: () => {},
   setCurrentDAIPoolRewardRead: () => {},
   setCurrentAVIXPoolRewardRead: () => {},

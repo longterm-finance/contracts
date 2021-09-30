@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./pool.css";
+import { Link } from "react-router-dom";
 import dai from "../../assets/images/dai.png";
 import eth from "../../assets/images/eth.png";
 import avix from "../../assets/images/avix_logo_new.png";
-import dvix from "../../assets/images/dVIX_favicon.png";
+import dvix from "../../assets/images/dvix_logo_new.png";
 import avax from "../../assets/images/avax.png";
 import { ThemeContext } from "../../state/ThemeContext";
 import { ethers } from "ethers";
@@ -254,7 +255,29 @@ const Pool = () => {
       >
         Enabled Pools
       </h1>
+
+      <p
+        className={`text-mute text-center ml-5 mr-5 mb-5 ${
+          isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
+        }`}
+      >
+        As a popular and frequently traded product, dVIX presents{" "}
+        <strong>a very lucrative opportunity for liquidity providers</strong> to
+        earn above average yields. Also, you can further boost your returns by{" "}
+        <strong>
+          depositing your LP tokens into the{" "}
+          <Link to="/farm" style={{ color: "#e84142" }} className="doc-link">
+            Avix Farm
+          </Link>
+          ,
+        </strong>{" "}
+        where you can earn additional rewards in the form of Avix Finance's
+        native governance token (aVIX).
+      </p>
+
       <br />
+      <br />
+
       <div className="trade-grid">
         <PoolCard
           icon1={avix}

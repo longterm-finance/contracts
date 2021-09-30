@@ -1,26 +1,26 @@
 import { useState, useCallback } from "react";
 
 export const useRewards = () => {
-  const [avaxReward, setAVAXReward] = useState();
+  const [wavaxReward, setWAVAXReward] = useState();
   const [wethReward, setWETHReward] = useState();
   const [daiReward, setDAIReward] = useState();
 
-  const [avaxPoolReward, setAVAXPoolReward] = useState();
+  const [wavaxPoolReward, setWAVAXPoolReward] = useState();
   const [wethPoolReward, setWETHPoolReward] = useState();
   const [daiPoolReward, setDAIPoolReward] = useState();
   const [avixPoolReward, setAVIXPoolReward] = useState();
 
-  const [avaxRewardRead, setAVAXRewardRead] = useState();
+  const [wavaxRewardRead, setWAVAXRewardRead] = useState();
   const [wethRewardRead, setWETHRewardRead] = useState();
   const [daiRewardRead, setDAIRewardRead] = useState();
 
-  const [avaxPoolRewardRead, setAVAXPoolRewardRead] = useState();
+  const [wavaxPoolRewardRead, setWAVAXPoolRewardRead] = useState();
   const [wethPoolRewardRead, setWETHPoolRewardRead] = useState();
   const [daiPoolRewardRead, setDAIPoolRewardRead] = useState();
   const [avixPoolRewardRead, setAVIXPoolRewardRead] = useState();
 
-  const setCurrentAVAXReward = useCallback((currentAVAXReward) => {
-    setAVAXReward(currentAVAXReward);
+  const setCurrentWAVAXReward = useCallback((currentWAVAXReward) => {
+    setWAVAXReward(currentWAVAXReward);
   }, []);
   const setCurrentWETHReward = useCallback((currentWETHReward) => {
     setWETHReward(currentWETHReward);
@@ -29,8 +29,8 @@ export const useRewards = () => {
     setDAIReward(currentDAIReward);
   }, []);
 
-  const setCurrentAVAXPoolReward = useCallback((currentAVAXPoolReward) => {
-    setAVAXPoolReward(currentAVAXPoolReward);
+  const setCurrentWAVAXPoolReward = useCallback((currentWAVAXPoolReward) => {
+    setWAVAXPoolReward(currentWAVAXPoolReward);
   }, []);
   const setCurrentWETHPoolReward = useCallback((currentWETHPoolReward) => {
     setWETHPoolReward(currentWETHPoolReward);
@@ -42,8 +42,8 @@ export const useRewards = () => {
     setAVIXPoolReward(currentAVIXPoolReward);
   }, []);
 
-  const setCurrentAVAXRewardRead = useCallback((currentAVAXReward) => {
-    setAVAXRewardRead(currentAVAXReward);
+  const setCurrentWAVAXRewardRead = useCallback((currentWAVAXReward) => {
+    setWAVAXRewardRead(currentWAVAXReward);
   }, []);
   const setCurrentWETHRewardRead = useCallback((currentWETHReward) => {
     setWETHRewardRead(currentWETHReward);
@@ -52,9 +52,12 @@ export const useRewards = () => {
     setDAIRewardRead(currentDAIReward);
   }, []);
 
-  const setCurrentAVAXPoolRewardRead = useCallback((currentAVAXPoolReward) => {
-    setAVAXPoolRewardRead(currentAVAXPoolReward);
-  }, []);
+  const setCurrentWAVAXPoolRewardRead = useCallback(
+    (currentWAVAXPoolReward) => {
+      setWAVAXPoolRewardRead(currentWAVAXPoolReward);
+    },
+    []
+  );
   const setCurrentWETHPoolRewardRead = useCallback((currentWETHPoolReward) => {
     setWETHPoolRewardRead(currentWETHPoolReward);
   }, []);
@@ -66,15 +69,15 @@ export const useRewards = () => {
   }, []);
 
   return {
-    avaxReward,
-    setCurrentAVAXReward,
+    wavaxReward,
+    setCurrentWAVAXReward,
     wethReward,
     setCurrentWETHReward,
     daiReward,
     setCurrentDAIReward,
 
-    avaxPoolReward,
-    setCurrentAVAXPoolReward,
+    wavaxPoolReward,
+    setCurrentWAVAXPoolReward,
     wethPoolReward,
     setCurrentWETHPoolReward,
     daiPoolReward,
@@ -82,15 +85,15 @@ export const useRewards = () => {
     avixPoolReward,
     setCurrentAVIXPoolReward,
 
-    avaxRewardRead,
-    setCurrentAVAXRewardRead,
+    wavaxRewardRead,
+    setCurrentWAVAXRewardRead,
     wethRewardRead,
     setCurrentWETHRewardRead,
     daiRewardRead,
     setCurrentDAIRewardRead,
 
-    avaxPoolRewardRead,
-    setCurrentAVAXPoolRewardRead,
+    wavaxPoolRewardRead,
+    setCurrentWAVAXPoolRewardRead,
     wethPoolRewardRead,
     setCurrentWETHPoolRewardRead,
     daiPoolRewardRead,

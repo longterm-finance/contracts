@@ -39,7 +39,7 @@ contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
   uint256 public rewardRate = 0;
 
   /// @notice How long the rewards lasts, it updates when more rewards are added
-  uint256 public rewardsDuration = 732 days; // ~ 2 years
+  uint256 public rewardsDuration = 1464 days; // ~ 4 years
 
   /// @notice Last time rewards were updated
   uint256 public lastUpdateTime;

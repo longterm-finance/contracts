@@ -26,12 +26,7 @@ const NFT = () => {
         {/* eslint-disable-next-line */}
         <a
           target={!isDisabled && "_blank"}
-          href={
-            isDisabled
-              ? // eslint-disable-next-line
-                "javascript:void(0)"
-              : `https://opensea.io/assets/${buyLink}`
-          }
+          href={`https://opensea.io/assets/${buyLink}`}
           rel="noreferrer"
         >
           <div
@@ -39,6 +34,8 @@ const NFT = () => {
             style={{
               backgroundImage: `url(${nftSrc ? nftSrc : demoImg})`,
               cursor: isDisabled && "not-allowed",
+              backgroundRepeat: isExclusive && "no-repeat",
+              backgroundPosition: isExclusive && "center top",
             }}
           />
         </a>
@@ -141,11 +138,18 @@ const NFT = () => {
           rel="noreferrer community-link-inner"
           style={{ color: "#e84142" }}
         >
-          Twitter
-        </a>
-        !
+          Twitter Page!
+        </a>{" "}
+        <br />
+        <small>
+          <strong>Note: </strong> There will only ever be 10 NFTs as a part of
+          the original Avix NFT collection, and all of them come with 10%
+          royalty on future sales for the art creators (Avix creative team &
+          community members).
+        </small>
       </p>
 
+      <br />
       <br />
 
       <h2
@@ -155,6 +159,22 @@ const NFT = () => {
       >
         Exclusive (One of a Kind)
       </h2>
+
+      <p
+        className={`text-mute text-center ml-5 mr-5 mb-5 ${
+          isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
+        }`}
+      >
+        <strong>The original Avix logo in its full flory,</strong> neatly
+        engraved in the rotating gold coin. Rotation is there to remind us that
+        there's always opportunity to come on top in any market situation and{" "}
+        <strong>turn volatility to our advantage.</strong>
+      </p>
+
+      <br />
+      <br />
+      <br />
+
       <div className="exclusive-container">
         <NFTCard
           name="Golden aVIX Coin"
@@ -170,73 +190,99 @@ const NFT = () => {
       <br />
       <br />
       <br />
+      <br />
 
       <h2
         className={`text-center bold mt-5 mb-5 ${
           isDarkMode ? "collection-title-dark-mode" : "collection-title"
         }`}
       >
-        Premium Edition (Total Supply: 9)
+        Genesis Edition (Total Supply: 9)
       </h2>
+
+      <p
+        className={`text-mute text-center ml-5 mr-5 mb-5 ${
+          isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
+        }`}
+      >
+        <strong>The Avix Genesis Edition of NFTs</strong> represents a great
+        example of newly popularized{" "}
+        <strong>
+          <i>generative art.</i>
+        </strong>{" "}
+        In a nutshell, it's a type of art that's created by machines, not
+        humans, with a predefined set of inputs that are stored on-chain. Each
+        of the below NFTs is{" "}
+        <strong>
+          algorithmically generated to be provably unique in its own way,
+        </strong>{" "}
+        making it virtually impossible for anyone to generate the same one ever
+        again.
+      </p>
+
+      <br />
+      <br />
+      <br />
+
       <div className="premium-container">
         <NFTCard
-          name="3D aVIX Token"
+          name="Genesis NFT #1"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="3D aVIX Token (Light)"
+          name="Genesis NFT #2"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="Premium NFT #3"
+          name="Genesis NFT #3"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="Premium NFT #4"
+          name="Genesis NFT #4"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="Premium NFT #5"
+          name="Genesis NFT #5"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="Premium NFT #6"
+          name="Genesis NFT #6"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="Premium NFT #7"
+          name="Genesis NFT #7"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="Premium NFT #8"
+          name="Genesis NFT #8"
           status="Soon"
           price={25}
           buyLink="0x..."
           isDisabled
         />
         <NFTCard
-          name="Premium NFT #9"
+          name="Genesis NFT #9"
           status="Soon"
           price={25}
           buyLink="0x..."

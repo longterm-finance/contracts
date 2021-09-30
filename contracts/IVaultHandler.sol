@@ -97,7 +97,7 @@ abstract contract IVaultHandler is
   mapping(uint256 => Vault) public vaults;
 
   /// @notice value used to multiply chainlink oracle for handling decimals
-  uint256 public constant oracleDigits = 10000000000;
+  uint256 public constant oracleDigits = 100000000;
 
   /// @notice Minimum value that the ratio can be set to
   uint256 public constant MIN_RATIO = 105;
@@ -139,7 +139,7 @@ abstract contract IVaultHandler is
   );
 
   /// @notice An event emitted when the devAddress is updated
-  event NewDevAddress(address indexed _owner, address _devAddress);
+  event NewDevAddress(address indexed _devAddress, address _newDevAddress);
 
   /// @notice An event emitted when a vault is created
   event VaultCreated(address indexed _owner, uint256 indexed _id);
@@ -310,12 +310,14 @@ abstract contract IVaultHandler is
   }
 
   /**
-   * @notice Sets the devAddress where fees are transfered to
+   * @notice Sets the devAddress where fees charged by the protocol are transfered to
    * @param _devAddress address
-   * @dev Only owner can call it
+   * @dev Only the current devAddress can call it
    */
-  function setDevAddress(address _devAddress) external virtual onlyOwner {
-    devAddress = (_devAddress);
+  function setDevAddress(address _devAddress) public virtual {
+    require(msg.sender == devAddress, "VaultHandler::setDevAddress: this address is not allowed to set the new dev address");
+
+    devAddress = _devAddress;
     emit NewDevAddress(msg.sender, _devAddress);
   }
 

@@ -34,6 +34,7 @@ export const Stake = ({
           currentAddress,
           pool?.address
         );
+
         if (approved.toString() !== "0") {
           setIsApproved(true);
         } else {
@@ -62,7 +63,7 @@ export const Stake = ({
           if (error.code === 4001) {
             errorNotification("Transaction rejected");
           } else {
-            errorNotification("Token not approved");
+            errorNotification("Token not approved yet");
           }
         }
       } else {
@@ -95,73 +96,79 @@ export const Stake = ({
   };
 
   return (
-    <Modal
-      show={show}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      onHide={() => {
-        setStakeText("");
-        onHide();
-      }}
+    <div
+      className={`stake-modal-container ${
+        isDarkMode && "stake-modal-container-dark-mode"
+      }`}
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Stake {poolTitle}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>
-          Current Balance: <b>{balance}</b>
-        </p>
-        <Form>
-          <Form.Group>
-            {isApproved ? (
-              <>
-                <Form.Label>Amount to Stake</Form.Label>
-                <Form.Label className="max">
-                  <a href="/" className="number" onClick={maxStake}>
-                    MAX
-                  </a>
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="0"
-                  className="neon-green"
-                  value={stakeText}
-                  onChange={onChangeStake}
-                />
-              </>
-            ) : (
-              <></>
-            )}
-          </Form.Group>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        {isApproved ? (
-          <>
-            <Button
-              variant="primary"
-              className="neon-highlight"
-              onClick={stakeTokens}
-            >
-              Stake Tokens
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              variant="primary"
-              className="neon-green"
-              onClick={infiniteApproveTokens}
-            >
-              Infinite Approve
-            </Button>
-          </>
-        )}{" "}
-        Tokens
-      </Modal.Footer>
-    </Modal>
+      <Modal
+        show={show}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={() => {
+          setStakeText("");
+          onHide();
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Stake {poolTitle}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            Current Balance: <b>{balance}</b>
+          </p>
+          <Form>
+            <Form.Group>
+              {isApproved ? (
+                <>
+                  <Form.Label>Amount to Stake</Form.Label>
+                  <Form.Label className="max">
+                    <a href="/" className="number" onClick={maxStake}>
+                      MAX
+                    </a>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="0"
+                    className="neon-green"
+                    value={stakeText}
+                    onChange={onChangeStake}
+                  />
+                </>
+              ) : (
+                <></>
+              )}
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          {isApproved ? (
+            <>
+              <Button
+                variant="primary"
+                className="neon-highlight"
+                onClick={stakeTokens}
+              >
+                Stake Tokens
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="primary"
+                className="neon-green"
+                onClick={infiniteApproveTokens}
+              >
+                Approve Staking
+              </Button>
+            </>
+          )}{" "}
+          Tokens
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 };

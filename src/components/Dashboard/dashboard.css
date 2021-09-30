@@ -1,7 +1,7 @@
 /* Navbar */
 
 .navbar {
-  height: 9.75vh;
+  height: 91px;
   width: 100%;
   position: fixed;
   background-color: #fafbfd;
@@ -127,7 +127,7 @@
 
 .slider:before {
   position: absolute;
-  content: '';
+  content: "";
   height: 26px;
   width: 26px;
   left: 4px;

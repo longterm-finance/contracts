@@ -1,18 +1,18 @@
 import { useState, useCallback } from "react";
 
 export const useOracles = () => {
-  const [avaxOracle, setAVAXOracle] = useState();
+  const [wavaxOracle, setWAVAXOracle] = useState();
   const [wethOracle, setETHOracle] = useState();
   const [daiOracle, setDAIOracle] = useState();
   const [dvixOracle, setDVIXOracle] = useState();
 
-  const [avaxOracleRead, setAVAXOracleRead] = useState();
+  const [wavaxOracleRead, setWAVAXOracleRead] = useState();
   const [wethOracleRead, setETHOracleRead] = useState();
   const [daiOracleRead, setDAIOracleRead] = useState();
   const [dvixOracleRead, setDVIXOracleRead] = useState();
 
-  const setCurrentAVAXOracle = useCallback((currentAVAXOracle) => {
-    setAVAXOracle(currentAVAXOracle);
+  const setCurrentWAVAXOracle = useCallback((currentWAVAXOracle) => {
+    setWAVAXOracle(currentWAVAXOracle);
   }, []);
   const setCurrentWETHOracle = useCallback((currentWETHOracle) => {
     setETHOracle(currentWETHOracle);
@@ -24,8 +24,8 @@ export const useOracles = () => {
     setDVIXOracle(currentDVIXOracle);
   }, []);
 
-  const setCurrentAVAXOracleRead = useCallback((currentAVAXOracleRead) => {
-    setAVAXOracleRead(currentAVAXOracleRead);
+  const setCurrentWAVAXOracleRead = useCallback((currentWAVAXOracleRead) => {
+    setWAVAXOracleRead(currentWAVAXOracleRead);
   }, []);
   const setCurrentWETHOracleRead = useCallback((currentWETHOracleRead) => {
     setETHOracleRead(currentWETHOracleRead);
@@ -38,8 +38,8 @@ export const useOracles = () => {
   }, []);
 
   return {
-    avaxOracle,
-    setCurrentAVAXOracle,
+    wavaxOracle,
+    setCurrentWAVAXOracle,
     wethOracle,
     setCurrentWETHOracle,
     daiOracle,
@@ -52,7 +52,7 @@ export const useOracles = () => {
     setCurrentDAIOracleRead,
     dvixOracleRead,
     setCurrentDVIXOracleRead,
-    avaxOracleRead,
-    setCurrentAVAXOracleRead,
+    wavaxOracleRead,
+    setCurrentWAVAXOracleRead,
   };
 };

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import "./dashboard.css";
@@ -14,6 +14,181 @@ import whiteVaultIcon from "../../assets/images/vault_white.svg";
 import greyVaultIcon from "../../assets/images/vault_grey.svg";
 import { Modal } from "semantic-ui-react";
 import { ThemeContext } from "../../state/ThemeContext";
+import Nav from "react-bootstrap/esm/Nav";
+import BSButton from "react-bootstrap/esm/Button"; // BSButton = Bootstrap Button
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
+import Tooltip from "react-bootstrap/esm/Tooltip";
+import { ethers } from "ethers";
+import NumberFormat from "react-number-format";
+import SignerContext from "../../state/SignerContext";
+import { Web3ModalContext } from "../../state/Web3ModalContext";
+import TokensContext from "../../state/TokensContext";
+import { makeShortAddress } from "../../utils/utils";
+import dvix from "../../assets/images/dvix_logo_new.png";
+import logoutIcon from "../../assets/images/logout.png";
+
+const Icon = ({ src, alt }) => (
+  <img src={src} alt={alt} width="42" height="42" className="trade-icon-1" />
+);
+
+//  TODO: On change account reload page
+
+export const Header = () => {
+  const web3Modal = useContext(Web3ModalContext);
+  const signer = useContext(SignerContext);
+  const tokens = useContext(TokensContext);
+  const [address, setAddress] = useState("");
+  const [tokenBalance, setTokenBalance] = useState("0.0");
+
+  const copyCodeToClipboard = (e) => {
+    e.preventDefault();
+    // Create new element
+    const el = document.createElement("textarea");
+    // Set value (string to be copied)
+    el.value = address;
+    // Set non-editable to avoid focus and move outside of view
+    el.setAttribute("readonly", "");
+    document.body.appendChild(el);
+    // Select text inside element
+    el.select();
+    // Copy text to clipboard
+    document.execCommand("copy");
+    // Remove temporary element
+    document.body.removeChild(el);
+  };
+
+  useEffect(() => {
+    const loadAddress = async () => {
+      if (signer.signer && tokens.tcapToken) {
+        const currentAddress = await signer.signer?.getAddress();
+        const filterMint = tokens.tcapToken.filters.Transfer(
+          null,
+          currentAddress
+        );
+        const filterBurn = tokens.tcapToken.filters.Transfer(
+          currentAddress,
+          null
+        );
+        tokens.tcapToken.on(filterMint, async () => {
+          const currentBalance = await tokens.tcapToken?.balanceOf(
+            currentAddress
+          );
+          setTokenBalance(ethers.utils.formatEther(currentBalance));
+        });
+
+        tokens.tcapToken.on(filterBurn, async () => {
+          const currentBalance = await tokens.tcapToken?.balanceOf(
+            currentAddress
+          );
+          setTokenBalance(ethers.utils.formatEther(currentBalance));
+        });
+        setAddress(currentAddress);
+        const currentTcapBalance = await tokens.tcapToken.balanceOf(
+          currentAddress
+        );
+        setTokenBalance(ethers.utils.formatEther(currentTcapBalance));
+      }
+    };
+
+    loadAddress();
+    // eslint-disable-next-line
+  }, [signer]);
+
+  return (
+    <div className="trade-container">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <Nav className="header">
+        {signer.signer ? (
+          <>
+            <Icon src={dvix} alt="dvix" />
+            <h5>
+              <NumberFormat
+                className="number mx-2 neon-pink"
+                value={tokenBalance}
+                displayType="text"
+                thousandSeparator
+                prefix=""
+                decimalScale={2}
+              />
+            </h5>
+            <h5>
+              <OverlayTrigger
+                key="bottom"
+                placement="bottom"
+                overlay={<Tooltip id="tooltip-bottom">Click to Copy</Tooltip>}
+              >
+                <a href="/" onClick={copyCodeToClipboard} className="address">
+                  {makeShortAddress(address)}
+                </a>
+              </OverlayTrigger>
+            </h5>
+            <Link
+              to=""
+              onClick={(event) => {
+                event.preventDefault();
+                web3Modal.clearCachedProvider();
+                window.location.reload();
+              }}
+            >
+              <Icon src={logoutIcon} alt={"Logout"} />
+            </Link>
+          </>
+        ) : (
+          <BSButton
+            variant="pink"
+            className="neon-pink"
+            onClick={() => {
+              web3Modal.toggleModal();
+            }}
+          >
+            Connect Wallet
+          </BSButton>
+        )}
+      </Nav>
+    </div>
+  );
+};
+
+// @TODO:
+// 1- Add a button that adds the Avalanche mainnet to user's wallet
+// programatically if they are connected to the wrong chain (e.g.
+// if you get Wrong Network or Error connecting errors when attempting
+// to connect the user to MetaMask)
+// Code:
+// import injected from "web3-react/injected-connector"
+// function addAvalancheNetwork() {
+//   injected.getProvider().then(provider => {
+//     provider
+//       .request({
+//         method: 'wallet_addEthereumChain',
+//         params: [AVALANCHE_MAINNET_PARAMS]
+//       })
+//       .catch((error: any) => {
+//         console.log(error)
+//       })
+//   })
+// }
+// In the UI:
+// eslint-disable-next-line
+{
+  /* <div>
+  <h1>Wrong Network</h1>
+  <p>Please connect to the Avlanache Chain to start using the app.</p>
+  <button onClick={addAvalancheNetwork}>Switch to Avalanche Chain</button>
+</div> */
+}
 
 const DashboardLayout = () => {
   const { switchTheme, isDarkMode } = useContext(ThemeContext);
@@ -58,9 +233,9 @@ const DashboardLayout = () => {
           viewBox="0 0 24 24"
           fill={isDarkMode ? "none" : "#000"}
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
@@ -76,9 +251,9 @@ const DashboardLayout = () => {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -196,42 +371,24 @@ const DashboardLayout = () => {
               <i className="fas fa-shapes" />{" "}
               <span className="mobile-menu-tab-name">Collectibles</span>
             </Link>
-            {/*  eslint-disable-next-line */}
-            <a
-              // ADD LATER: target="_blank"
-              // REPLACE LATER: https://app.avix.finance/gov
-              rel="noreferrer"
-              // eslint-disable-next-line
-              href="javascript:void(0)"
+            <Link
+              to="/gov"
               className={`nav-link ${
                 isDarkMode && "nav-link-dark-mode"
               } disabled-link`}
             >
-              {/* REMOVE THE "disabled-link" CLASSNAME LATER */}
               <i className="fas fa-bullhorn" />{" "}
-              <span className="mobile-menu-tab-name">
-                {/* REPLACE LATER: Governance */}
-                Vote (SOON)
-              </span>
-            </a>
-            {/*  eslint-disable-next-line */}
-            <a
-              // ADD LATER: target="_blank"
-              // REPLACE LATER: https://app.avix.finance/stats
-              rel="noreferrer"
-              // eslint-disable-next-line
-              href="javascript:void(0)"
+              <span className="mobile-menu-tab-name">Governance</span>
+            </Link>
+            <link
+              to="/stats"
               className={`nav-link ${
                 isDarkMode && "nav-link-dark-mode"
               } disabled-link`}
             >
-              {/* REMOVE THE "disabled-link" CLASSNAME LATER */}
               <i className="fas fa-chart-line" />{" "}
-              <span className="mobile-menu-tab-name">
-                {/* REPLACE LATER: Stats */}
-                Stats (SOON)
-              </span>
-            </a>
+              <span className="mobile-menu-tab-name">Stats</span>
+            </link>
             <Link
               to="/learn"
               className={`nav-link ${isDarkMode && "nav-link-dark-mode"}`}
@@ -317,14 +474,19 @@ const DashboardLayout = () => {
                   fontSize: "1.125em",
                 }}
                 onClick={() => {
-                  console.log("Connect Wallet button clicked");
+                  // connect wallet function
+                  openAccountModal();
                 }}
               >
                 Connect Wallet
               </button>
             </div>
 
-            <Modal size="mini" open={false} onClose={false}>
+            <Modal
+              size="mini"
+              open={toggleAccountModal}
+              onClose={closeAccountModal}
+            >
               <Modal.Header
                 className="text-center bold"
                 style={{ fontSize: "1.75em" }}
@@ -338,7 +500,7 @@ const DashboardLayout = () => {
                 {active && (
                   <React.Fragment>
                     <i
-                      class="far fa-check-circle"
+                      className="far fa-check-circle"
                       style={{
                         color: "green",
                       }}
@@ -368,7 +530,7 @@ const DashboardLayout = () => {
                 {copyAddressClicked && (
                   <span className="bold ml-3">
                     <i
-                      class="far fa-check-circle"
+                      className="far fa-check-circle"
                       style={{
                         color: "green",
                       }}
@@ -450,56 +612,39 @@ const DashboardLayout = () => {
 
     render() {
       const { active } = this.props;
+
       return (
         <React.Fragment>
-          {this.props.path[0] === "/" ? (
-            <Link
-              active={active}
-              className={`pt-4 ${
-                active ? "sidebar-item-active" : "sidebar-item"
-              } ${this.props.css}`}
-              to={this.props.path}
-              onClick={this.handleClick}
-              style={{ color: active ? "#fff" : "#b8b4b4" }}
-            >
-              {this.props.path === "/" && (
-                <img
-                  src={active ? whiteVaultIcon : greyVaultIcon}
-                  alt="Vault"
-                  className="vault"
-                  style={{
-                    width: 22.5,
-                    height: 22.5,
-                  }}
-                />
-              )}
-              <span
-                className="sidebar-tab-name"
+          <Link
+            active={active}
+            className={`pt-4 ${
+              active ? "sidebar-item-active" : "sidebar-item"
+            } ${this.props.css}`}
+            to={this.props.path}
+            onClick={this.handleClick}
+            style={{ color: active ? "#fff" : "#b8b4b4" }}
+          >
+            {this.props.path === "/" && (
+              <img
+                src={active ? whiteVaultIcon : greyVaultIcon}
+                alt="Vault"
+                className="vault"
                 style={{
-                  position: this.props.path === "/" && "relative",
-                  top: this.props.path === "/" && "1.5px",
+                  width: 22.5,
+                  height: 22.5,
                 }}
-              >
-                {this.props.name}
-              </span>
-            </Link>
-          ) : (
-            <a
-              // ADD LATER: target="_blank"
-              rel="noreferrer"
-              href={this.props.path}
-              active={active}
-              className={`pt-4 ${
-                active ? "sidebar-item-active" : "sidebar-item"
-              } ${this.props.css}
-                disabled-link
-              `} // REMOVE THE "disabled-link" CLASSNAME LATER
-              onClick={this.handleClick}
-              style={{ color: active ? "#fff" : "#b8b4b4" }}
+              />
+            )}
+            <span
+              className="sidebar-tab-name"
+              style={{
+                position: this.props.path === "/" && "relative",
+                top: this.props.path === "/" && "1.5px",
+              }}
             >
-              <span className="sidebar-tab-name">{this.props.name}</span>
-            </a>
-          )}
+              {this.props.name}
+            </span>
+          </Link>
         </React.Fragment>
       );
     }
@@ -542,16 +687,14 @@ const DashboardLayout = () => {
             key: Math.random() + 4,
           },
           {
-            // eslint-disable-next-line
-            path: "javascript:void(0)", // REPLACE LATER: https://app.avix.finance/gov
-            name: "Vote (SOON)", // REPLACE LATER: Governance
+            path: "/gov",
+            name: "Governance",
             css: "fas fa-bullhorn",
             key: Math.random() + 5,
           },
           {
-            // eslint-disable-next-line
-            path: "javascript:void(0 + 0)", // REPLACE LATER: https://app.avix.finance/stats
-            name: "Stats (SOON)", // REPLACE LATER: Stats
+            path: "/stats",
+            name: "Stats",
             css: "fas fa-chart-line",
             key: Math.random() + 6,
           },

@@ -5,7 +5,7 @@ import moment from "moment";
 import dai from "../../assets/images/dai.png";
 import eth from "../../assets/images/eth.png";
 import avix from "../../assets/images/avix_logo_new.png";
-import dvix from "../../assets/images/dVIX_favicon.png";
+import dvix from "../../assets/images/dvix_logo_new.png";
 import avax from "../../assets/images/avax.png";
 import { ThemeContext } from "../../state/ThemeContext";
 import SignerContext from "../../state/SignerContext";
@@ -24,7 +24,7 @@ import { ethers } from "ethers";
 import NumberFormat from "react-number-format";
 import { useQuery, gql } from "@apollo/client";
 import Spinner from "../../components/Layout/Spinner";
-import { Stake } from "../Modals/Stake";
+import { Stake } from "./Stake";
 
 const Farm = () => {
   const { isDarkMode } = useContext(ThemeContext);
@@ -885,7 +885,7 @@ const Farm = () => {
       <br />
       <br />
 
-      {/* @NOTE: DELETE EARLY ADOPTER REWARDS PART 30 DAYS AFTER THE LAUNCH! */}
+      {/* @NOTE: DELETE EARLY ADOPTER REWARDS PART 3 MONTHS AFTER THE LAUNCH! */}
       <h1
         className="text-center bold mb-5 mt-5"
         style={{ fontSize: "2.75rem" }}
@@ -894,15 +894,15 @@ const Farm = () => {
       </h1>
 
       <p
-        className={`text-muted text-center ml-5 mr-5 mb-5 ${
+        className={`text-mute text-center ml-5 mr-5 mb-5 ${
           isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
         }`}
       >
         <strong>
-          Early adopter rewards are issued over the 30 day period after the
+          Early adopter rewards are issued over the 3 month period after the
           launch of Avix Finance,
         </strong>{" "}
-        for a total of 500,000 aVIX (5% of the max supply). This reward is{" "}
+        for a total of 900,000 aVIX (9% of the max supply). This reward is{" "}
         <strong>
           split across the dVIX minters (debtors), with 100% of the reward being
           immediately available.
@@ -1039,19 +1039,19 @@ const Farm = () => {
       <br />
 
       {/* @NOTE: DELETE LIQUIDITY MINING REWARDS PART & THE ENTIRE FARM
-      TAB 2 YEARS AFTER THE LAUNCH! */}
+      TAB 4 YEARS AFTER THE LAUNCH! */}
       <h1 className="text-center bold mb-5 mt-5" style={{ fontSize: "2.5rem" }}>
         Liquidity Rewards
       </h1>
 
       <p
-        className={`text-muted text-center ml-5 mr-5 mb-5 ${
+        className={`text-mute text-center ml-5 mr-5 mb-5 ${
           isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
         }`}
       >
         {" "}
         You can <strong>earn aVIX governance tokens</strong> by staking your LP
-        tokens for any of the pairs listed below.
+        tokens for any of the pairs listed below.{" "}
         <strong>Claimable Rewards</strong> (20% of total rewards) are available
         to claim immediately. <strong>Locked Rewards</strong> (80% of total
         rewards) are unlocked 6 months after the start of the pool. To learn

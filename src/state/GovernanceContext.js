@@ -1,9 +1,9 @@
 import React from "react";
 
 export const GOVERNANCE_DEFAULT_VALUE = {
-  setCurrentGovernorAlpha: () => {},
+  setCurrentGovernorBeta: () => {},
   setCurrentTimelock: () => {},
-  setCurrentGovernorAlphaRead: () => {},
+  setCurrentGovernorBetaRead: () => {},
   setCurrentTimelockRead: () => {},
 };
 

@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
-import './layout.css'
-import spinner from '../../assets/other/spinner.gif'
-import { ThemeContext } from '../../state/ThemeContext'
+import React, { useContext } from "react";
+import "./layout.css";
+import spinner from "../../assets/other/spinner.gif";
+import { ThemeContext } from "../../state/ThemeContext";
 
 const Spinner = () => {
-  const { isDarkMode } = useContext(ThemeContext)
+  const { isDarkMode } = useContext(ThemeContext);
 
   return (
-    <div className={isDarkMode && 'dark-mode-spinner'}>
+    <div className={isDarkMode ? "dark-mode-spinner" : ""}>
       <br />
       <br />
       <br />
@@ -17,7 +17,7 @@ const Spinner = () => {
       <img src={spinner} alt="Loading..." className="spinner" />
       <div className="loading">Please wait...</div>
     </div>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

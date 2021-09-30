@@ -1,16 +1,16 @@
 import { useState, useCallback } from "react";
 
 export const useVaults = () => {
-  const [avaxVault, setAVAXVault] = useState();
+  const [wavaxVault, setWAVAXVault] = useState();
   const [wethVault, setWETHVault] = useState();
   const [daiVault, setDAIVault] = useState();
 
-  const [avaxVaultRead, setAVAXVaultRead] = useState();
+  const [wavaxVaultRead, setWAVAXVaultRead] = useState();
   const [wethVaultRead, setWETHVaultRead] = useState();
   const [daiVaultRead, setDAIVaultRead] = useState();
 
-  const setCurrentAVAXVault = useCallback((currentAVAXVault) => {
-    setAVAXVault(currentAVAXVault);
+  const setCurrentWAVAXVault = useCallback((currentWAVAXVault) => {
+    setWAVAXVault(currentWAVAXVault);
   }, []);
 
   const setCurrentWETHVault = useCallback((currentWETHVault) => {
@@ -21,8 +21,8 @@ export const useVaults = () => {
     setDAIVault(currentDAIVault);
   }, []);
 
-  const setCurrentAVAXVaultRead = useCallback((currentAVAXVaultRead) => {
-    setAVAXVaultRead(currentAVAXVaultRead);
+  const setCurrentWAVAXVaultRead = useCallback((currentWAVAXVaultRead) => {
+    setWAVAXVaultRead(currentWAVAXVaultRead);
   }, []);
 
   const setCurrentWETHVaultRead = useCallback((currentWETHVaultRead) => {
@@ -42,9 +42,9 @@ export const useVaults = () => {
     setCurrentWETHVaultRead,
     daiVaultRead,
     setCurrentDAIVaultRead,
-    avaxVault,
-    setCurrentAVAXVault,
-    avaxVaultRead,
-    setCurrentAVAXVaultRead,
+    wavaxVault,
+    setCurrentWAVAXVault,
+    wavaxVaultRead,
+    setCurrentWAVAXVaultRead,
   };
 };

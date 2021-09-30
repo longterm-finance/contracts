@@ -52,6 +52,8 @@ const config = {
 
 module.exports = config;
 
+// Official config recommended by Ava Labs
+
 // import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 // import { BigNumber } from "ethers"
 // import "@nomiclabs/hardhat-waffle"

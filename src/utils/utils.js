@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import React from "react";
 import { toast } from "react-toastify";
 import toasty from "../assets/images/toasty.jpg";
+import "./utils.css";
 
 export const makeShortAddress = (address) => {
   const shortAddress = `${address.substr(0, 6).toString()}...${address

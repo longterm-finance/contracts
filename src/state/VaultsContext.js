@@ -1,11 +1,11 @@
 import React from "react";
 
 export const VAULTS_DEFAULT_VALUE = {
-  setCurrentAVAXVault: () => {},
+  setCurrentWAVAXVault: () => {},
   setCurrentWETHVault: () => {},
   setCurrentDAIVault: () => {},
 
-  setCurrentAVAXVaultRead: () => {},
+  setCurrentWAVAXVaultRead: () => {},
   setCurrentWETHVaultRead: () => {},
   setCurrentDAIVaultRead: () => {},
 };

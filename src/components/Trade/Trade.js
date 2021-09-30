@@ -3,7 +3,7 @@ import "./trade.css";
 import dai from "../../assets/images/dai.png";
 import eth from "../../assets/images/eth.png";
 import avix from "../../assets/images/avix_logo_new.png";
-import dvix from "../../assets/images/dVIX_favicon.png";
+import dvix from "../../assets/images/dvix_logo_new.png";
 import avax from "../../assets/images/avax.png";
 import { ThemeContext } from "../../state/ThemeContext";
 
@@ -94,13 +94,31 @@ const Trade = () => {
       <br />
       <br />
       <br />
+
       <h1
         className="text-center bold mb-5 mt-5"
         style={{ fontSize: "2.75rem" }}
       >
         Popular Trading Pairs
       </h1>
+
+      <p
+        className={`text-mute text-center ml-5 mr-5 mb-5 ${
+          isDarkMode ? "early-adopter-note-dark-mode" : "early-adopter-note"
+        }`}
+      >
+        Avix makes it possible for you to{" "}
+        <strong>trade based on volatility</strong>, and not the market
+        direction. This enables you to{" "}
+        <strong>
+          always be profitable, regardless of the current market conditions.
+        </strong>{" "}
+        Experience the full power of dVIX in action!
+      </p>
+
       <br />
+      <br />
+
       <div className="trade-grid">
         <TradeCard
           icon1={avix}

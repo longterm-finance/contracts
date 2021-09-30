@@ -42,6 +42,9 @@ coverage.json
 truffle-config.js
 /migrations
 
+# group tests
+/contracts/grouped
+
 # test oracles
 /contracts/TEST_IVaultHandler.sol
 /contracts/oracles/TEST_VIXOracle.sol

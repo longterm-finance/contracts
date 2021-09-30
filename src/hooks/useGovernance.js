@@ -1,35 +1,32 @@
 import { useState, useCallback } from "react";
 
 export const useGovernance = () => {
-  const [governorAlpha, setGovernorAlpha] = useState();
+  const [governorBeta, setGovernorBeta] = useState();
   const [timelock, setTimelock] = useState();
-  const [governorAlphaRead, setGovernorAlphaRead] = useState();
+  const [governorBetaRead, setGovernorBetaRead] = useState();
   const [timelockRead, setTimelockRead] = useState();
 
-  const setCurrentGovernorAlpha = useCallback((currentGovernorAlpha) => {
-    setGovernorAlpha(currentGovernorAlpha);
+  const setCurrentGovernorBeta = useCallback((currentGovernorBeta) => {
+    setGovernorBeta(currentGovernorBeta);
   }, []);
   const setCurrentTimelock = useCallback((currentTimelock) => {
     setTimelock(currentTimelock);
   }, []);
 
-  const setCurrentGovernorAlphaRead = useCallback(
-    (currentGovernorAlphaRead) => {
-      setGovernorAlphaRead(currentGovernorAlphaRead);
-    },
-    []
-  );
+  const setCurrentGovernorBetaRead = useCallback((currentGovernorBetaRead) => {
+    setGovernorBetaRead(currentGovernorBetaRead);
+  }, []);
   const setCurrentTimelockRead = useCallback((currentTimelockRead) => {
     setTimelockRead(currentTimelockRead);
   }, []);
 
   return {
-    governorAlpha,
-    setCurrentGovernorAlpha,
+    governorBeta,
+    setCurrentGovernorBeta,
     timelock,
     setCurrentTimelock,
-    governorAlphaRead,
-    setCurrentGovernorAlphaRead,
+    governorBetaRead,
+    setCurrentGovernorBetaRead,
     timelockRead,
     setCurrentTimelockRead,
   };

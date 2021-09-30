@@ -42,7 +42,7 @@ const Learn = () => {
         </p>
         <p className="what-is-avix-desc">
           dVIX is <strong>safely overcollateralized by at least 300%.</strong>{" "}
-          Collateral options include AVAX, WETH and DAI.
+          Collateral options include AVAX, WETH.e and DAI.e
         </p>
         <p className="what-is-avix-desc">
           {" "}

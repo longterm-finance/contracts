@@ -1,12 +1,12 @@
 import React from "react";
 
 export const ORACLES_DEFAULT_VALUE = {
-  setCurrentAVAXOracle: () => {},
+  setCurrentWAVAXOracle: () => {},
   setCurrentWETHOracle: () => {},
   setCurrentDAIOracle: () => {},
   setCurrentDVIXOracle: () => {},
 
-  setCurrentAVAXOracleRead: () => {},
+  setCurrentWAVAXOracleRead: () => {},
   setCurrentWETHOracleRead: () => {},
   setCurrentDAIOracleRead: () => {},
   setCurrentDVIXOracleRead: () => {},
