@@ -512,6 +512,8 @@ const App = () => {
     const currentProvider = new ethers.providers.Web3Provider(networkProvider);
     const network = await currentProvider.getNetwork();
 
+    console.log({ appjs: { network } });
+
     // if (
     //   process.env.REACT_APP_NETWORK_ID &&
     //   !(
@@ -543,6 +545,12 @@ const App = () => {
         );
         const network = await currentProvider.getNetwork();
 
+        console.log({
+          cachedProvider: web3Modal.cachedProvider,
+          signer: signer.signer,
+          network,
+        });
+
         // if (
         //   process.env.REACT_APP_NETWORK_ID &&
         //   !(
@@ -555,6 +563,8 @@ const App = () => {
 
         const currentSigner = currentProvider.getSigner();
         signer.setCurrentSigner(currentSigner);
+
+        console.log({ signer2: currentSigner, signerObj: signer });
 
         const ethcallProvider = new Provider(currentProvider);
         setContracts(currentSigner, ethcallProvider);

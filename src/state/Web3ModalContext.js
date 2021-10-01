@@ -1,11 +1,11 @@
 import React from "react";
 import Web3Modal from "web3modal";
 
-let network = "avalanche";
+let network = "unknown";
 
 switch (process.env.REACT_APP_NETWORK_ID) {
   case 43114:
-    network = "avalanche";
+    network = "unknown";
     break;
   case 43113:
     network = "fuji";
@@ -13,6 +13,8 @@ switch (process.env.REACT_APP_NETWORK_ID) {
   default:
     break;
 }
+
+console.log(network);
 
 const providerOptions = {
   injected: {
