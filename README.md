@@ -1,19 +1,11 @@
-# **Derived VIX (dVIX) Token**
+# **LongTerm Finance: Go LONG on ALTS**
 
-## What is dVIX?
+**Simplify your crypto investing with ALTS,** a token that tracks the entire crypto market excluding BTC and ETH. Easily diversify your portfolio and at the same time **get the altcoin market's superior performance in one click.**
 
----
-
-**Avix Finance is building dVIX (derived VIX), the world’s first token that tracks the CBOE Volatility Index (VIX) in 1:1 ratio.**
-
-By depositing collateral in the Avix vaults, you're be able to **mint derived VIX (dVIX) tokens which will track the real-world price movements of the VIX,** thus giving you a direct exposure to the volatility - the new asset class and an ultimate hedge against the broader market sellof.
-
-Also, unlike the VIX products from the traditional finance, **dVIX will not experience any time decay as it never expires** (because it's not an options or futures contract), thus making it a **much more reliable hedge for the overall market volatility.**
-
-## What is AVIX?
+## **What is LONG Token?**
 
 ---
 
-**AVIX is the native token of the Avix Finance ecosystem**, it makes it possible for you to vote, propose and debate changes to the protocol (1 AVIX equals 1 vote). In addition to being a governance token, AVIX is also used for **various community and platform-level incentives.**
+LONG is the **native governance and utility token** of the LongTerm Finance ecosystem. **It has the max supply of 10 million LONG tokens,** more than 2 thirds of which are distributed directly to platform users through liquidity rewards.
 
-For complete documentation please visit [https://docs.avix.finance](https://docs.avix.finance).
+For more detailed documentation please visit **[https://docs.long-term.finance](https://docs.long-term.finance).**

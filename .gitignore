@@ -43,9 +43,9 @@ truffle-config.js
 /migrations
 
 # group tests
-/contracts/grouped
+/contracts/groups
 
-# test oracles
+# test 
 /contracts/TEST_IVaultHandler.sol
-/contracts/oracles/TEST_VIXOracle.sol
+/contracts/oracles/TEST_ALTSOracle.sol
 /contracts/utils/chainlink/TEST_CustomOracleInterface.sol
