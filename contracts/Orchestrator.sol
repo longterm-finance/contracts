@@ -4,14 +4,14 @@ pragma solidity 0.7.5;
 import "./utils/Ownable.sol";
 import "./utils/ERC165Checker.sol";
 import "./IVaultHandler.sol";
-import "./DVIX.sol";
+import "./ALTS.sol";
 import "./oracles/ChainlinkOracle.sol";
 import "./utils/IERC20.sol";
 
 /**
- * @title dVIX Orchestrator
- * @author Avix Finance
- * @notice Orchestrator contract in charge of managing the settings of the vaults, rewards and dVIX token. It acts as the owner of these contracts.
+ * @title ALTS Orchestrator
+ * @author LongTerm Finance
+ * @notice Orchestrator contract in charge of managing the settings of the vaults, rewards and ALTS token. It acts as the owner of these contracts.
  */
 contract Orchestrator is Ownable {
   /// @dev Enum which saves the available functions to emergency call.
@@ -22,7 +22,7 @@ contract Orchestrator is Ownable {
 
   /** @dev Interface constants*/
   bytes4 private constant _INTERFACE_ID_IVAULT = 0x9e75ab0c;
-  bytes4 private constant _INTERFACE_ID_DVIX = 0xbd115939;
+  bytes4 private constant _INTERFACE_ID_ALTS = 0xbd115939;
   bytes4 private constant _INTERFACE_ID_CHAINLINK_ORACLE = 0x85be402b;
 
   /// @dev tracks which vault was emergency called
@@ -73,13 +73,13 @@ contract Orchestrator is Ownable {
   }
 
   /**
-   * @notice Throws if dVIX Token is not valid
-   * @param _dvix address
+   * @notice Throws if ALTS Token is not valid
+   * @param _alts address
    */
-  modifier validDVIX(DVIX _dvix) {
+  modifier validALTS(ALTS _alts) {
     require(
-      ERC165Checker.supportsInterface(address(_dvix), _INTERFACE_ID_DVIX),
-      "Orchestrator::validDVIX: not a valid DVIX ERC20"
+      ERC165Checker.supportsInterface(address(_alts), _INTERFACE_ID_ALTS),
+      "Orchestrator::validALTS: not a valid ALTS ERC20"
     );
     _;
   }
@@ -226,67 +226,67 @@ contract Orchestrator is Ownable {
   }
 
   /**
-   * @notice Enables or disables the dVIX Cap
-   * @param _dvix address
+   * @notice Enables or disables the ALTS Cap
+   * @param _alts address
    * @param _enable bool
    * @dev Only owner can call it
-   * @dev Validates if _dvix is valid
+   * @dev Validates if _alts is valid
    */
-  function enableDVIXCap(DVIX _dvix, bool _enable)
+  function enableALTSCap(ALTS _alts, bool _enable)
     external
     onlyOwner
-    validDVIX(_dvix)
+    validALTS(_alts)
   {
-    _dvix.enableCap(_enable);
+    _alts.enableCap(_enable);
   }
 
   /**
-   * @notice Sets the dVIX maximum minting value
-   * @param _dvix address
+   * @notice Sets the ALTS maximum minting value
+   * @param _alts address
    * @param _cap uint value
    * @dev Only owner can call it
-   * @dev Validates if _dvix is valid
+   * @dev Validates if _alts is valid
    */
-  function setDVIXCap(DVIX _dvix, uint256 _cap)
+  function setALTSCap(ALTS _alts, uint256 _cap)
     external
     onlyOwner
-    validDVIX(_dvix)
+    validALTS(_alts)
   {
-    _dvix.setCap(_cap);
+    _alts.setCap(_cap);
   }
 
   /**
-   * @notice Adds Vault to DVIX ERC20
-   * @param _dvix address
+   * @notice Adds Vault to ALTS ERC20
+   * @param _alts address
    * @param _vault address
    * @dev Only owner can call it
-   * @dev Validates if _dvix is valid
+   * @dev Validates if _alts is valid
    * @dev Validates if _vault is valid
    */
-  function addDVIXVault(DVIX _dvix, IVaultHandler _vault)
+  function addALTSVault(ALTS _alts, IVaultHandler _vault)
     external
     onlyOwner
-    validDVIX(_dvix)
+    validALTS(_alts)
     validVault(_vault)
   {
-    _dvix.addVaultHandler(address(_vault));
+    _alts.addVaultHandler(address(_vault));
   }
 
   /**
-   * @notice Removes Vault to DVIX ERC20
-   * @param _dvix address
+   * @notice Removes Vault to ALTS ERC20
+   * @param _alts address
    * @param _vault address
    * @dev Only owner can call it
-   * @dev Validates if _dvix is valid
+   * @dev Validates if _alts is valid
    * @dev Validates if _vault is valid
    */
-  function removeDVIXVault(DVIX _dvix, IVaultHandler _vault)
+  function removeALTSVault(ALTS _alts, IVaultHandler _vault)
     external
     onlyOwner
-    validDVIX(_dvix)
+    validALTS(_alts)
     validVault(_vault)
   {
-    _dvix.removeVaultHandler(address(_vault));
+    _alts.removeVaultHandler(address(_vault));
   }
 
   /**
@@ -330,19 +330,19 @@ contract Orchestrator is Ownable {
   }
 
   /**
-   * @notice Retrieves the AVAX stuck on the orchestrator
+   * @notice Retrieves the ETH stuck on the orchestrator
    * @param _to address
    * @dev Only owner can call it
    */
-  function retrieveAVAX(address _to) external onlyOwner {
+  function retrieveETH(address _to) external onlyOwner {
     require(
       _to != address(0),
-      "Orchestrator::retrieveAVAX: address can't be zero address"
+      "Orchestrator::retrieveETH: address can't be zero address"
     );
     uint256 amount = address(this).balance;
     payable(_to).transfer(amount);
   }
 
-  /// @notice Allows the contract to receive AVAX
+  /// @notice Allows the contract to receive ETH
   receive() external payable {}
 }

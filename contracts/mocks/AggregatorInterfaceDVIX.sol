@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.5;
 
-contract AggregatorInterfaceDVIX {
+contract AggregatorInterfaceALTS {
   int256 value = 25129732288636297500;
 
   function latestAnswer() public view virtual returns (int256) {
@@ -29,8 +29,8 @@ contract AggregatorInterfaceDVIX {
     );
   }
 
-  function setLatestAnswer(int256 _dvix) public {
-    value = _dvix;
+  function setLatestAnswer(int256 _alts) public {
+    value = _alts;
   }
 
   event AnswerUpdated(

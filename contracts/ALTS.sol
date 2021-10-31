@@ -8,18 +8,18 @@ import "./utils/SafeMath.sol";
 import "./Orchestrator.sol";
 
 /**
- * @title derived VIX (dVIX) Token
- * @author Avix Finance
- * @notice ARC20 token on the Avalanche C-Chain that tracks the CBOE Volatility Index (VIX)
+ * @title ALTS Token
+ * @author LongTerm Finance
+ * @notice ERC20 token that tracks the entire crypto market excluding BTC and ETH
  */
-contract DVIX is ERC20, Ownable, IERC165 {
+contract ALTS is ERC20, Ownable, IERC165 {
   /// @notice Open Zeppelin libraries
   using SafeMath for uint256;
 
-  /// @notice if enabled dVIX can't be minted if the total supply is above or equal the cap value
+  /// @notice if enabled ALTS can't be minted if the total supply is above or equal the cap value
   bool public capEnabled = false;
 
-  /// @notice Maximum value the total supply of dVIX
+  /// @notice Maximum value the total supply of ALTS
   uint256 public cap;
   
   // @notice: Address that sets the orchestrator after the contract deployment
@@ -33,7 +33,7 @@ contract DVIX is ERC20, Ownable, IERC165 {
 
   /**
    * @notice Address to Vault Handler
-   * @dev Only vault handlers can mint and burn dVIX
+   * @dev Only vault handlers can mint and burn ALTS
    */
   mapping(address => bool) public vaultHandlers;
 
@@ -49,7 +49,7 @@ contract DVIX is ERC20, Ownable, IERC165 {
    * removeVaultHandler.selector ^
    * approve.selector => 0xbd115939
    */
-  bytes4 private constant _INTERFACE_ID_DVIX = 0xbd115939;
+  bytes4 private constant _INTERFACE_ID_ALTS = 0xbd115939;
 
   /// @dev bytes4(keccak256('supportsInterface(bytes4)')) == 0x01ffc9a7
   bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
@@ -96,7 +96,7 @@ contract DVIX is ERC20, Ownable, IERC165 {
   modifier onlyVault() {
     require(
       vaultHandlers[msg.sender],
-      "dVIX::onlyVault: caller is not a vault"
+      "ALTS::onlyVault: caller is not a vault"
     );
     _;
   }
@@ -107,8 +107,8 @@ contract DVIX is ERC20, Ownable, IERC165 {
    * @dev Only orchestratorSetter can call it and it can only be called once
    */
   function setOrchestrator(Orchestrator _orchestrator) public {
-    require(msg.sender == orchestratorSetter, "dVIX::setOrchestrator: not allowed to set the orchestrator");
-    require(orchestratorTracker == false, "dVIX::setOrchestrator: orchestrator has already been set");
+    require(msg.sender == orchestratorSetter, "ALTS::setOrchestrator: not allowed to set the orchestrator");
+    require(orchestratorTracker == false, "ALTS::setOrchestrator: orchestrator has already been set");
       
     orchestratorTracker = true;
       
@@ -140,7 +140,7 @@ contract DVIX is ERC20, Ownable, IERC165 {
   }
 
   /**
-   * @notice Mints dVIX Tokens
+   * @notice Mints ALTS Tokens
    * @param _account address of the receiver of tokens
    * @param _amount uint of tokens to mint
    * @dev Only vault can call it
@@ -150,7 +150,7 @@ contract DVIX is ERC20, Ownable, IERC165 {
   }
 
   /**
-   * @notice Burns dVIX Tokens
+   * @notice Burns ALTS Tokens
    * @param _account address of the account which is burning tokens.
    * @param _amount uint of tokens to burn
    * @dev Only vault can call it
@@ -160,7 +160,7 @@ contract DVIX is ERC20, Ownable, IERC165 {
   }
 
   /**
-   * @notice Sets maximum value the total supply of dVIX can have
+   * @notice Sets maximum value the total supply of ALTS can have
    * @param _cap value
    * @dev When capEnabled is true, mint is not allowed to issue tokens that would increase the total supply above or equal the specified capacity.
    * @dev Only owner can call it
@@ -192,7 +192,7 @@ contract DVIX is ERC20, Ownable, IERC165 {
     override
     returns (bool)
   {
-    return (_interfaceId == _INTERFACE_ID_DVIX ||
+    return (_interfaceId == _INTERFACE_ID_ALTS ||
       _interfaceId == _INTERFACE_ID_ERC165);
   }
 
@@ -214,14 +214,14 @@ contract DVIX is ERC20, Ownable, IERC165 {
 
     require(
       _to != address(this),
-      "dVIX::transfer: can't transfer to dVIX contract"
+      "ALTS::transfer: can't transfer to ALTS contract"
     );
 
     if (_from == address(0) && capEnabled) {
       // When minting tokens
       require(
         totalSupply().add(_amount) <= cap,
-        "dVIX::Transfer: dVIX cap exceeded"
+        "ALTS::Transfer: ALTS cap exceeded"
       );
     }
   }

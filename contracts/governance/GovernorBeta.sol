@@ -6,17 +6,17 @@ pragma experimental ABIEncoderV2;
 
 contract GovernorBeta {
   /// @notice The name of this contract
-  string public constant name = "Avix Governor Beta";
+  string public constant name = "LongTerm Governor Beta";
 
   /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
   function quorumVotes() public pure returns (uint256) {
     return 500_000e18;
-  } // 5% of aVIX total supply
+  } // 5% of LONG total supply
 
   /// @notice The number of votes required in order for a voter to become a proposer
   function proposalThreshold() public pure returns (uint256) {
     return 50_000e18;
-  } // 0.5% of aVIX total supply
+  } // 0.5% of LONG total supply
 
   /// @notice The maximum number of actions that can be included in a proposal
   function proposalMaxOperations() public pure returns (uint256) {
@@ -33,11 +33,11 @@ contract GovernorBeta {
     return 172_800;
   } // ~3 days in blocks (assuming 1.5s blocks)
 
-  /// @notice The address of the Avix Protocol Timelock
+  /// @notice The address of the LongTerm Protocol Timelock
   TimelockInterface public timelock;
 
-  /// @notice The address of the aVIX governance token
-  AvixInterface public avix;
+  /// @notice The address of the LONG governance token
+  LongInterface public long;
 
   /// @notice The total number of proposals
   uint256 public proposalCount;
@@ -147,11 +147,11 @@ contract GovernorBeta {
 
   constructor(
     address timelock_,
-    address avix_,
+    address long_,
     address guardian_
   ) {
     timelock = TimelockInterface(timelock_);
-    avix = AvixInterface(avix_);
+    long = LongInterface(long_);
     guardian = guardian_;
   }
 
@@ -163,7 +163,7 @@ contract GovernorBeta {
     string memory description
   ) public returns (uint256) {
     require(
-      avix.getPriorVotes(msg.sender, sub256(block.number, 1)) >
+      long.getPriorVotes(msg.sender, sub256(block.number, 1)) >
         proposalThreshold(),
       "GovernorBeta::propose: proposer votes below proposal threshold"
     );
@@ -295,7 +295,7 @@ contract GovernorBeta {
 
     Proposal storage proposal = proposals[proposalId];
     require(
-      avix.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
+      long.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
         proposalThreshold(),
       "GovernorBeta::cancel: proposer above threshold"
     );
@@ -417,7 +417,7 @@ contract GovernorBeta {
       receipt.hasVoted == false,
       "GovernorBeta::_castVote: voter already voted"
     );
-    uint96 votes = avix.getPriorVotes(voter, proposal.startBlock);
+    uint96 votes = long.getPriorVotes(voter, proposal.startBlock);
 
     if (support) {
       proposal.forVotes = add256(proposal.forVotes, votes);
@@ -494,7 +494,7 @@ interface TimelockInterface {
   ) external payable returns (bytes memory);
 }
 
-interface AvixInterface {
+interface LongInterface {
   function getPriorVotes(address account, uint256 blockNumber)
     external
     view

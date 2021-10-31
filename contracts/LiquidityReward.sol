@@ -27,7 +27,7 @@ contract LiquidityReward is Ownable, AccessControl, ReentrancyGuard, Pausable {
   using SafeMath for uint256;
   using SafeERC20 for IERC20;
 
-  /// @notice Address of the reward token (aVIX Token)
+  /// @notice Address of the reward token (LONG Token)
   IERC20 public immutable rewardsToken;
 
   /// @notice Address of the staking token

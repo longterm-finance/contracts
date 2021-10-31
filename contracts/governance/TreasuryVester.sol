@@ -7,7 +7,7 @@ import "../utils/SafeMath.sol";
 contract TreasuryVester {
   using SafeMath for uint256;
 
-  address public avix;
+  address public long;
   address public recipient;
 
   uint256 public vestingAmount;
@@ -18,7 +18,7 @@ contract TreasuryVester {
   uint256 public lastUpdate;
 
   constructor(
-    address avix_,
+    address long_,
     address recipient_,
     uint256 vestingAmount_,
     uint256 vestingBegin_,
@@ -38,7 +38,7 @@ contract TreasuryVester {
       "TreasuryVester::constructor: vesting end is too early"
     );
 
-    avix = avix_;
+    long = long_;
     recipient = recipient_;
 
     vestingAmount = vestingAmount_;
@@ -64,18 +64,18 @@ contract TreasuryVester {
     );
     uint256 amount;
     if (block.timestamp >= vestingEnd) {
-      amount = IAvix(avix).balanceOf(address(this));
+      amount = ILong(long).balanceOf(address(this));
     } else {
       amount = vestingAmount.mul(block.timestamp - lastUpdate).div(
         vestingEnd - vestingBegin
       );
       lastUpdate = block.timestamp;
     }
-    IAvix(avix).transfer(recipient, amount);
+    ILong(long).transfer(recipient, amount);
   }
 }
 
-interface IAvix {
+interface ILong {
   function balanceOf(address account) external view returns (uint256);
 
   function transfer(address dst, uint256 rawAmount) external returns (bool);

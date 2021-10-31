@@ -5,8 +5,8 @@ pragma solidity 0.7.5;
 
 import "../utils/ERC20.sol";
 
-contract WETH is ERC20 {
-  constructor() ERC20("Mockup WETH.e", "mWETH.e") {}
+contract RenBTC is ERC20 {
+  constructor() ERC20("Mockup renBTC", "renBTC") {}
 
   function mint(address _account, uint256 _amount) public {
     _mint(_account, _amount);

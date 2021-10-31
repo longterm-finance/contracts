@@ -3,15 +3,15 @@ pragma solidity 0.7.5;
 
 import "./IVaultHandler.sol";
 import "./Orchestrator.sol";
-import "./IWAVAX.sol";
+import "./IWETH.sol";
 import "./utils/SafeMath.sol";
 
 /**
- * @title AVAX Avix Vault
- * @author Avix Finance
- * @notice Contract in charge of handling the dVIX Vault and stake using a AVAX and WAVAX
+ * @title ETH LongTerm Vault
+ * @author LongTerm Finance
+ * @notice Contract in charge of handling the ALTS Vault and stake using ETH and WETH
  */
-contract AVAXVaultHandler is IVaultHandler {
+contract ETHVaultHandler is IVaultHandler {
   /// @notice Open Zeppelin libraries
   using SafeMath for uint256;
 
@@ -22,11 +22,11 @@ contract AVAXVaultHandler is IVaultHandler {
    * @param _ratio uint256
    * @param _burnFee uint256
    * @param _liquidationPenalty uint256
-   * @param _vixOracle address
-   * @param _dvixAddress address
+   * @param _altsOracle address
+   * @param _altsAddress address
    * @param _collateralAddress address
    * @param _collateralOracle address
-   * @param _avaxOracle address
+   * @param _ethOracle address
    * @param _rewardHandler address
    * @param _devAddress address
    */
@@ -36,11 +36,11 @@ contract AVAXVaultHandler is IVaultHandler {
     uint256 _ratio,
     uint256 _burnFee,
     uint256 _liquidationPenalty,
-    address _vixOracle, // used to calculate the price of dVIX
-    DVIX _dvixAddress,
+    address _altsOracle, // used to calculate the price of ALTS
+    ALTS _altsAddress,
     address _collateralAddress,
     address _collateralOracle,
-    address _avaxOracle,
+    address _ethOracle,
     address _rewardHandler,
     address _devAddress
   )
@@ -50,29 +50,29 @@ contract AVAXVaultHandler is IVaultHandler {
       _ratio,
       _burnFee,
       _liquidationPenalty,
-      _vixOracle,
-      _dvixAddress,
+      _altsOracle,
+      _altsAddress,
       _collateralAddress,
       _collateralOracle,
-      _avaxOracle,
+      _ethOracle,
       _rewardHandler,
       _devAddress
     )
   {}
 
   /**
-   * @notice only accept AVAX via fallback from the WAVAX contract
+   * @notice only accept ETH via fallback from the WETH contract
    */
   receive() external payable {
     assert(msg.sender == address(collateralContract));
   }
 
   /**
-   * @notice Adds collateral to vault using AVAX
-   * @dev value should be higher than 0 AVAX
-   * @dev AVAX is turned into WAVAX
+   * @notice Adds collateral to vault using ETH
+   * @dev value should be higher than 0 ETH
+   * @dev ETH is turned into WETH
    */
-  function addCollateralAVAX()
+  function addCollateralETH()
     external
     payable
     nonReentrant
@@ -81,9 +81,9 @@ contract AVAXVaultHandler is IVaultHandler {
   {
     require(
       msg.value > 0,
-      "AVAXVaultHandler::addCollateralAVAX: value can't be 0 AVAX"
+      "ETHVaultHandler::addCollateralETH: value can't be 0 ETH"
     );
-    IWAVAX(address(collateralContract)).deposit{value: msg.value}();
+    IWETH(address(collateralContract)).deposit{value: msg.value}();
     Vault storage vault = vaults[userToVault[msg.sender]];
     vault.Collateral = vault.Collateral.add(msg.value);
     emit CollateralAdded(msg.sender, vault.Id, msg.value);
@@ -92,10 +92,10 @@ contract AVAXVaultHandler is IVaultHandler {
   /**
    * @notice Removes not used collateral from vault
    * @param _amount of collateral to remove
-   * @dev _amount should be higher than 0 AVAX
-   * @dev WAVAX is turned into AVAX
+   * @dev _amount should be higher than 0 ETH
+   * @dev WETH is turned into ETH
    */
-  function removeCollateralAVAX(uint256 _amount)
+  function removeCollateralETH(uint256 _amount)
     external
     nonReentrant
     vaultExists
@@ -103,24 +103,24 @@ contract AVAXVaultHandler is IVaultHandler {
   {
     require(
       _amount > 0,
-      "AVAXVaultHandler::removeCollateralAVAX: value can't be 0 AVAX"
+      "ETHVaultHandler::removeCollateralETH: value can't be 0 ETH"
     );
     Vault storage vault = vaults[userToVault[msg.sender]];
     uint256 currentRatio = getVaultRatio(vault.Id);
     require(
       vault.Collateral >= _amount,
-      "AVAXVaultHandler::removeCollateralAVAX: retrieve amount higher than collateral"
+      "ETHVaultHandler::removeCollateralETH: retrieve amount higher than collateral"
     );
     vault.Collateral = vault.Collateral.sub(_amount);
     if (currentRatio != 0) {
       require(
         getVaultRatio(vault.Id) >= ratio,
-        "AVAXVaultHandler::removeCollateralAVAX: collateral below min required ratio"
+        "ETHVaultHandler::removeCollateralETH: collateral below min required ratio"
       );
     }
 
-    IWAVAX(address(collateralContract)).withdraw(_amount);
-    safeTransferAVAX(msg.sender, _amount);
+    IWETH(address(collateralContract)).withdraw(_amount);
+    safeTransferETH(msg.sender, _amount);
     emit CollateralRemoved(msg.sender, vault.Id, _amount);
   }
 }
