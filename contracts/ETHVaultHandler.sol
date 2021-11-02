@@ -7,8 +7,8 @@ import "./IWETH.sol";
 import "./utils/SafeMath.sol";
 
 /**
- * @title ETH Bundl Vault
- * @author Bundl Finance
+ * @title ETH LongTerm Vault
+ * @author LongTerm Finance
  * @notice Contract in charge of handling the ALTS Vault and stake using ETH and WETH
  */
 contract ETHVaultHandler is IVaultHandler {

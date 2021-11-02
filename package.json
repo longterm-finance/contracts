@@ -1,10 +1,10 @@
 {
   "name": "contracts",
   "version": "1.0.0",
-  "description": "Bundl Finance Smart Contracts",
+  "description": "LongTerm Finance Smart Contracts",
   "main": "index.js",
-  "repository": "https://github.com/bundl-finance/contracts",
-  "author": "Bundl Finance",
+  "repository": "https://github.com/longterm-finance/contracts",
+  "author": "LongTerm Finance",
   "license": "MIT",
   "private": true,
   "dependencies": {

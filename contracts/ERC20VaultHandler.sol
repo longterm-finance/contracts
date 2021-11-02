@@ -5,8 +5,8 @@ import "./IVaultHandler.sol";
 import "./Orchestrator.sol";
 
 /**
- * @title ERC-20 Bundl Vault
- * @author Bundl Finance
+ * @title ERC-20 LongTerm Vault
+ * @author LongTerm Finance
  * @notice Contract in charge of handling the ALTS Vault and stake using a Collateral ERC20 tokens 
  */
 contract ERC20VaultHandler is IVaultHandler {

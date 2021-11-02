@@ -5,17 +5,17 @@ pragma experimental ABIEncoderV2;
 
 contract GovernorAlpha {
   /// @notice The name of this contract
-  string public constant name = "Bundl Finance Governor Alpha";
+  string public constant name = "LongTerm Finance Governor Alpha";
 
   /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
   function quorumVotes() public pure returns (uint256) {
     return 500_000e18;
-  } // 5% of BNDL total supply
+  } // 5% of LONG total supply
 
   /// @notice The number of votes required in order for a voter to become a proposer
   function proposalThreshold() public pure returns (uint256) {
     return 50_000e18;
-  } // 0.5% of BNDL total supply
+  } // 0.5% of LONG total supply
 
   /// @notice The maximum number of actions that can be included in a proposal
   function proposalMaxOperations() public pure returns (uint256) {
@@ -32,11 +32,11 @@ contract GovernorAlpha {
     return 17_280;
   } // ~3 days in blocks (assuming 15s blocks)
 
-  /// @notice The address of the Bundl Protocol Timelock
+  /// @notice The address of the LongTerm Protocol Timelock
   TimelockInterface public timelock;
 
-  /// @notice The address of the BNDL governance token
-  BndlInterface public bndl;
+  /// @notice The address of the LONG governance token
+  LongInterface public long;
 
   /// @notice The total number of proposals
   uint256 public proposalCount;
@@ -141,9 +141,9 @@ contract GovernorAlpha {
   /// @notice An event emitted when a proposal has been executed in the Timelock
   event ProposalExecuted(uint256 id);
 
-  constructor(address timelock_, address bndl_) {
+  constructor(address timelock_, address long_) {
     timelock = TimelockInterface(timelock_);
-    bndl = BndlInterface(bndl_);
+    long = LongInterface(long_);
   }
 
   function propose(
@@ -154,7 +154,7 @@ contract GovernorAlpha {
     string memory description
   ) public returns (uint256) {
     require(
-      bndl.getPriorVotes(msg.sender, sub256(block.number, 1)) >
+      long.getPriorVotes(msg.sender, sub256(block.number, 1)) >
         proposalThreshold(),
       "GovernorAlpha::propose: proposer votes below proposal threshold"
     );
@@ -289,7 +289,7 @@ contract GovernorAlpha {
 
     Proposal storage proposal = proposals[proposalId];
     require(
-      bndl.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
+      long.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
         proposalThreshold(),
       "GovernorAlpha::cancel: proposer above threshold"
     );
@@ -411,7 +411,7 @@ contract GovernorAlpha {
       receipt.hasVoted == false,
       "GovernorAlpha::_castVote: voter already voted"
     );
-    uint96 votes = bndl.getPriorVotes(voter, proposal.startBlock);
+    uint96 votes = long.getPriorVotes(voter, proposal.startBlock);
 
     if (support) {
       proposal.forVotes = add256(proposal.forVotes, votes);

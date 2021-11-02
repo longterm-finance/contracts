@@ -9,7 +9,7 @@ import "./Orchestrator.sol";
 
 /**
  * @title ALTS Token
- * @author Bundl Finance
+ * @author LongTerm Finance
  * @notice ERC20 token that tracks the entire crypto market excluding BTC and ETH
  */
 contract ALTS is ERC20, Ownable, IERC165 {

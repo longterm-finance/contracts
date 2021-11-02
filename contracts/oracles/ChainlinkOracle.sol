@@ -7,7 +7,7 @@ import "../utils/IERC165.sol";
 
 /**
  * @title Chainlink Oracle
- * @author Bundl Finance
+ * @author LongTerm Finance
  * @notice Contract in charge of reading the information from a Chainlink Oracle. ALTS contracts read the price directly from this contract. More information can be found on Chainlink Documentation
  */
 contract ChainlinkOracle is Ownable, IERC165 {

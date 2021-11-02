@@ -24,7 +24,7 @@ interface IRewardHandler {
 
 /**
  * @title ALTS Vault Handler Abstract Contract
- * @author Bundl Finance
+ * @author LongTerm Finance
  * @notice Contract in charge of handling the ALTS Token and stake
  */
 abstract contract IVaultHandler is
@@ -516,7 +516,7 @@ abstract contract IVaultHandler is
     //Removes the collateral that is rewarded to liquidator
     vault.Collateral = vault.Collateral.sub(reward);
 
-    // Triggers update of BNDL Rewards
+    // Triggers update of LONG Rewards
     if (address(rewardHandler) != address(0)) {
       rewardHandler.withdraw(vault.Owner, requiredALTS);
     }
