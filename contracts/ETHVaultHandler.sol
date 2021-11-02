@@ -7,8 +7,8 @@ import "./IWETH.sol";
 import "./utils/SafeMath.sol";
 
 /**
- * @title ETH LongTerm Vault
- * @author LongTerm Finance
+ * @title ETH Bundl Vault
+ * @author Bundl Finance
  * @notice Contract in charge of handling the ALTS Vault and stake using ETH and WETH
  */
 contract ETHVaultHandler is IVaultHandler {
@@ -28,7 +28,7 @@ contract ETHVaultHandler is IVaultHandler {
    * @param _collateralOracle address
    * @param _ethOracle address
    * @param _rewardHandler address
-   * @param _devAddress address
+   * @param _feeAddress address
    */
   constructor(
     Orchestrator _orchestrator,
@@ -42,7 +42,7 @@ contract ETHVaultHandler is IVaultHandler {
     address _collateralOracle,
     address _ethOracle,
     address _rewardHandler,
-    address _devAddress
+    address _feeAddress
   )
     IVaultHandler(
       _orchestrator,
@@ -56,7 +56,7 @@ contract ETHVaultHandler is IVaultHandler {
       _collateralOracle,
       _ethOracle,
       _rewardHandler,
-      _devAddress
+      _feeAddress
     )
   {}
 

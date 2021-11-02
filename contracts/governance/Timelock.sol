@@ -54,7 +54,6 @@ contract Timelock is IERC165 {
   address public admin;
   address public pendingAdmin;
   address public adminSetter;
-  bool public adminTracker;
   uint256 public delay;
 
   /**
@@ -124,12 +123,9 @@ contract Timelock is IERC165 {
    * @param _admin address of the GovernorBeta contract (admin)
    * @dev Only adminSetter can call it and it can only be called once
    */
-  function setAdminInitially(address _admin) public {
-    require(msg.sender == adminSetter, "Timelock::setAdminInitially: Not allowed to set the admin");
-    require(adminTracker == false, "Timelock::setAdminInitially: Admin has already been set");
-    require(_admin != address(0), "Timelock::setAdminIinitially: Admin can't be zero address");
-
-    adminTracker = true;
+  function setAdmin(address _admin) public {
+    require(msg.sender == adminSetter, "Timelock::setAdmin: Not allowed to set the admin");
+    require(_admin != address(0), "Timelock::setAdmin: Admin can't be zero address");
 
     admin = _admin;
 

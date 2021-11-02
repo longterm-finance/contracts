@@ -10,7 +10,7 @@ import "./utils/IERC20.sol";
 
 /**
  * @title ALTS Orchestrator
- * @author LongTerm Finance
+ * @author Bundl Finance
  * @notice Orchestrator contract in charge of managing the settings of the vaults, rewards and ALTS token. It acts as the owner of these contracts.
  */
 contract Orchestrator is Ownable {

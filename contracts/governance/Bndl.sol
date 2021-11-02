@@ -5,18 +5,18 @@ pragma experimental ABIEncoderV2;
 
 import "../utils/SafeMath.sol";
 
-contract Long {
+contract Bndl {
   /// @notice EIP-20 token name for this token
-  string public constant name = "LongTerm";
+  string public constant name = "Bundl";
 
   /// @notice EIP-20 token symbol for this token
-  string public constant symbol = "LONG";
+  string public constant symbol = "BNDL";
 
   /// @notice EIP-20 token decimals for this token
   uint8 public constant decimals = 18;
 
   /// @notice Total number of tokens in circulation
-  uint256 public totalSupply = 10000000e18; // 10 million LONG
+  uint256 public totalSupply = 10000000e18; // 10 million BNDL
 
   /// @notice Address which may mint new tokens
   address public minter;
@@ -98,7 +98,7 @@ contract Long {
   );
 
   /**
-   * @notice Construct a new LONG token
+   * @notice Construct a new BNDL token
    * @param account The initial account to grant all the tokens
    * @param minter_ The account with minting ability
    * @param mintingAllowedAfter_ The timestamp after which minting may occur
@@ -110,7 +110,7 @@ contract Long {
   ) {
     require(
       mintingAllowedAfter_ >= block.timestamp,
-      "Long::constructor: minting can only begin after deployment"
+      "Bndl::constructor: minting can only begin after deployment"
     );
 
     balances[account] = uint96(totalSupply);
@@ -127,7 +127,7 @@ contract Long {
   function setMinter(address minter_) external {
     require(
       msg.sender == minter,
-      "Long::setMinter: only the minter can change the minter address"
+      "Bndl::setMinter: only the minter can change the minter address"
     );
     emit MinterChanged(minter, minter_);
     minter = minter_;
@@ -139,18 +139,18 @@ contract Long {
    * @param rawAmount The number of tokens to be minted
    */
   function mint(address dst, uint256 rawAmount) external {
-    require(msg.sender == minter, "Long::mint: only the minter can mint");
+    require(msg.sender == minter, "Bndl::mint: only the minter can mint");
     require(
       block.timestamp >= mintingAllowedAfter,
-      "Long::mint: minting not allowed yet"
+      "Bndl::mint: minting not allowed yet"
     );
     require(
       dst != address(0),
-      "Long::mint: cannot transfer to the zero address"
+      "Bndl::mint: cannot transfer to the zero address"
     );
     require(
       dst != address(this),
-      "Long::mint: cannot transfer to the Long address"
+      "Bndl::mint: cannot transfer to the Bndl address"
     );
 
     // record the mint
@@ -160,21 +160,21 @@ contract Long {
     );
 
     // mint the amount
-    uint96 amount = safe96(rawAmount, "Long::mint: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "Bndl::mint: amount exceeds 96 bits");
     require(
       amount <= SafeMath.div(SafeMath.mul(totalSupply, mintCap), 100),
-      "Long::mint: exceeded mint cap"
+      "Bndl::mint: exceeded mint cap"
     );
     totalSupply = safe96(
       SafeMath.add(totalSupply, amount),
-      "Long::mint: totalSupply exceeds 96 bits"
+      "Bndl::mint: totalSupply exceeds 96 bits"
     );
 
     // transfer the amount to the recipient
     balances[dst] = add96(
       balances[dst],
       amount,
-      "Long::mint: transfer amount overflows"
+      "Bndl::mint: transfer amount overflows"
     );
     emit Transfer(address(0), dst, amount);
 
@@ -214,11 +214,11 @@ contract Long {
   ) internal virtual {
     require(
       owner != address(0),
-      "Long::_approve: approve from the zero address"
+      "Bndl::_approve: approve from the zero address"
     );
     require(
       spender != address(0),
-      "Long::_approve: approve to the zero address"
+      "Bndl::_approve: approve to the zero address"
     );
 
     allowances[owner][spender] = amount;
@@ -238,7 +238,7 @@ contract Long {
     if (rawAmount == uint256(-1)) {
       amount = uint96(-1);
     } else {
-      amount = safe96(rawAmount, "Long::approve: amount exceeds 96 bits");
+      amount = safe96(rawAmount, "Bndl::approve: amount exceeds 96 bits");
     }
     _approve(msg.sender, spender, amount);
     return true;
@@ -264,7 +264,7 @@ contract Long {
     } else {
       amount = safe96(
         addedValue,
-        "Long::increaseAllowance: amount exceeds 96 bits"
+        "Bndl::increaseAllowance: amount exceeds 96 bits"
       );
     }
     _approve(
@@ -273,7 +273,7 @@ contract Long {
       add96(
         allowances[msg.sender][spender],
         amount,
-        "Long::increaseAllowance: transfer amount overflows"
+        "Bndl::increaseAllowance: transfer amount overflows"
       )
     );
     return true;
@@ -300,7 +300,7 @@ contract Long {
     } else {
       amount = safe96(
         subtractedValue,
-        "Long::decreaseAllowance: amount exceeds 96 bits"
+        "Bndl::decreaseAllowance: amount exceeds 96 bits"
       );
     }
 
@@ -310,7 +310,7 @@ contract Long {
       sub96(
         allowances[msg.sender][spender],
         amount,
-        "Long::decreaseAllowance: decreased allowance below zero"
+        "Bndl::decreaseAllowance: decreased allowance below zero"
       )
     );
     return true;
@@ -339,7 +339,7 @@ contract Long {
     if (rawAmount == uint256(-1)) {
       amount = uint96(-1);
     } else {
-      amount = safe96(rawAmount, "Long::permit: amount exceeds 96 bits");
+      amount = safe96(rawAmount, "Bndl::permit: amount exceeds 96 bits");
     }
 
     bytes32 domainSeparator =
@@ -365,9 +365,9 @@ contract Long {
     bytes32 digest =
       keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash));
     address signatory = ecrecover(digest, v, r, s);
-    require(signatory != address(0), "Long::permit: invalid signature");
-    require(signatory == owner, "Long::permit: unauthorized");
-    require(block.timestamp <= deadline, "Long::permit: signature expired");
+    require(signatory != address(0), "Bndl::permit: invalid signature");
+    require(signatory == owner, "Bndl::permit: unauthorized");
+    require(block.timestamp <= deadline, "Bndl::permit: signature expired");
 
     allowances[owner][spender] = amount;
 
@@ -390,7 +390,7 @@ contract Long {
    * @return Whether or not the transfer succeeded
    */
   function transfer(address dst, uint256 rawAmount) external returns (bool) {
-    uint96 amount = safe96(rawAmount, "Long::transfer: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "Bndl::transfer: amount exceeds 96 bits");
     _transferTokens(msg.sender, dst, amount);
     return true;
   }
@@ -409,14 +409,14 @@ contract Long {
   ) external returns (bool) {
     address spender = msg.sender;
     uint96 spenderAllowance = allowances[src][spender];
-    uint96 amount = safe96(rawAmount, "Long::approve: amount exceeds 96 bits");
+    uint96 amount = safe96(rawAmount, "Bndl::approve: amount exceeds 96 bits");
 
     if (spender != src && spenderAllowance != uint96(-1)) {
       uint96 newAllowance =
         sub96(
           spenderAllowance,
           amount,
-          "Long::transferFrom: transfer amount exceeds spender allowance"
+          "Bndl::transferFrom: transfer amount exceeds spender allowance"
         );
       allowances[src][spender] = newAllowance;
 
@@ -466,9 +466,9 @@ contract Long {
     bytes32 digest =
       keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash));
     address signatory = ecrecover(digest, v, r, s);
-    require(signatory != address(0), "Long::delegateBySig: invalid signature");
-    require(nonce == nonces[signatory]++, "Long::delegateBySig: invalid nonce");
-    require(block.timestamp <= expiry, "Long::delegateBySig: signature expired");
+    require(signatory != address(0), "Bndl::delegateBySig: invalid signature");
+    require(nonce == nonces[signatory]++, "Bndl::delegateBySig: invalid nonce");
+    require(block.timestamp <= expiry, "Bndl::delegateBySig: signature expired");
     return _delegate(signatory, delegatee);
   }
 
@@ -496,7 +496,7 @@ contract Long {
   {
     require(
       blockNumber < block.number,
-      "Long::getPriorVotes: not yet determined"
+      "Bndl::getPriorVotes: not yet determined"
     );
 
     uint32 nCheckpoints = numCheckpoints[account];
@@ -547,26 +547,26 @@ contract Long {
   ) internal {
     require(
       src != address(0),
-      "Long::_transferTokens: cannot transfer from the zero address"
+      "Bndl::_transferTokens: cannot transfer from the zero address"
     );
     require(
       dst != address(0),
-      "Long::_transferTokens: cannot transfer to the zero address"
+      "Bndl::_transferTokens: cannot transfer to the zero address"
     );
     require(
       dst != address(this),
-      "Long::_transferTokens: cannot transfer to the Long address"
+      "Bndl::_transferTokens: cannot transfer to the Bndl address"
     );
 
     balances[src] = sub96(
       balances[src],
       amount,
-      "Long::_transferTokens: transfer amount exceeds balance"
+      "Bndl::_transferTokens: transfer amount exceeds balance"
     );
     balances[dst] = add96(
       balances[dst],
       amount,
-      "Long::_transferTokens: transfer amount overflows"
+      "Bndl::_transferTokens: transfer amount overflows"
     );
     emit Transfer(src, dst, amount);
 
@@ -584,7 +584,7 @@ contract Long {
         uint96 srcRepOld =
           srcRepNum > 0 ? checkpoints[srcRep][srcRepNum - 1].votes : 0;
         uint96 srcRepNew =
-          sub96(srcRepOld, amount, "Long::_moveVotes: vote amount underflows");
+          sub96(srcRepOld, amount, "Bndl::_moveVotes: vote amount underflows");
         _writeCheckpoint(srcRep, srcRepNum, srcRepOld, srcRepNew);
       }
 
@@ -593,7 +593,7 @@ contract Long {
         uint96 dstRepOld =
           dstRepNum > 0 ? checkpoints[dstRep][dstRepNum - 1].votes : 0;
         uint96 dstRepNew =
-          add96(dstRepOld, amount, "Long::_moveVotes: vote amount overflows");
+          add96(dstRepOld, amount, "Bndl::_moveVotes: vote amount overflows");
         _writeCheckpoint(dstRep, dstRepNum, dstRepOld, dstRepNew);
       }
     }
@@ -608,7 +608,7 @@ contract Long {
     uint32 blockNumber =
       safe32(
         block.number,
-        "Long::_writeCheckpoint: block number exceeds 32 bits"
+        "Bndl::_writeCheckpoint: block number exceeds 32 bits"
       );
 
     if (

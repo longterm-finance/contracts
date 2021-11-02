@@ -1,22 +1,21 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity 0.7.5;
 
 pragma experimental ABIEncoderV2;
 
 contract GovernorAlpha {
   /// @notice The name of this contract
-  string public constant name = "LongTerm Governor Alpha";
+  string public constant name = "Bundl Finance Governor Alpha";
 
   /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
   function quorumVotes() public pure returns (uint256) {
     return 500_000e18;
-  } // 5% of LONG total supply
+  } // 5% of BNDL total supply
 
   /// @notice The number of votes required in order for a voter to become a proposer
   function proposalThreshold() public pure returns (uint256) {
     return 50_000e18;
-  } // 0.5% of LONG total supply
+  } // 0.5% of BNDL total supply
 
   /// @notice The maximum number of actions that can be included in a proposal
   function proposalMaxOperations() public pure returns (uint256) {
@@ -30,14 +29,14 @@ contract GovernorAlpha {
 
   /// @notice The duration of voting on a proposal, in blocks
   function votingPeriod() public pure returns (uint256) {
-    return 172_800;
-  } // ~3 days in blocks (assuming 1.5s blocks)
+    return 17_280;
+  } // ~3 days in blocks (assuming 15s blocks)
 
-  /// @notice The address of the LongTerm Protocol Timelock
+  /// @notice The address of the Bundl Protocol Timelock
   TimelockInterface public timelock;
 
-  /// @notice The address of the LONG governance token
-  LongInterface public long;
+  /// @notice The address of the BNDL governance token
+  BndlInterface public bndl;
 
   /// @notice The total number of proposals
   uint256 public proposalCount;
@@ -142,9 +141,9 @@ contract GovernorAlpha {
   /// @notice An event emitted when a proposal has been executed in the Timelock
   event ProposalExecuted(uint256 id);
 
-  constructor(address timelock_, address long_) {
+  constructor(address timelock_, address bndl_) {
     timelock = TimelockInterface(timelock_);
-    long = LongInterface(long_);
+    bndl = BndlInterface(bndl_);
   }
 
   function propose(
@@ -155,7 +154,7 @@ contract GovernorAlpha {
     string memory description
   ) public returns (uint256) {
     require(
-      long.getPriorVotes(msg.sender, sub256(block.number, 1)) >
+      bndl.getPriorVotes(msg.sender, sub256(block.number, 1)) >
         proposalThreshold(),
       "GovernorAlpha::propose: proposer votes below proposal threshold"
     );
@@ -290,7 +289,7 @@ contract GovernorAlpha {
 
     Proposal storage proposal = proposals[proposalId];
     require(
-      long.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
+      bndl.getPriorVotes(proposal.proposer, sub256(block.number, 1)) <
         proposalThreshold(),
       "GovernorAlpha::cancel: proposer above threshold"
     );
@@ -412,7 +411,7 @@ contract GovernorAlpha {
       receipt.hasVoted == false,
       "GovernorAlpha::_castVote: voter already voted"
     );
-    uint96 votes = long.getPriorVotes(voter, proposal.startBlock);
+    uint96 votes = bndl.getPriorVotes(voter, proposal.startBlock);
 
     if (support) {
       proposal.forVotes = add256(proposal.forVotes, votes);
@@ -481,7 +480,7 @@ interface TimelockInterface {
   ) external payable returns (bytes memory);
 }
 
-interface LongInterface {
+interface BndlInterface {
   function getPriorVotes(address account, uint256 blockNumber)
     external
     view

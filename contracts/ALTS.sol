@@ -9,7 +9,7 @@ import "./Orchestrator.sol";
 
 /**
  * @title ALTS Token
- * @author LongTerm Finance
+ * @author Bundl Finance
  * @notice ERC20 token that tracks the entire crypto market excluding BTC and ETH
  */
 contract ALTS is ERC20, Ownable, IERC165 {
@@ -27,9 +27,6 @@ contract ALTS is ERC20, Ownable, IERC165 {
   
   // @notice: Orchestrator address
   Orchestrator public orchestrator;
-  
-  // @notice: Tracks if the orchestrator has been set 
-  bool public orchestratorTracker = false;
 
   /**
    * @notice Address to Vault Handler
@@ -108,9 +105,6 @@ contract ALTS is ERC20, Ownable, IERC165 {
    */
   function setOrchestrator(Orchestrator _orchestrator) public {
     require(msg.sender == orchestratorSetter, "ALTS::setOrchestrator: not allowed to set the orchestrator");
-    require(orchestratorTracker == false, "ALTS::setOrchestrator: orchestrator has already been set");
-      
-    orchestratorTracker = true;
       
     /// @dev transfer ownership to orchestrator
     transferOwnership(address(_orchestrator));

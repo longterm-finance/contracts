@@ -45,7 +45,9 @@ truffle-config.js
 # group tests
 /contracts/groups
 
-# test 
+# tests 
 /contracts/TEST_IVaultHandler.sol
 /contracts/oracles/TEST_ALTSOracle.sol
 /contracts/utils/chainlink/TEST_CustomOracleInterface.sol
+/contracts/OVR_RewardHandler.sol
+/contracts/OVR_ALTS.sol
