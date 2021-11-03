@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity 0.7.5;
 pragma experimental ABIEncoderV2;
 
@@ -7,7 +6,7 @@ import "../utils/SafeMath.sol";
 
 contract Long {
   /// @notice EIP-20 token name for this token
-  string public constant name = "LongTerm";
+  string public constant name = "LongTerm Token";
 
   /// @notice EIP-20 token symbol for this token
   string public constant symbol = "LONG";

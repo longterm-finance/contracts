@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 /** @notice this contract is for tests only */
-
 pragma solidity 0.7.5;
 
 import "../utils/ERC20.sol";
