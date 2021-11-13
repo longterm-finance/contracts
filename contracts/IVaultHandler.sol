@@ -63,7 +63,7 @@ abstract contract IVaultHandler is
   /// @notice ALTS Oracle Address
   ChainlinkOracle public immutable altsOracle;
 
-  /// @notice Collateral Token Address (e.g. WETH or renBTC)
+  /// @notice Collateral Token Address (e.g. WETH or MIM stablecoin)
   IERC20 public immutable collateralContract;
 
   /// @notice Collateral/USD Oracle Address 
