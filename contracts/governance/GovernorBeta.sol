@@ -8,13 +8,13 @@ contract GovernorBeta {
 
   /// @notice The number of votes in support of a proposal required in order for a quorum to be reached and for a vote to succeed
   function quorumVotes() public pure returns (uint256) {
-    return 500_000e18;
-  } // 5% of LONG total supply
+    return 200_000e18;
+  } // 2% of the LONG total supply
 
   /// @notice The number of votes required in order for a voter to become a proposer
   function proposalThreshold() public pure returns (uint256) {
-    return 50_000e18;
-  } // 0.5% of LONG total supply
+    return 1e18;
+  } // 1 LONG token
 
   /// @notice The maximum number of actions that can be included in a proposal
   function proposalMaxOperations() public pure returns (uint256) {
@@ -28,8 +28,8 @@ contract GovernorBeta {
 
   /// @notice The duration of voting on a proposal, in blocks
   function votingPeriod() public pure returns (uint256) {
-    return 17_280;
-  } // ~3 days in blocks (assuming 15s blocks)
+    return 216_000;
+  } // ~5 days in blocks (assuming 2s blocks)
 
   /// @notice The address of the LongTerm Protocol Timelock
   TimelockInterface public timelock;

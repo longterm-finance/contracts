@@ -4,8 +4,8 @@ pragma solidity 0.7.5;
 
 import "../utils/ERC20.sol";
 
-contract MIM is ERC20 {
-  constructor() ERC20("Mockup MIM", "MIM") {}
+contract DAI is ERC20 {
+  constructor() ERC20("Mockup DAI", "DAI") {}
 
   function mint(address _account, uint256 _amount) public {
     _mint(_account, _amount);
