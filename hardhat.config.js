@@ -27,19 +27,15 @@ const config = {
   networks: {
     hardhat: {
       forking: {
-        url: process.env.MAINNET_RPC_URL,
+        url: process.env.RPC_URL,
       },
     },
     ganache: {
       url: "http://127.0.0.1:8545",
       accounts: { mnemonic: ganacheMnemonic },
     },
-    mainnet: {
-      url: process.env.MAINNET_RPC_URL,
-      accounts: { mnemonic: mnemonic },
-    },
-    testnet: {
-      url: process.env.TESTNET_RPC_URL,
+    matic: {
+      url: process.env.RPC_URL,
       accounts: { mnemonic: mnemonic },
     },
   },
