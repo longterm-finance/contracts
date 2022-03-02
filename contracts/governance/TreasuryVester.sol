@@ -53,6 +53,7 @@ contract TreasuryVester {
       msg.sender == recipient,
       "TreasuryVester::setRecipient: unauthorized"
     );
+
     recipient = recipient_;
   }
 
@@ -61,7 +62,10 @@ contract TreasuryVester {
       block.timestamp >= vestingCliff,
       "TreasuryVester::claim: not time yet"
     );
+    require(msg.sender == recipient, "TreasuryVester::claim: only recipient can claim vested LONG tokens");
+
     uint256 amount;
+
     if (block.timestamp >= vestingEnd) {
       amount = ILong(long).balanceOf(address(this));
     } else {
@@ -70,6 +74,7 @@ contract TreasuryVester {
       );
       lastUpdate = block.timestamp;
     }
+
     ILong(long).transfer(recipient, amount);
   }
 }
